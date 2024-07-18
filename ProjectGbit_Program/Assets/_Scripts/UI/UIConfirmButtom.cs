@@ -25,6 +25,18 @@ public class UIConfirmButtom : MonoBehaviour, ISelectHandler,IDeselectHandler
 
     public PlayerType thisBtnType;
 
+    /// <summary>
+    /// 点击完成事件
+    /// </summary>
+    public delegate void ConfirmPlayerEvent();
+    public event ConfirmPlayerEvent OnPlayerConfirmed;
+
+    /// <summary>
+    /// 不能选中事件
+    /// </summary>
+    public delegate void CantConfirmEvent();
+    public event CantConfirmEvent OnCantConfirm;
+
     private void OnEnable()
     {
         _selectBtn = GetComponent<Button>();
@@ -100,17 +112,31 @@ public class UIConfirmButtom : MonoBehaviour, ISelectHandler,IDeselectHandler
     /// </summary>
     private void OnClickSelectBtn()
     {
-        //锁定点击状态
-        _isConfirmed = true;
-        GetComponent<Image>().color = confirmColor;
-         
-        //初始化玩家
-        GameObject curPlayer=MultiplayerEventSystem.current.gameObject;
-        Player player = curPlayer.GetComponent<Player>();
-        PlayerInput playerInput = curPlayer.GetComponent<PlayerInput>();
-        //切换映射表
-        playerInput.SwitchCurrentActionMap("Player");
-        player.myType = thisBtnType;
-        player.InitiatePlayer();
+        //没有被选择时
+        if (!_isConfirmed)
+        {
+            //锁定点击状态
+            _isConfirmed = true;
+            GetComponent<Image>().color = confirmColor;
+
+            //初始化玩家
+            GameObject curPlayer = MultiplayerEventSystem.current.gameObject;
+            Player player = curPlayer.GetComponent<Player>();
+            PlayerInput playerInput = curPlayer.GetComponent<PlayerInput>();
+            player.myType = thisBtnType;
+            player.InitiatePlayer();
+
+            //切换映射表
+            playerInput.SwitchCurrentActionMap("Player");
+
+            //通知完成配置
+            OnPlayerConfirmed?.Invoke();
+        }
+        //被选择时
+        else
+        {
+            OnCantConfirm?.Invoke();
+        }
     }
+    
 }

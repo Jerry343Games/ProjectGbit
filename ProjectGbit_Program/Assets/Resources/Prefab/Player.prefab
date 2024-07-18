@@ -270,6 +270,7 @@ MonoBehaviour:
   - {fileID: 6617165068739624644}
   - {fileID: 2499294287035241886}
   - {fileID: 352821535451036324}
+  moveSpeed: 2
 --- !u!114 &7428233439764705239
 MonoBehaviour:
   m_ObjectHideFlags: 0
