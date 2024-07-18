@@ -131,6 +131,34 @@ MonoBehaviour:
   TransparencyFactor:
     m_OverrideState: 1
     m_Value: 0.4
+--- !u!114 &-2243667349440126121
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23000c842e413574daaae06c51a6c736, type: 3}
+  m_Name: PostScreenTint
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 5.39
+  vignetteWidth:
+    m_OverrideState: 1
+    m_Value: 0.1
+  ScanlinePower:
+    m_OverrideState: 1
+    m_Value: 1
+  CycleIndex:
+    m_OverrideState: 1
+    m_Value: 0.2
+  TransparencyFactor:
+    m_OverrideState: 1
+    m_Value: 0.2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,13 +169,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: SampleSceneProfile
+  m_Name: StandardPostProfile
   m_EditorClassIdentifier: 
   components:
   - {fileID: 849379129802519247}
   - {fileID: -7893295128165547882}
   - {fileID: -7011558710299706105}
   - {fileID: -6676566024368877343}
+  - {fileID: -2243667349440126121}
 --- !u!114 &849379129802519247
 MonoBehaviour:
   m_ObjectHideFlags: 3
