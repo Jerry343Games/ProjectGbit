@@ -2,12 +2,13 @@ using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 //利用枚举列出所有敌人状态:站岗，巡逻，追击，死亡
 public enum EnemyStatus 
 { 
     Guard, 
-    Patol, 
+    Patrol, 
     Chase, 
     Dead 
 };
@@ -19,7 +20,7 @@ public class Enemy_Sphere : MonoBehaviour
 {
     //多个敌人保持间距(间距不同要在特定的敌人脚本中额外写） UI制作与显示
 
-    private Rigidbody2D _rb;
+    private Rigidbody _rb;
     private Animator _anim;
     private Collider _coll;
 
@@ -28,6 +29,8 @@ public class Enemy_Sphere : MonoBehaviour
     private EnemyStatus _enemyStatus;
 
     public GameObject Target;//玩家目标
+
+    private NavMeshAgent _agent;
 
     [Header("状态相关")]
     public int MaxHealth;
@@ -44,11 +47,11 @@ public class Enemy_Sphere : MonoBehaviour
     public Transform[] PatolPoints;
     private Vector3 _guardPos;//初始站岗点
     private int _wayPointIndex = 0;//巡逻点标记，用以循环
-    public float PatolSpeed;//巡逻速度
+    public float PatrolSpeed;//巡逻速度
 
 
-    public float PatolStayDuration;//巡逻驻足观察的时间
-    private float _patolStayTimer;//巡逻驻足观察的计时器
+    public float PatrolStayDuration;//巡逻驻足观察的时间
+    private float _patrolStayTimer;//巡逻驻足观察的计时器
 
 
     [Header("追击相关")]
@@ -73,19 +76,21 @@ public class Enemy_Sphere : MonoBehaviour
     [SerializeField] bool isCritical;//是否暴击
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody>();
         _coll = GetComponent<Collider>();
         _anim = GetComponent<Animator>();
+
+        _agent = GetComponent<NavMeshAgent>();
     }
     private void Start()
     {
         _guardPos = transform.position;
-        _waitPlayerExitTimer = PatolStayDuration;
+        _waitPlayerExitTimer = PatrolStayDuration;
         _attackCoolDownTimer = AttackCoolDown;
         if (!isGuard)//初始化判断站岗型还是巡逻型敌人
         {
-            _enemyStatus = EnemyStatus.Patol;
-            _patolStayTimer = PatolStayDuration;
+            _enemyStatus = EnemyStatus.Patrol;
+            _patrolStayTimer = PatrolStayDuration;
         }
         else
         {
@@ -114,8 +119,8 @@ public class Enemy_Sphere : MonoBehaviour
             case EnemyStatus.Guard:
                 Guard();
                 break;
-            case EnemyStatus.Patol:
-                Patol();
+            case EnemyStatus.Patrol:
+                Patrol();
                 break;
             case EnemyStatus.Chase:
                 Chase();
@@ -158,7 +163,7 @@ public class Enemy_Sphere : MonoBehaviour
                 }
                 else
                 {
-                    _enemyStatus = EnemyStatus.Patol;
+                    _enemyStatus = EnemyStatus.Patrol;
                 }
             }
             else
@@ -169,7 +174,7 @@ public class Enemy_Sphere : MonoBehaviour
                 }
                 if (!isGuard)
                 {
-                    _enemyStatus = EnemyStatus.Patol;//不用担心马上回去巡逻状态,因为在巡逻时会先判断是否等待时间结束
+                    _enemyStatus = EnemyStatus.Patrol;//不用担心马上回去巡逻状态,因为在巡逻时会先判断是否等待时间结束
                 }
                 _waitPlayerExitTimer -= Time.deltaTime;
             }
@@ -233,7 +238,7 @@ public class Enemy_Sphere : MonoBehaviour
             isChase = false;
             Vector2 direction = _guardPos - transform.position;//保证回站岗点的时候也能跟着翻转
 
-            transform.position = Vector3.MoveTowards(transform.position, _guardPos, PatolSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _guardPos, PatrolSpeed * Time.deltaTime);
             transform.LookAt(_guardPos);
 
             if (Vector2.Distance(transform.position, _guardPos) > 0.1f)
@@ -247,26 +252,26 @@ public class Enemy_Sphere : MonoBehaviour
         }
 
     }
-    private void Patol()//巡逻方法
+    private void Patrol()//巡逻方法
     {
         if (_waitPlayerExitTimer < 0)
         {
             isChase = false;
-            if (Vector2.Distance(transform.position, PatolPoints[_wayPointIndex].position) > 0.1f)
+            if (Vector3.Distance(transform.position, PatolPoints[_wayPointIndex].position) > 0.5f)
             {
                 isWalk = true;
-                transform.position = Vector3.MoveTowards(transform.position, PatolPoints[_wayPointIndex].position, PatolSpeed * Time.deltaTime);
-                transform.LookAt(PatolPoints[_wayPointIndex].position);
-
+                _agent.speed = PatrolSpeed;
+                _agent.stoppingDistance = ChaseStopDistance;
+                _agent.SetDestination(PatolPoints[_wayPointIndex].position);
             }
             else
             {
                 isWalk = false;
-                _patolStayTimer -= Time.deltaTime;
-                if (_patolStayTimer < 0)
+                _patrolStayTimer -= Time.deltaTime;
+                if (_patrolStayTimer < 0)
                 {
                     _wayPointIndex = (_wayPointIndex + 1) % PatolPoints.Length;
-                    _patolStayTimer = PatolStayDuration;
+                    _patrolStayTimer = PatrolStayDuration;
                 }
             }
         }
@@ -281,8 +286,10 @@ public class Enemy_Sphere : MonoBehaviour
             {
                 isWalk = false;
                 isChase = true;
-                transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, ChaseSpeed * Time.deltaTime);//移动到玩家位置的方法 
-                transform.LookAt(Target.transform.position);
+                _agent.speed = ChaseSpeed;
+                _agent.stoppingDistance = ChaseStopDistance;
+                _agent.SetDestination(Target.transform.position);
+                //transform.LookAt(Target.transform.position);
             }
             else
             {
@@ -323,6 +330,16 @@ public class Enemy_Sphere : MonoBehaviour
 
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, CheckPlayerDistance);
 
+        Vector3 viewAngleA = Quaternion.AngleAxis(CheckPlayerAngle / 2, transform.up) * transform.forward;//扇形视野射线初始角度
+        Vector3 viewAngleB = Quaternion.AngleAxis(-CheckPlayerAngle / 2, transform.up) * transform.forward;//扇形视野射线终止角度
+
+        
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * CheckPlayerDistance);//起点，方向*长度
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * CheckPlayerDistance);//同上
+    }
 
 }
