@@ -9,7 +9,6 @@ using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 public class UIConfirmButtom : MonoBehaviour, ISelectHandler,IDeselectHandler
 {
-    public GameObject player;
 
     private Button _selectBtn;
 
@@ -23,6 +22,8 @@ public class UIConfirmButtom : MonoBehaviour, ISelectHandler,IDeselectHandler
     private bool _isConfirmed;
 
     private int _currentSelectedNum;
+
+    public PlayerType thisBtnType;
 
     private void OnEnable()
     {
@@ -94,8 +95,22 @@ public class UIConfirmButtom : MonoBehaviour, ISelectHandler,IDeselectHandler
         }
     }
 
+    /// <summary>
+    /// 点击事件
+    /// </summary>
     private void OnClickSelectBtn()
     {
-        
+        //锁定点击状态
+        _isConfirmed = true;
+        GetComponent<Image>().color = confirmColor;
+         
+        //初始化玩家
+        GameObject curPlayer=MultiplayerEventSystem.current.gameObject;
+        Player player = curPlayer.GetComponent<Player>();
+        PlayerInput playerInput = curPlayer.GetComponent<PlayerInput>();
+        //切换映射表
+        playerInput.SwitchCurrentActionMap("Player");
+        player.myType = thisBtnType;
+        player.InitiatePlayer();
     }
 }

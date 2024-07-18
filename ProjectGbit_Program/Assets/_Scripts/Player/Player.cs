@@ -12,27 +12,34 @@ public class Player : MonoBehaviour
     /// 多人输入事件系统
     /// </summary>
     private MultiplayerEventSystem _multiplayerEventSystem;
+
+    /// <summary>
+    /// 输入系统
+    /// </summary>
+    private InputSetting _inputSetting;
     
     /// <summary>
     /// 输入组件
     /// </summary>
     private PlayerInput _playerInput;
-    
-    /// <summary>
-    /// 在分配设备时根据先后顺序分配到的序号
-    /// </summary>
-    [HideInInspector]
-    public int myIndex;
 
     /// <summary>
-    /// 选人界面菜单首选项
+    /// 玩家类型
     /// </summary>
-    public GameObject firstSelectBtn;
+    [HideInInspector]
+    public PlayerType myType;
+
+    /// <summary>
+    /// 玩家模型组件
+    /// </summary>
+    public GameObject[] playerModel;
+    
     
     void Awake()
     {
         _playerInput = gameObject.GetComponent<PlayerInput>();
         _multiplayerEventSystem =gameObject.GetComponent<MultiplayerEventSystem>();
+        _inputSetting = GetComponent<InputSetting>();
     }
 
     void Start()
@@ -42,15 +49,27 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        
+        Debug.Log(_inputSetting.inputDir);
     }
-    
-    public void OnDeviceAssigned(int index)
+
+    public void InitiatePlayer()
     {
-        Debug.Log($"设备 "+_playerInput.devices+ " 已分配给玩家 {gameObject.name}");
-        // 在这里添加更多逻辑，如更新状态、UI等
-        myIndex = index;
-        _multiplayerEventSystem.firstSelectedGameObject = firstSelectBtn;
+        //由类型分配模型
+        switch (myType)
+        {
+            case PlayerType.A:
+                playerModel[0].SetActive(true);
+                break;
+            case PlayerType.B:
+                playerModel[1].SetActive(true);
+                break;
+            case PlayerType.C:
+                playerModel[2].SetActive(true);
+                break;
+            case PlayerType.D:
+                playerModel[3].SetActive(true);
+                break;
+        }
     }
     
     public void OnPlayerJoined()

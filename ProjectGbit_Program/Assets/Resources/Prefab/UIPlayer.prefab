@@ -511,7 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f49de0680f5c74f9fdfc58323e1ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   selectedIcons:
   - {fileID: 5272297654270190718}
   - {fileID: 9027703628189027135}
