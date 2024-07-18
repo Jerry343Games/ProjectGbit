@@ -222,6 +222,7 @@ public class Enemy_Sphere : MonoBehaviour
         {
             Target = closestPlayer.gameObject;
             isFindPlayer = true;
+            _agent.isStopped = false;
         }
         else
         {
@@ -239,17 +240,27 @@ public class Enemy_Sphere : MonoBehaviour
         {
             isChase = false;
             Vector2 direction = _guardPos - transform.position;//保证回站岗点的时候也能跟着翻转
+            //Debug.Log(direction.magnitude);
+            //if(direction.magnitude>0.5f)
+            
 
-            transform.position = Vector3.MoveTowards(transform.position, _guardPos, PatrolSpeed * Time.deltaTime);
-            transform.LookAt(_guardPos);
-
-            if (Vector2.Distance(transform.position, _guardPos) > 0.1f)
+            if (Vector2.Distance(transform.position, _guardPos) > 0.4f)
             {
+                _agent.isStopped = false;
                 isWalk = true;
+                //transform.position = Vector3.MoveTowards(transform.position, _guardPos, PatrolSpeed * Time.deltaTime);
+                //transform.LookAt(_guardPos);
+                _agent.speed = PatrolSpeed;
+                _agent.stoppingDistance = ChaseStopDistance;
+                _agent.SetDestination(_guardPos);
             }
             else
             {
+                _agent.isStopped = true;
+                //_agent.speed = 0;
                 isWalk = false;
+                _rb.velocity = Vector3.zero;
+                _rb.angularVelocity = Vector3.zero;
             }
         }
 
@@ -281,34 +292,23 @@ public class Enemy_Sphere : MonoBehaviour
     }
     private void Chase()//追击方法
     {
-
-        if (!isGuard)
+        if (Vector2.Distance(transform.position, Target.transform.position) >= ChaseStopDistance)//大于技能攻击范围才靠近,除非特殊类型，不要设置敌人自己往玩家身上去的傻瓜式敌人
         {
-            if (Vector2.Distance(transform.position, Target.transform.position) >= ChaseStopDistance)//大于技能攻击范围才靠近,除非特殊类型，不要设置敌人自己往玩家身上去的傻瓜式敌人
-            {
-                isAttack = false;
-                isWalk = false;
-                isChase = true;
-                _agent.speed = ChaseSpeed;
-                _agent.stoppingDistance = ChaseStopDistance;
-                _agent.SetDestination(Target.transform.position);
-                //transform.LookAt(Target.transform.position);
-            }
-            else
-            {
-                isChase = true;
-                isFollow = false;
-
-                Attack();
-            }
+            isAttack = false;
+            isWalk = false;
+            isChase = true;
+            _agent.speed = ChaseSpeed;
+            _agent.stoppingDistance = ChaseStopDistance;
+            _agent.SetDestination(Target.transform.position);
+            //transform.LookAt(Target.transform.position);
         }
         else
         {
-            isWalk = false;
             isChase = true;
+            isFollow = false;
+
             Attack();
         }
-
     }
     private void Dead()//敌人死亡方法
     {
@@ -332,6 +332,10 @@ public class Enemy_Sphere : MonoBehaviour
             //    _anim.SetTrigger("attack");
             //    _attackCoolDownTimer = AttackCoolDown;
             //}
+        }
+        else
+        {
+            isAttack = false;
         }
 
     }
