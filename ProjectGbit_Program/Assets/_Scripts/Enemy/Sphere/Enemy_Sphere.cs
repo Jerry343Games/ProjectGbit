@@ -58,9 +58,10 @@ public class Enemy_Sphere : MonoBehaviour
     public float WaitPlayerExitDuration;//丢失玩家后原地停留的时间
     private float _waitPlayerExitTimer;//丢失玩家后原地停留时间的计时器
     public float ChaseSpeed;//追击速度
-    public float ChaseStopDistance;
+    public float ChaseStopDistance;//追逐停止的距离，目前同时也是攻击范围
     [Header("攻击相关")]
     public float AttackCoolDown;
+    [SerializeField]
     private float _attackCoolDownTimer;
 
 
@@ -74,6 +75,7 @@ public class Enemy_Sphere : MonoBehaviour
     [SerializeField] bool isChase;//
     [SerializeField] bool isFollow;//是否追逐，在动画控制器中做追击和战力攻击的切换
     [SerializeField] bool isCritical;//是否暴击
+    [SerializeField] bool isAttack;//是否在攻击
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -284,6 +286,7 @@ public class Enemy_Sphere : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, Target.transform.position) >= ChaseStopDistance)//大于技能攻击范围才靠近,除非特殊类型，不要设置敌人自己往玩家身上去的傻瓜式敌人
             {
+                isAttack = false;
                 isWalk = false;
                 isChase = true;
                 _agent.speed = ChaseSpeed;
@@ -295,6 +298,7 @@ public class Enemy_Sphere : MonoBehaviour
             {
                 isChase = true;
                 isFollow = false;
+
                 Attack();
             }
         }
@@ -319,8 +323,10 @@ public class Enemy_Sphere : MonoBehaviour
     {
         if (_attackCoolDownTimer < 0)
         {
-            _anim.SetTrigger("attack");
+            isAttack = true;
+            //_anim.SetTrigger("attack");
             _attackCoolDownTimer = AttackCoolDown;
+            Debug.Log("attack");
             //if (TargetInAttackRange())
             //{
             //    _anim.SetTrigger("attack");
