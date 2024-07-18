@@ -248,8 +248,6 @@ public class Enemy_Sphere : MonoBehaviour
             {
                 _agent.isStopped = false;
                 isWalk = true;
-                //transform.position = Vector3.MoveTowards(transform.position, _guardPos, PatrolSpeed * Time.deltaTime);
-                //transform.LookAt(_guardPos);
                 _agent.speed = PatrolSpeed;
                 _agent.stoppingDistance = ChaseStopDistance;
                 _agent.SetDestination(_guardPos);
@@ -300,7 +298,6 @@ public class Enemy_Sphere : MonoBehaviour
             _agent.speed = ChaseSpeed;
             _agent.stoppingDistance = ChaseStopDistance;
             _agent.SetDestination(Target.transform.position);
-            //transform.LookAt(Target.transform.position);
         }
         else
         {
@@ -327,6 +324,7 @@ public class Enemy_Sphere : MonoBehaviour
             //_anim.SetTrigger("attack");
             _attackCoolDownTimer = AttackCoolDown;
             Debug.Log("attack");
+
             //if (TargetInAttackRange())
             //{
             //    _anim.SetTrigger("attack");
