@@ -257,7 +257,7 @@ public class Enemy_Sphere : MonoBehaviour
         if (_waitPlayerExitTimer < 0)
         {
             isChase = false;
-            if (Vector3.Distance(transform.position, PatolPoints[_wayPointIndex].position) > 0.5f)
+            if (Vector3.Distance(transform.position, PatolPoints[_wayPointIndex].position) > ChaseStopDistance)
             {
                 isWalk = true;
                 _agent.speed = PatrolSpeed;
