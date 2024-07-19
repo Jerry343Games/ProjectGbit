@@ -6,5 +6,46 @@ using UnityEngine;
 /// </summary>
 public class PartGenerator : MonoBehaviour
 {
-    
+    public GameObject[] parts; // 零件预制体数组
+    public Transform spawnPoint; // 生成点
+    public float spawnInterval = 2.0f; // 生成间隔
+
+    private GameObject nextPart; // 下一个生成的特定零件
+    private float timer; // 计时器
+
+    void Start()
+    {
+        timer = spawnInterval;
+    }
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            GeneratePart();
+            timer = spawnInterval;
+        }
+    }
+
+    /// <summary>
+    /// 生成零件
+    /// </summary>
+    void GeneratePart()
+    {
+        GameObject partToSpawn = nextPart != null ? nextPart : parts[Random.Range(0, parts.Length)];
+        Instantiate(partToSpawn, spawnPoint.position, spawnPoint.rotation);
+        nextPart = null;
+    }
+
+    /// <summary>
+    /// 设置下一个生成的零件
+    /// </summary>
+    /// <param name="part">要生成的特定零件</param>
+    public void SetNextPart(GameObject part)
+    {
+        nextPart = part;
+    }
 }
+
