@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -160,24 +161,27 @@ public class AIBot : MonoBehaviour
     private IEnumerator TakePartRoutine()
     {
         int randomPartIndex = Random.Range(0, WaitPoints.Length);
-        Vector3 targetPosition = new Vector3(WaitPoints[randomPartIndex].transform.position.x,transform.position.y, WaitPoints[randomPartIndex].transform.position.z);
 
-        float distance = Vector3.Distance(transform.position, targetPosition);
-        float travelTime = distance / MoveSpeed;
+        BotWaitPoint randomPoint = WaitPoints[randomPartIndex];
 
-        float moveTimer = 0f;
-        while (moveTimer < travelTime)
+        Vector3 targetPosition = new Vector3(randomPoint.transform.position.x, transform.position.y, randomPoint.transform.position.z);
+
+        _agent.SetDestination(targetPosition);
+
+        while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
         {
-            _agent.SetDestination(targetPosition);
-            moveTimer += Time.deltaTime;
             yield return null;
         }
 
         _agent.isStopped = true;
 
         print("到达位置，等待零件");
-    }
 
+        transform.LookAt(randomPoint.BotShowFaceDir + transform.position);
+
+        // 获得零件后进行处理，可以是调用 GetPart 方法或其他逻辑
+        GetPart();
+    }
 
     /// <summary>
     /// 获得零件之后的响应
@@ -187,34 +191,28 @@ public class AIBot : MonoBehaviour
         StartCoroutine(GetPartRoutine());
     }
 
-    IEnumerator GetPartRoutine()
+    private IEnumerator GetPartRoutine()
     {
+        _agent.isStopped = false;
+
         Vector3 targetPosition = FindObjectOfType<SubmissionPoint>().transform.GetChild(0).transform.position;
 
         Vector3 offsetPosition = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
 
-        float distance = Vector3.Distance(transform.position, offsetPosition);
-        float travelTime = distance / MoveSpeed;
+        _agent.SetDestination(offsetPosition);
 
-        float moveTimer = 0f;
-        while (moveTimer < travelTime)
+        while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
         {
-            _agent.SetDestination(offsetPosition);
-            moveTimer += Time.deltaTime;
             yield return null;
         }
 
-        AIBotAction();
+        SwitchState();
     }
-
-
-
 
     public void ExecuteQTE()
     {
         IsBeingQTE = true;
         _agent.isStopped = true;
-
 
         if (_currentCoroutine != null)
         {

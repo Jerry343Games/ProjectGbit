@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BotWaitPoint : MonoBehaviour
 {
-
+    public Vector3 BotShowFaceDir;
 
 
 }
