@@ -30,7 +30,7 @@ public class PartGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// 生成零件
+    /// 生成零件，如果有提前指定就生成指定的，没有就随机选一个
     /// </summary>
     void GeneratePart()
     {
