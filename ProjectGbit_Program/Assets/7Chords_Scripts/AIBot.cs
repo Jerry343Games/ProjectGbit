@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,6 +31,9 @@ public class AIBot : MonoBehaviour
     public float SingleStopDuration; // 单次移动后停止时间
     private Vector3 _randomDir; // 缓存的随机方向
 
+    [Header("获取道具参数")]
+    public BotWaitPoint[] WaitPoints;
+
     [Header("QTE参数")]
     public bool IsBeingQTE;
 
@@ -37,21 +41,24 @@ public class AIBot : MonoBehaviour
     public Vector3 MinBounds; // 地图最小边界
     public Vector3 MaxBounds; // 地图最大边界
 
-    private void OnEnable()
-    {
-        GameManager.Instance.GameStartedAction += AIBotAction;
-    }
-
     private void Awake()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
-        PrecomputeRandomDirection();
     }
 
     private void Start()
     {
+        GameManager.Instance.GameStartedAction += AIBotAction;
+
         CurrentStateIndex = 0;
         CurrentState = StateList[CurrentStateIndex];
+        WaitPoints = FindObjectsOfType<BotWaitPoint>();
+        PrecomputeRandomDirection();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.GameStartedAction -= AIBotAction;
     }
 
     // 获取一个随机移动方向，并确保不会超出边界
@@ -65,7 +72,7 @@ public class AIBot : MonoBehaviour
             potentialDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
             newPosition = transform.position + potentialDirection * MoveSpeed * SingleMoveDuration;
         }
-        while (!IsWithinBounds(newPosition));
+        while (!IsWithinBounds(newPosition) && !HasObstacleBetweenTwoPos(potentialDirection, Vector3.Distance(newPosition, transform.position)));
 
         _randomDir = potentialDirection;
     }
@@ -75,6 +82,11 @@ public class AIBot : MonoBehaviour
     {
         return position.x > MinBounds.x && position.x < MaxBounds.x &&
                position.z > MinBounds.z && position.z < MaxBounds.z;
+    }
+
+    private bool HasObstacleBetweenTwoPos(Vector3 dir, float distance)
+    {
+        return Physics.Raycast(transform.position, dir, distance, LayerMask.GetMask("Obstacle"));
     }
 
     private void AIBotAction()
@@ -94,20 +106,6 @@ public class AIBot : MonoBehaviour
                 break;
             default:
                 break;
-        }
-    }
-
-    private void Update()
-    {
-        if (!GameManager.Instance.GameStarted)
-        {
-            return;
-        }
-
-        if (IsBeingQTE)
-        {
-            _agent.isStopped = true;
-            return;
         }
     }
 
@@ -139,17 +137,48 @@ public class AIBot : MonoBehaviour
 
     private IEnumerator TakePartRoutine()
     {
-        // 选取场上存在随机零件的位置
-        print("拿取零件");
-        // if判断当前位置和零件位置的距离 接近之后就拿取GetPart
-        // 回到框子后
-        SwitchState();
-        yield return null;
+        int randomPartIndex = Random.Range(0, WaitPoints.Length);
+        Vector3 targetPosition = WaitPoints[randomPartIndex].transform.position;
+
+        float distance = Vector3.Distance(transform.position, targetPosition);
+        float travelTime = distance / MoveSpeed;
+
+        float moveTimer = 0f;
+        while (moveTimer < travelTime)
+        {
+            _agent.SetDestination(targetPosition);
+            moveTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        _agent.isStopped = true;
+
+        print("到达位置，等待零件");
+    }
+
+
+
+    public void GetPart()
+    {
+        //Vector3 targetPosition = WaitPoints[randomPartIndex].transform.position;
+
+        //float distance = Vector3.Distance(transform.position, targetPosition);
+        //float travelTime = distance / MoveSpeed;
+
+        //float moveTimer = 0f;
+        //while (moveTimer < travelTime)
+        //{
+        //    _agent.SetDestination(targetPosition);
+        //    moveTimer += Time.deltaTime;
+        //    yield return null;
+        //}
     }
 
     public void ExecuteQTE()
     {
         IsBeingQTE = true;
+        _agent.isStopped = true;
+
 
         if (_currentCoroutine != null)
         {
@@ -162,9 +191,16 @@ public class AIBot : MonoBehaviour
     private IEnumerator QTERoutine()
     {
         float QTETimer = 0;
-        float QTETime = Random.Range(0, 5f); // 随机选取一个0到最大响应时间的时间点 响应QTE
+        float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
+        float QTETime = Random.Range(0, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
 
         while (QTETimer < QTETime)
+        {
+            QTETimer += Time.deltaTime;
+            yield return null;
+        }
+        //执行QTE效果
+        while (QTETimer < QTEMaxTime)
         {
             QTETimer += Time.deltaTime;
             yield return null;
@@ -172,7 +208,7 @@ public class AIBot : MonoBehaviour
 
         // QTE事件完成
         IsBeingQTE = false;
-
+        _agent.isStopped = false;
         // 结束QTE就开始动
         AIBotAction();
     }

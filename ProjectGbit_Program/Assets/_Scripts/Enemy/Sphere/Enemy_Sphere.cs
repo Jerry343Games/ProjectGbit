@@ -323,7 +323,6 @@ public class Enemy_Sphere : MonoBehaviour
             isAttack = true;
             //_anim.SetTrigger("attack");
             _attackCoolDownTimer = AttackCoolDown;
-            Debug.Log("attack");
 
             //if (TargetInAttackRange())
             //{
