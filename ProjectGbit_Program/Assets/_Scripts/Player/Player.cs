@@ -65,16 +65,16 @@ public class Player : MonoBehaviour
         //由类型分配模型
         switch (myType)
         {
-            case PlayerType.A:
+            case PlayerType.PlayerBot1:
                 playerModel[0].SetActive(true);
                 break;
-            case PlayerType.B:
+            case PlayerType.PlayerBot2:
                 playerModel[1].SetActive(true);
                 break;
-            case PlayerType.C:
+            case PlayerType.PlayerFactory:
                 playerModel[2].SetActive(true);
                 break;
-            case PlayerType.D:
+            case PlayerType.PlayerPolice:
                 playerModel[3].SetActive(true);
                 break;
         }

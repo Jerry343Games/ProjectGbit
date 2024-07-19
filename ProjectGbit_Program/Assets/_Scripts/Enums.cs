@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public enum PlayerType
 { 
-    A,
-    B,
-    C,
-    D
+    PlayerBot1,
+    PlayerBot2,
+    PlayerFactory,
+    PlayerPolice
 }
 

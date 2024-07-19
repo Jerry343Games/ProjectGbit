@@ -19,5 +19,34 @@ public class InputSetting : MonoBehaviour
     {
         inputDir = value0.ReadValue<Vector2>();
     }
-    
+
+    public bool isPressConfirm;
+    public void OnPressConfirm (InputAction.CallbackContext context)
+    {
+        // 检测按键被按下
+        if (context.started)
+        {
+            isPressConfirm = true;
+        }
+        // 检测按键被抬起
+        else if (context.canceled)
+        {
+            isPressConfirm = false;
+        }
+    }
+    public bool isPressSwitch;
+
+    public void OnPressSwitch(InputAction.CallbackContext context)
+    {
+        // 检测按键被按下
+        if (context.started)
+        {
+            isPressSwitch = true;
+        }
+        // 检测按键被抬起
+        else if (context.canceled)
+        {
+            isPressSwitch = false;
+        }
+    }
 }

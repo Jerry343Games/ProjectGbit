@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 219275046252184642}
   - component: {fileID: 8063833961682768340}
   - component: {fileID: 3711601751461207340}
+  - component: {fileID: 1940554578179813198}
+  - component: {fileID: 4948398971796014020}
   m_Layer: 7
   m_Name: PlayerFactory
   m_TagString: Untagged
@@ -105,3 +107,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1940554578179813198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4089501036522716570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750d7da1604187e4a8dda406ace414c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4948398971796014020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4089501036522716570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db41b48929f93b141be2931342b4dd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBlock: {fileID: 0}
+  navigateHost: {fileID: 0}
+  inputDir: {x: 0, y: 0}
+  isUp: 0
+  isDown: 0
+  isLeft: 0
+  isRight: 0
