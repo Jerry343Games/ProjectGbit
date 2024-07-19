@@ -141,10 +141,10 @@ public class AIBot : MonoBehaviour
     {
         float moveTimer = 0f;
         Vector3 targetPosition = transform.position + _randomDir * MoveSpeed * SingleMoveDuration;
-
+        _agent.SetDestination(targetPosition);
         while (moveTimer < SingleMoveDuration)
         {
-            _agent.SetDestination(targetPosition);
+            //_agent.SetDestination(targetPosition);
             moveTimer += Time.deltaTime;
             yield return null;
         }
@@ -179,17 +179,15 @@ public class AIBot : MonoBehaviour
 
         print("到达位置，等待零件");
 
-        transform.LookAt(randomPoint.BotShowFaceDir + transform.position);
 
-        // 获得零件后进行处理，可以是调用 GetPart 方法或其他逻辑
-        GetPart();
     }
 
     /// <summary>
     /// 获得零件之后的响应
     /// </summary>
-    public void GetPart()
+    public void GetPart(Part part)
     {
+        CurrentPart = part;
         StartCoroutine(GetPartRoutine());
     }
 
