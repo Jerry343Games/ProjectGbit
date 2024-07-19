@@ -9,7 +9,6 @@ public enum BotState
 {
     Move, // 普通移动
     TakeParts, // 拿零件（移动到固定点面前，等待零件过来拿起来）
-    ExecuteCommand, // 执行警察的命令
 }
 
 /// <summary>
@@ -61,7 +60,9 @@ public class AIBot : MonoBehaviour
         GameManager.Instance.GameStartedAction -= AIBotAction;
     }
 
-    // 获取一个随机移动方向，并确保不会超出边界
+    /// <summary>
+    /// 获取一个随机移动方向，并确保不会超出边界和定位在障碍物里面
+    /// </summary>
     private void PrecomputeRandomDirection()
     {
         Vector3 potentialDirection;
@@ -77,18 +78,26 @@ public class AIBot : MonoBehaviour
         _randomDir = potentialDirection;
     }
 
-    // 检查新位置是否在边界内
+    /// <summary>
+    /// 检查新位置是否在边界内
+    /// </summary>
     private bool IsWithinBounds(Vector3 position)
     {
         return position.x > MinBounds.x && position.x < MaxBounds.x &&
                position.z > MinBounds.z && position.z < MaxBounds.z;
     }
 
+    /// <summary>
+    /// 检查新位置和当前位置之间是否有障碍物
+    /// </summary>
     private bool HasObstacleBetweenTwoPos(Vector3 dir, float distance)
     {
         return Physics.Raycast(transform.position, dir, distance, LayerMask.GetMask("Obstacle"));
     }
 
+    /// <summary>
+    /// AIBot行为
+    /// </summary>
     private void AIBotAction()
     {
         if (_currentCoroutine != null)
@@ -109,6 +118,10 @@ public class AIBot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// AIBot的状态切换
+    /// </summary>
+
     private void SwitchState()
     {
         CurrentStateIndex = (CurrentStateIndex + 1) % StateList.Count;
@@ -116,6 +129,11 @@ public class AIBot : MonoBehaviour
         AIBotAction();
     }
 
+
+    /// <summary>
+    /// 随机移动携程
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator MoveRoutine()
     {
         float moveTimer = 0f;
@@ -135,10 +153,14 @@ public class AIBot : MonoBehaviour
         SwitchState();
     }
 
+    /// <summary>
+    /// 去拿零件携程
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator TakePartRoutine()
     {
         int randomPartIndex = Random.Range(0, WaitPoints.Length);
-        Vector3 targetPosition = WaitPoints[randomPartIndex].transform.position;
+        Vector3 targetPosition = new Vector3(WaitPoints[randomPartIndex].transform.position.x,transform.position.y, WaitPoints[randomPartIndex].transform.position.z);
 
         float distance = Vector3.Distance(transform.position, targetPosition);
         float travelTime = distance / MoveSpeed;
@@ -157,22 +179,36 @@ public class AIBot : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// 获得零件之后的响应
+    /// </summary>
     public void GetPart()
     {
-        //Vector3 targetPosition = WaitPoints[randomPartIndex].transform.position;
-
-        //float distance = Vector3.Distance(transform.position, targetPosition);
-        //float travelTime = distance / MoveSpeed;
-
-        //float moveTimer = 0f;
-        //while (moveTimer < travelTime)
-        //{
-        //    _agent.SetDestination(targetPosition);
-        //    moveTimer += Time.deltaTime;
-        //    yield return null;
-        //}
+        StartCoroutine(GetPartRoutine());
     }
+
+    IEnumerator GetPartRoutine()
+    {
+        Vector3 targetPosition = FindObjectOfType<SubmissionPoint>().transform.GetChild(0).transform.position;
+
+        Vector3 offsetPosition = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
+
+        float distance = Vector3.Distance(transform.position, offsetPosition);
+        float travelTime = distance / MoveSpeed;
+
+        float moveTimer = 0f;
+        while (moveTimer < travelTime)
+        {
+            _agent.SetDestination(offsetPosition);
+            moveTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        AIBotAction();
+    }
+
+
+
 
     public void ExecuteQTE()
     {

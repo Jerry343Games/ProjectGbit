@@ -37,4 +37,27 @@ public class PlayerBot : MonoBehaviour
         // 移动玩家
         _rigidbody.velocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z);
     }
+    
+    /// <summary>
+    /// 开始QTE
+    /// </summary>
+    public void BeginQTE()
+    {
+        StartCoroutine(QTERoutine());
+    }
+
+    IEnumerator QTERoutine()
+    {
+        float QTETimer = 0;
+        float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
+
+        while (QTETimer < QTEMaxTime)
+        {
+            //输入按键后结束
+            QTETimer += Time.deltaTime;
+            yield return null;
+        }
+        //未完成输入，暴露
+    }
+
 }
