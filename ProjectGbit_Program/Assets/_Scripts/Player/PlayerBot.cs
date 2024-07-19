@@ -35,7 +35,7 @@ public class PlayerBot : MonoBehaviour
     {
         Vector3 movement = new Vector3(inputDir.x, 0, inputDir.y).normalized * moveSpeed ;
         // 移动玩家
-        _rigidbody.velocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z);
+        _rigidbody.velocity += new Vector3(movement.x, _rigidbody.velocity.y, movement.z)*Time.deltaTime*30;
     }
     
     /// <summary>
