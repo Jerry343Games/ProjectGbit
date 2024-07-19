@@ -376,7 +376,7 @@ PrefabInstance:
     - target: {fileID: 7635649882886510212, guid: d22dc9eb9b4e42e4699c926373ee5b71,
         type: 3}
       propertyPath: m_text
-      value: 'NAMEA
+      value: 'Bot1
 
 '
       objectReference: {fileID: 0}
@@ -528,7 +528,9 @@ PrefabInstance:
     - target: {fileID: 7635649882886510212, guid: d22dc9eb9b4e42e4699c926373ee5b71,
         type: 3}
       propertyPath: m_text
-      value: NAMED
+      value: 'Ploice
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 7706904118064383892, guid: d22dc9eb9b4e42e4699c926373ee5b71,
         type: 3}
@@ -683,7 +685,9 @@ PrefabInstance:
     - target: {fileID: 7635649882886510212, guid: d22dc9eb9b4e42e4699c926373ee5b71,
         type: 3}
       propertyPath: m_text
-      value: NAMEC
+      value: 'Factory
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 7706904118064383892, guid: d22dc9eb9b4e42e4699c926373ee5b71,
         type: 3}
@@ -838,7 +842,9 @@ PrefabInstance:
     - target: {fileID: 7635649882886510212, guid: d22dc9eb9b4e42e4699c926373ee5b71,
         type: 3}
       propertyPath: m_text
-      value: NAMEB
+      value: 'Bot2
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 7706904118064383892, guid: d22dc9eb9b4e42e4699c926373ee5b71,
         type: 3}
