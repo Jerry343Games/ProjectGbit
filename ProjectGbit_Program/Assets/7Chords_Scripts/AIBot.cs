@@ -33,6 +33,10 @@ public class AIBot : MonoBehaviour
     [Header("QTE参数")]
     public bool IsBeingQTE;
 
+    [Header("地图边界")]
+    public Vector3 MinBounds; // 地图最小边界
+    public Vector3 MaxBounds; // 地图最大边界
+
     private void OnEnable()
     {
         GameManager.Instance.GameStartedAction += AIBotAction;
@@ -50,10 +54,27 @@ public class AIBot : MonoBehaviour
         CurrentState = StateList[CurrentStateIndex];
     }
 
-    //获取一个随机移动方向
+    // 获取一个随机移动方向，并确保不会超出边界
     private void PrecomputeRandomDirection()
     {
-        _randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        Vector3 potentialDirection;
+        Vector3 newPosition;
+
+        do
+        {
+            potentialDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+            newPosition = transform.position + potentialDirection * MoveSpeed * SingleMoveDuration;
+        }
+        while (!IsWithinBounds(newPosition));
+
+        _randomDir = potentialDirection;
+    }
+
+    // 检查新位置是否在边界内
+    private bool IsWithinBounds(Vector3 position)
+    {
+        return position.x > MinBounds.x && position.x < MaxBounds.x &&
+               position.z > MinBounds.z && position.z < MaxBounds.z;
     }
 
     private void AIBotAction()
@@ -100,10 +121,11 @@ public class AIBot : MonoBehaviour
     private IEnumerator MoveRoutine()
     {
         float moveTimer = 0f;
+        Vector3 targetPosition = transform.position + _randomDir * MoveSpeed * SingleMoveDuration;
 
         while (moveTimer < SingleMoveDuration)
         {
-            _agent.Move(_randomDir * MoveSpeed * Time.deltaTime);
+            _agent.SetDestination(targetPosition);
             moveTimer += Time.deltaTime;
             yield return null;
         }

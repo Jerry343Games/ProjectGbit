@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager>
         GameStarted = false;
 
         GameFinished = false;
+
+        StartGame();
     }
     public void StartGame()
     {
