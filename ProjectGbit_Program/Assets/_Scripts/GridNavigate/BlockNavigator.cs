@@ -20,6 +20,8 @@ public class BlockNavigator : MonoBehaviour
     public bool isRight;
 
     private float _navigateInputTimer;
+    private float _pressSwitchTimer;
+    private float _pressConfirmTimer;
     
     private void Awake()
     {
@@ -38,6 +40,10 @@ public class BlockNavigator : MonoBehaviour
             Navigate();
             _navigateInputTimer = 0f; // 重置计时器
         }
+        
+        ConfirmOnOff();
+        SwitchDirection();
+        
     }
     
     /// <summary>
@@ -57,23 +63,45 @@ public class BlockNavigator : MonoBehaviour
             if (angle > -45f && angle <= 45f)
             {
                 isUp = true;
-                Debug.Log("isUp");
             }
             else if (angle > 45f && angle <= 135f)
             {
                 isLeft = true;
-                Debug.Log("isRight");
             }
             else if (angle > -135f && angle <= -45f)
             {
                 isRight = true;
-                Debug.Log("isLeft");
             }
             else
             {
                 isDown = true;
-                Debug.Log("isDown");
             }
+        }
+    }
+
+    private void SwitchDirection()
+    {
+        _pressSwitchTimer += Time.deltaTime; // 更新计时器
+        if (_pressSwitchTimer >= 0.15f) // 检查计时器是否超过间隔
+        {
+            if (_inputSetting.isPressSwitch)
+            {
+                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.cyan;
+            }
+            _pressSwitchTimer = 0f; // 重置计时器
+        }
+    }
+    
+    private void ConfirmOnOff()
+    {
+        _pressConfirmTimer += Time.deltaTime; // 更新计时器
+        if (_pressConfirmTimer >= 0.15f) // 检查计时器是否超过间隔
+        {
+            if (_inputSetting.isPressConfirm)
+            {
+                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.blue;
+            }
+            _pressConfirmTimer = 0f; // 重置计时器
         }
     }
 
@@ -119,7 +147,5 @@ public class BlockNavigator : MonoBehaviour
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
             }
         }
-
-        Debug.Log(_multiplayerEventSystem.currentSelectedGameObject.name);
     }
 }

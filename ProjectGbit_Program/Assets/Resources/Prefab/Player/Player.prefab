@@ -72,6 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputDir: {x: 0, y: 0}
+  isPressConfirm: 0
+  isPressSwitch: 0
 --- !u!114 &8129797878860314619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +156,42 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: db706a82-a2e1-4b7a-985a-61c8940cd4d2
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7428233439764705239}
+        m_TargetAssemblyTypeName: InputSetting, Assembly-CSharp
+        m_MethodName: OnPressSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e18e6e7f-3d09-4530-a424-23d0e08d4ce1
+    m_ActionName: Player/PressSwitch[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7428233439764705239}
+        m_TargetAssemblyTypeName: InputSetting, Assembly-CSharp
+        m_MethodName: OnPressConfirm
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fad37363-8227-4771-9710-195068a31e23
+    m_ActionName: Player/PressConfirm[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 640c26d7-e370-4bea-9643-f8fec2a13b6c
+    m_ActionName: Factory/Navigate[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -284,6 +322,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4948398971796014020, guid: f6e0f6abb0d6b0c4ba43d6f9178cd192,
+        type: 3}
+      propertyPath: navigateHost
+      value: 
+      objectReference: {fileID: 3860741151660753668}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

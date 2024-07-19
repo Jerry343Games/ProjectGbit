@@ -20,6 +20,7 @@ public class InputSetting : MonoBehaviour
         inputDir = value0.ReadValue<Vector2>();
     }
 
+    [HideInInspector]
     public bool isPressConfirm;
     public void OnPressConfirm (InputAction.CallbackContext context)
     {
@@ -34,8 +35,9 @@ public class InputSetting : MonoBehaviour
             isPressConfirm = false;
         }
     }
+    
+    [HideInInspector]
     public bool isPressSwitch;
-
     public void OnPressSwitch(InputAction.CallbackContext context)
     {
         // 检测按键被按下
