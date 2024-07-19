@@ -9,27 +9,26 @@ public class ConveyorBelt : MonoBehaviour
     public bool isAwake = true;
     public bool isReverse = false;
     private int reverseNum = 1;
-    private void OnTriggerStay(Collider other)
+    private void OnCollisionStay(Collision collision)
     {
         if (!isAwake) return;
 
-        Rigidbody rb = other.attachedRigidbody;
+        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
             if (isReverse) reverseNum = -1; else reverseNum = 1;
             Vector3 conveyorMovement = transform.forward * beltSpeed * Time.deltaTime * reverseNum;
 
-            BotProperty botProperty = other.GetComponent<BotProperty>();
+            BotProperty botProperty = collision.gameObject.GetComponent<BotProperty>();
             rb.velocity += conveyorMovement;
-            
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
-        BotProperty botProperty = other.GetComponent<BotProperty>();
-        Rigidbody rb = other.attachedRigidbody;
+        BotProperty botProperty = collision.gameObject.GetComponent<BotProperty>();
+        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         if (botProperty == null && rb != null)
         {
             rb.velocity = Vector3.zero;
