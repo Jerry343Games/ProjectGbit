@@ -52,7 +52,7 @@ public class UISelectPanel : MonoBehaviour
         _currentPlayerNum++;
         
         //全部确认时
-        if (_currentPlayerNum==3)
+        if (_currentPlayerNum==PlayerManager.Instance.MaxPlayerNumber())
         {
             Debug.Log("AllPlayerOnline");
             Sequence sequence = DOTween.Sequence();

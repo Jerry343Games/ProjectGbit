@@ -19,4 +19,5 @@ public class InputSetting : MonoBehaviour
     {
         inputDir = value0.ReadValue<Vector2>();
     }
+    
 }
