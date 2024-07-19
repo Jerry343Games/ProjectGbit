@@ -5,7 +5,7 @@ using UnityEngine;
 public class ConveyorBelt : MonoBehaviour
 {
     public float beltSpeed = 2.0f; // 传送带的速度
-    public float playerResistanceFactor = 0.5f; // 玩家移动时的阻力因子
+    //public float playerResistanceFactor = 0.5f; // 玩家移动时的阻力因子
     public bool isAwake = true;
     public bool isReverse = false;
     private int reverseNum = 1;
@@ -21,25 +21,8 @@ public class ConveyorBelt : MonoBehaviour
             Vector3 conveyorMovement = transform.forward * beltSpeed * Time.deltaTime * reverseNum;
 
             BotProperty botProperty = other.GetComponent<BotProperty>();
-
-            if (botProperty != null) // 是机器人
-            {
-                if (botProperty.isMoving)
-                {
-                    // 玩家正在移动，施加阻力
-                    rb.velocity += conveyorMovement * playerResistanceFactor;
-                }
-                else
-                {
-                    // 玩家没有移动，完全被传送带带动
-                    rb.velocity += conveyorMovement;
-                }
-            }
-            else
-            {
-                // 其他物体完全被传送带带动
-                rb.velocity += conveyorMovement;
-            }
+            rb.velocity += conveyorMovement;
+            
         }
     }
 
