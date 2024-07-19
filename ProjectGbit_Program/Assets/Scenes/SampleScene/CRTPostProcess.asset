@@ -54,19 +54,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   intensity:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 7.01
   vignetteWidth:
-    m_OverrideState: 0
-    m_Value: 0.1
+    m_OverrideState: 1
+    m_Value: 100.47
   ScanlinePower:
-    m_OverrideState: 0
-    m_Value: 1
-  CycleIndex:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.2
+  CycleIndex:
+    m_OverrideState: 1
+    m_Value: 0.53
   TransparencyFactor:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.2
 --- !u!114 &11400000
 MonoBehaviour:
