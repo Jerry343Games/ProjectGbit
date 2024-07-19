@@ -44,7 +44,14 @@ public class PlayerPolice : MonoBehaviour
     /// </summary>
     private void CallQTE()
     {
-        
+        foreach(var aiBot in SceneManager.Instance.AIBotList)
+        {
+            aiBot.GetComponent<AIBot>().ExecuteQTE();
+        }
+        foreach (var playerBot in SceneManager.Instance.PlayerBotList)
+        {
+            playerBot.GetComponent<PlayerBot>().BeginQTE();
+        }
     }
 
 }

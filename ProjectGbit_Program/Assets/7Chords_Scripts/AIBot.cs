@@ -34,6 +34,8 @@ public class AIBot : MonoBehaviour
     [Header("获取道具参数")]
     public BotWaitPoint[] WaitPoints;
 
+    public Part CurrentPart;
+
     [Header("QTE参数")]
     public bool IsBeingQTE;
 
