@@ -38,7 +38,7 @@ public class BlockNavigator : MonoBehaviour
         
         //带有计时器的执行导航，连续间隔不低于0.2秒
         _navigateInputTimer += Time.deltaTime; // 更新计时器
-        if (_navigateInputTimer >= 0.15f) // 检查计时器是否超过间隔
+        if (_navigateInputTimer >= 0.1f) // 检查计时器是否超过间隔
         {
             Navigate();
             _navigateInputTimer = 0f; // 重置计时器

@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     {
         GameStarted = true;
 
-        GameStartedAction.Invoke();
+        //GameStartedAction.Invoke();
     }
 
 
