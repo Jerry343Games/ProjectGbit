@@ -1,6 +1,8 @@
+using DG.Tweening.Core.Easing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
@@ -15,7 +17,14 @@ public class BlockNavigator : MonoBehaviour
 
     private MultiplayerEventSystem _multiplayerEventSystem;
     private InputSetting _inputSetting;
-    
+
+
+    [Header("技能零件消耗")]
+    public int SwitchDirectionNeedPart;//转换方向需要的零件数量
+
+    public int ConfirmOnOffNeedPart;//开关传送带需要的零件数量
+
+
     [HideInInspector]
     public Vector2 inputDir;
     [HideInInspector]
@@ -26,6 +35,8 @@ public class BlockNavigator : MonoBehaviour
     public bool isLeft;
     [HideInInspector]
     public bool isRight;
+
+
 
     private float _navigateInputTimer;
     private float _pressSwitchTimer = 0;
@@ -99,6 +110,15 @@ public class BlockNavigator : MonoBehaviour
             if (_inputSetting.isPressSwitch)
             {
                 //这里写点击后的操作
+
+                //消耗零件
+                PartTask task = GameManager.Instance.Tasks.Find(x => x.currentAmount >= SwitchDirectionNeedPart);
+                if (task == null)
+                {
+                    return;
+                }
+                task.currentAmount -= SwitchDirectionNeedPart;
+
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.cyan;
                 ConveyorBelt conveyorBelt = currentBlock.GetComponent<ConveyorBelt>();
                 conveyorBelt.ChangeReverse();
@@ -119,6 +139,15 @@ public class BlockNavigator : MonoBehaviour
             if (_inputSetting.isPressConfirm)
             {
                 //这里写点击后执行的操作
+
+                //消耗零件
+                PartTask task = GameManager.Instance.Tasks.Find(x => x.currentAmount >= ConfirmOnOffNeedPart);
+                if(task == null)
+                {
+                    return;
+                }
+                task.currentAmount -= ConfirmOnOffNeedPart;
+
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.blue;
                 ConveyorBelt conveyorBelt = currentBlock.GetComponent<ConveyorBelt>();
                 conveyorBelt.ChangeOnOff();
