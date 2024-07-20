@@ -18,7 +18,7 @@ public enum BotState
 public class AIBot : MonoBehaviour
 {
     private NavMeshAgent _agent;
-    private Coroutine _currentCoroutine; // 当前正在执行的协程
+    //private Coroutine _currentCoroutine; // 当前正在执行的协程
 
     private Rigidbody _rb;
 
@@ -49,6 +49,16 @@ public class AIBot : MonoBehaviour
     public Vector3 MinBounds; // 地图最小边界
     public Vector3 MaxBounds; // 地图最大边界
 
+    bool hasMoveOver = false;
+
+    bool hasSetDest = false;
+
+    bool hasSetPartDest = false;
+
+    float moveTimer = 0;
+
+    float waitTimer = 0;
+
     private void Awake()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
@@ -59,11 +69,9 @@ public class AIBot : MonoBehaviour
     private void Start()
     {
 
-
-        GameManager.Instance.GameStartedAction += AIBotAction;
-
         SceneManager.Instance.RegisterAIBot(this);
 
+        //生成随机行为序列
         StateList.Clear();
 
         for (int i = 0; i < 5; i++)
@@ -79,16 +87,16 @@ public class AIBot : MonoBehaviour
             }
         }
 
+        //设置当前行为
         CurrentStateIndex = 0;
         CurrentState = StateList[CurrentStateIndex];
+
+        //获取场上所有的零件等待点
         WaitPoints = FindObjectsOfType<BotWaitPoint>();
+
         PrecomputeRandomDirection();
     }
 
-    private void OnDisable()
-    {
-        GameManager.Instance.GameStartedAction -= AIBotAction;
-    }
 
     /// <summary>
     /// 获取一个随机移动方向，并确保不会超出边界和定位在障碍物里面
@@ -125,27 +133,97 @@ public class AIBot : MonoBehaviour
         return Physics.Raycast(transform.position, dir, distance, LayerMask.GetMask("Obstacle"));
     }
 
-    /// <summary>
-    /// AIBot行为
-    /// </summary>
-    private void AIBotAction()
+
+
+    private void Update()
     {
-        if (_currentCoroutine != null)
+        if(!GameManager.Instance.GameStarted || GameManager.Instance.GameFinished)
         {
-            StopCoroutine(_currentCoroutine);
+            return;
+        }
+        if(!IsBeingQTE)
+        {
+            switch (CurrentState)
+            {
+                case BotState.Move:
+                    Move();
+                    break;
+                case BotState.TakeParts:
+                    TakePart();
+                    //_currentCoroutine = StartCoroutine(TakePartRoutine());
+                    break;
+                default:
+                    break;
+            }
         }
 
-        switch (CurrentState)
+        QTE();
+    }
+
+
+
+
+    private void Move()
+    {
+ 
+
+        if(!hasMoveOver)
         {
-            case BotState.Move:
-                _currentCoroutine = StartCoroutine(MoveRoutine());
-                break;
-            case BotState.TakeParts:
-                _currentCoroutine = StartCoroutine(TakePartRoutine());
-                break;
-            default:
-                break;
+            if (moveTimer < SingleMoveDuration)
+            {
+                if(!hasSetDest)
+                {
+                    hasSetDest = true;
+                    Vector3 targetPosition = transform.position + _randomDir * MoveSpeed * SingleMoveDuration;
+                    _agent.isStopped = false;
+                    _agent.SetDestination(targetPosition);
+                }
+                moveTimer += Time.deltaTime;
+
+            }
+            else
+            {
+                hasMoveOver = true;
+            }
         }
+        else
+        {
+            if(waitTimer<SingleStopDuration)
+            {
+                waitTimer += Time.deltaTime;
+                _agent.isStopped = true;
+            }
+            else
+            {
+                SwitchState();
+            }
+        }
+
+
+    }
+
+
+    private void TakePart()
+    {
+
+        if(!hasSetPartDest)
+        {
+            hasSetPartDest = true;
+            do
+            {
+                int randomPartIndex = Random.Range(0, WaitPoints.Length);
+
+                TargetPoint = WaitPoints[randomPartIndex];
+
+            } while (TargetPoint.HasBotExit);
+
+            TargetPoint.HasBotExit = true;
+
+            _agent.isStopped = false;
+
+            _agent.SetDestination(TargetPoint.transform.position);
+        }
+
     }
 
     /// <summary>
@@ -155,74 +233,22 @@ public class AIBot : MonoBehaviour
     private void SwitchState()
     {
         CurrentStateIndex = (CurrentStateIndex + 1) % StateList.Count;
+
         CurrentState = StateList[CurrentStateIndex];
-        AIBotAction();
+
+        hasMoveOver = false;
+
+        hasSetDest = false;
+
+        hasSetPartDest = false;
+
+        moveTimer = 0;
+
+        waitTimer = 0;
+
+        PrecomputeRandomDirection();
     }
 
-
-    /// <summary>
-    /// 随机移动携程
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator MoveRoutine()
-    {
-        float moveTimer = 0f;
-        _agent.angularSpeed = 60;
-
-        Vector3 targetPosition = transform.position + _randomDir * MoveSpeed * SingleMoveDuration;
-        _agent.SetDestination(targetPosition);
-        while (moveTimer < SingleMoveDuration)
-        {
-            //_agent.SetDestination(targetPosition);
-            moveTimer += Time.deltaTime;
-            yield return null;
-        }
-
-        _agent.isStopped = true;
-        yield return new WaitForSeconds(SingleStopDuration);
-        _agent.isStopped = false;
-        _agent.angularSpeed = 0;
-        PrecomputeRandomDirection(); // 移动结束后重新计算随机方向
-        SwitchState();
-    }
-
-    /// <summary>
-    /// 去拿零件携程
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator TakePartRoutine()
-    {
-        do
-        {
-            int randomPartIndex = Random.Range(0, WaitPoints.Length);
-
-            TargetPoint = WaitPoints[randomPartIndex];
-
-        } while (TargetPoint.HasBotExit);
-
-
-        
-        TargetPoint.HasBotExit = true;
-
-        _agent.angularSpeed = 60;
-
-        Vector3 targetPosition = new Vector3(TargetPoint.transform.position.x, transform.position.y, TargetPoint.transform.position.z);
-
-        _agent.SetDestination(targetPosition);
-
-        while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
-        {
-            yield return null;
-        }
-
-        _agent.isStopped = true;
-
-        _agent.angularSpeed = 0;
-
-        print("到达位置，等待零件");
-
-
-    }
 
     /// <summary>
     /// 获得零件之后的响应
@@ -264,50 +290,41 @@ public class AIBot : MonoBehaviour
 
     public void ExecuteQTE()
     {
-        if (!IsBeingQTE) // 检查是否已经在进行QTE
-        {
-            Debug.Log("进行qte");
-            IsBeingQTE = true;
-            _agent.isStopped = true;
+        IsBeingQTE = true;
 
-            if (_currentCoroutine != null)
-            {
-                StopCoroutine(_currentCoroutine);
-            }
-
-            _currentCoroutine = StartCoroutine(QTERoutine());
-        }
     }
-
-    private IEnumerator QTERoutine()
+    private void QTE()
     {
-        float QTETimer = 0;
+        if(!IsBeingQTE)
+        {
+            return;
+        }
+
+        float timer = 0;
         float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
         float QTETime = Random.Range(0, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
+        bool hasQTEed = false;
 
-        while (QTETimer < QTETime)
+
+        timer += Time.deltaTime;
+        if (!hasQTEed)
         {
-            QTETimer += Time.deltaTime;
-            yield return null;
+            if(timer> QTETime)
+            {
+                hasQTEed = true;
+                Debug.Log("AI成功QTE！");
+            }
         }
-        Debug.Log("成功QTE");
-
-        while (QTETimer < QTEMaxTime)
+        else
         {
-            QTETimer += Time.deltaTime;
-            yield return null;
+            if(timer > QTEMaxTime)
+            {
+                Debug.Log("QTE结束");
+                IsBeingQTE = false;
+                SwitchState();
+            }
         }
-        Debug.Log("QTEOver");
-
-        // QTE事件完成
-        IsBeingQTE = false;
-
-        _agent.isStopped = false;
-
-
-        // 结束QTE就开始动
-        SwitchState();
-
+        
     }
 
     public void Dead()
@@ -316,18 +333,5 @@ public class AIBot : MonoBehaviour
     }
 
 
-    private Vector3 GetRandomIntermediatePoint(Vector3 targetPosition)
-    {
-        Vector3 midPoint = (transform.position + targetPosition) / 2;
-        float randomOffset = Random.Range(-5f, 5f);
-        Vector3 randomPoint = new Vector3(midPoint.x + randomOffset, midPoint.y, midPoint.z + randomOffset);
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
-        {
-            return hit.position;
-        }
-        return targetPosition;
-    }
 
 }
