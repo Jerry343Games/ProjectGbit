@@ -141,11 +141,11 @@ public class AIBot : MonoBehaviour
 
     private void Update()
     {
-        if(!GameManager.Instance.GameStarted || GameManager.Instance.GameFinished)
+        if (!GameManager.Instance.GameStarted || GameManager.Instance.GameFinished)
         {
             return;
         }
-        if(!IsBeingQTE)
+        if (!IsBeingQTE)
         {
             switch (CurrentState)
             {
@@ -160,9 +160,20 @@ public class AIBot : MonoBehaviour
                     break;
             }
         }
+
+        if (_agent.velocity != Vector3.zero)
+        {
+            // 获取当前速度的方向
+            Vector3 direction = _agent.velocity.normalized;
+
+            // 计算朝向运动方向的旋转角度
+            Quaternion newRotation = Quaternion.LookRotation(direction);
+
+            // 应用突变的旋转
+            transform.rotation = newRotation;
+        }
+
     }
-
-
 
 
     private void Move()
