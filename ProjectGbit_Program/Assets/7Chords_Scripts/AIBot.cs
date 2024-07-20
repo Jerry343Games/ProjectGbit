@@ -163,6 +163,8 @@ public class AIBot : MonoBehaviour
     private IEnumerator MoveRoutine()
     {
         float moveTimer = 0f;
+        _agent.angularSpeed = 60;
+
         Vector3 targetPosition = transform.position + _randomDir * MoveSpeed * SingleMoveDuration;
         _agent.SetDestination(targetPosition);
         while (moveTimer < SingleMoveDuration)
@@ -175,6 +177,7 @@ public class AIBot : MonoBehaviour
         _agent.isStopped = true;
         yield return new WaitForSeconds(SingleStopDuration);
         _agent.isStopped = false;
+        _agent.angularSpeed = 0;
         PrecomputeRandomDirection(); // 移动结束后重新计算随机方向
         SwitchState();
     }
@@ -193,7 +196,11 @@ public class AIBot : MonoBehaviour
 
         } while (TargetPoint.HasBotExit);
 
+
+        
         TargetPoint.HasBotExit = true;
+
+        _agent.angularSpeed = 60;
 
         Vector3 targetPosition = new Vector3(TargetPoint.transform.position.x, transform.position.y, TargetPoint.transform.position.z);
 
@@ -205,6 +212,8 @@ public class AIBot : MonoBehaviour
         }
 
         _agent.isStopped = true;
+
+        _agent.angularSpeed = 0;
 
         print("到达位置，等待零件");
 
@@ -231,12 +240,16 @@ public class AIBot : MonoBehaviour
 
         Vector3 targetPosition = new Vector3(endCenterPoint.x + Random.Range(-2, 2), transform.position.y, endCenterPoint.z + Random.Range(-2, 2));
 
+        _agent.angularSpeed = 60;
+
         _agent.SetDestination(targetPosition);
 
         while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
         {
             yield return null;
         }
+        _agent.angularSpeed = 0;
+
         yield return new WaitForSeconds(StopAtSubmissionDuration);
 
         CurrentPart = null;
