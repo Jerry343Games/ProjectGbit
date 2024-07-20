@@ -67,4 +67,6 @@ public class InputSetting : MonoBehaviour
             isPressScan = false;
         }
     }
+
+
 }
