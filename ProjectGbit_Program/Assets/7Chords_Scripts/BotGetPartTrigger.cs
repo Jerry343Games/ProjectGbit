@@ -16,6 +16,10 @@ public class BotGetPartTrigger : MonoBehaviour
         {
             return;
         }
+        if(_aiBot.CurrentState != BotState.TakeParts)
+        {
+            return;
+        }
         if(other.gameObject.tag=="Part")
         {
             

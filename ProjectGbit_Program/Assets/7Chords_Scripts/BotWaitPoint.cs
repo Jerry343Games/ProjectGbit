@@ -6,5 +6,7 @@ public class BotWaitPoint : MonoBehaviour
 {
     //public Vector3 BotShowFaceDir;
 
+    public bool HasBotExit;
+
 
 }

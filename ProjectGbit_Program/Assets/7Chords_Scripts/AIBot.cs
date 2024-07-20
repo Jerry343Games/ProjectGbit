@@ -36,6 +36,8 @@ public class AIBot : MonoBehaviour
 
     public Part CurrentPart;
 
+    public BotWaitPoint TargetPoint;
+
     [Header("QTE²ÎÊý")]
     public bool IsBeingQTE;
 
@@ -51,6 +53,21 @@ public class AIBot : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.GameStartedAction += AIBotAction;
+
+        StateList.Clear();
+
+        for(int i =0;i<5;i++)
+        {
+            int r = Random.Range(0, 2);
+            if(r== 0)
+            {
+                StateList.Add(BotState.Move);
+            }
+            else
+            {
+                StateList.Add(BotState.TakeParts);
+            }
+        }
 
         CurrentStateIndex = 0;
         CurrentState = StateList[CurrentStateIndex];
@@ -162,11 +179,17 @@ public class AIBot : MonoBehaviour
     /// <returns></returns>
     private IEnumerator TakePartRoutine()
     {
-        int randomPartIndex = Random.Range(0, WaitPoints.Length);
+        do
+        {
+            int randomPartIndex = Random.Range(0, WaitPoints.Length);
 
-        BotWaitPoint randomPoint = WaitPoints[randomPartIndex];
+            TargetPoint = WaitPoints[randomPartIndex];
 
-        Vector3 targetPosition = new Vector3(randomPoint.transform.position.x, transform.position.y, randomPoint.transform.position.z);
+        } while (TargetPoint.HasBotExit);
+
+        TargetPoint.HasBotExit = true;
+
+        Vector3 targetPosition = new Vector3(TargetPoint.transform.position.x, transform.position.y, TargetPoint.transform.position.z);
 
         _agent.SetDestination(targetPosition);
 
@@ -188,6 +211,9 @@ public class AIBot : MonoBehaviour
     public void GetPart(Part part)
     {
         CurrentPart = part;
+
+        TargetPoint.HasBotExit = false;
+
         StartCoroutine(GetPartRoutine());
     }
 
@@ -205,6 +231,8 @@ public class AIBot : MonoBehaviour
         {
             yield return null;
         }
+
+        CurrentPart = null;
 
         SwitchState();
     }
