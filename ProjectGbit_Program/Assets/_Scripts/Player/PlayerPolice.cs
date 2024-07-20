@@ -143,7 +143,7 @@ public class PlayerPolice : MonoBehaviour
         _pressConfirmTimer -= Time.deltaTime; // 更新计时器
         if (_pressConfirmTimer <= 0f) // 检查计时器是否超过间隔
         {
-            if (inputSetting.isPressSwitch)
+            if (inputSetting.isPressConfirm)
             {
 
                 CallQTE();

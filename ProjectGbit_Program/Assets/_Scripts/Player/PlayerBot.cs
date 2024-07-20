@@ -65,7 +65,7 @@ public class PlayerBot : MonoBehaviour
         else
         {
             // 应用玩家输入方向和传送带速度
-            Vector3 totalVelocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z) +conveyorVelocity*6;
+            Vector3 totalVelocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z) +conveyorVelocity*10;
             _rigidbody.velocity = totalVelocity;
         }
         

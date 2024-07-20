@@ -290,8 +290,8 @@ public class AIBot : MonoBehaviour
             QTETimer += Time.deltaTime;
             yield return null;
         }
-        //执行QTE效果
-        _rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+        Debug.Log("成功QTE");
+
         while (QTETimer < QTEMaxTime)
         {
             QTETimer += Time.deltaTime;
@@ -303,10 +303,10 @@ public class AIBot : MonoBehaviour
         IsBeingQTE = false;
 
         _agent.isStopped = false;
-        // 结束QTE就开始动
-        AIBotAction();
 
-        //_currentCoroutine = null;
+
+        // 结束QTE就开始动
+        SwitchState();
 
     }
 
