@@ -190,7 +190,7 @@ MonoBehaviour:
   StateList: 000000000000000001000000
   CurrentStateIndex: 0
   CurrentState: 0
-  MoveSpeed: 1.5
+  MoveSpeed: 1
   SingleMoveDuration: 5
   SingleStopDuration: 1
   WaitPoints: []

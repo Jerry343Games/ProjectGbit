@@ -227,11 +227,11 @@ public class AIBot : MonoBehaviour
     {
         _agent.isStopped = false;
 
-        Vector3 targetPosition = FindObjectOfType<SubmissionPoint>().transform.GetChild(0).transform.position;
+        Vector3 endCenterPoint = FindObjectOfType<SubmissionPoint>().transform.position;
 
-        Vector3 offsetPosition = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
+        Vector3 targetPosition = new Vector3(endCenterPoint.x + Random.Range(-2, 2), transform.position.y, endCenterPoint.z + Random.Range(-2, 2));
 
-        _agent.SetDestination(offsetPosition);
+        _agent.SetDestination(targetPosition);
 
         while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
         {
