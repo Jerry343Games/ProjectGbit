@@ -18,6 +18,7 @@ public class PlayerBot : MonoBehaviour
 
     public PartType currentPart = PartType.Empty;
 
+    public Animator myAnimator;
     
     void Start()
     {
@@ -56,6 +57,19 @@ public class PlayerBot : MonoBehaviour
     /// <param name="inputDir"></param>
     private void Movement(Vector2 inputDir)
     {
+        //动画控制
+        if (inputDir!=Vector2.zero)
+        {
+           myAnimator.SetBool("isRun",true);
+            Vector3 direction = new Vector3(inputDir.x, 0, inputDir.y);
+            Vector3 targetPosition = transform.position -direction;
+            transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+        }
+        else
+        {
+            myAnimator.SetBool("isRun",false);
+        }
+        
         Vector3 movement = new Vector3(inputDir.x, 0, inputDir.y).normalized * moveSpeed ;
         // 移动玩家
         if (!isOnConveyBelt)

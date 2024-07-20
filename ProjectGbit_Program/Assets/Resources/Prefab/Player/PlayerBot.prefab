@@ -187,6 +187,7 @@ MonoBehaviour:
   isOnConveyBelt: 0
   conveyorVelocity: {x: 0, y: 0, z: 0}
   currentPart: 0
+  myAnimator: {fileID: 1652133073333612399}
 --- !u!54 &5018766790619436685
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -284,37 +285,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.013782446
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.79
+      value: -0.9499999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.01542308
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.44961435
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8932228
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
@@ -324,7 +325,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 80.387
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf569e448be06ed45afa41b59a7b103e,
         type: 3}
