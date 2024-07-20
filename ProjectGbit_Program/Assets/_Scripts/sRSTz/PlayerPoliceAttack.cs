@@ -25,6 +25,8 @@ public class PlayerPoliceAttack : MonoBehaviour
     }
     public void AttackPlayer()
     {
+        
+        
         foreach(BotProperty botProperty in playersInTrigger)
         {
             if (botProperty.isAIBot)

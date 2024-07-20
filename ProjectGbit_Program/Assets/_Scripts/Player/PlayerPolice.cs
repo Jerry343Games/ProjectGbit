@@ -39,6 +39,10 @@ public class PlayerPolice : MonoBehaviour
 
     private float _attackTimer;
     public PlayerPoliceAttack policeAttackArea;
+
+    public Animator myAnimator;
+    //用于攻击动画罚站
+    private bool _isAttack;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -78,9 +82,30 @@ public class PlayerPolice : MonoBehaviour
     /// <param name="inputDir"></param>
     private void Movement(Vector2 inputDir)
     {
-        Vector3 movement = new Vector3(inputDir.x, 0, inputDir.y).normalized * moveSpeed;
-        // 移动玩家
-        _rigidbody.velocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z);
+        //动画控制
+        if (inputDir!=Vector2.zero)
+        {
+            myAnimator.SetBool("isRun",true);
+            //转向
+            Vector3 direction = new Vector3(inputDir.x, 0, inputDir.y);
+            Vector3 targetPosition = transform.position +direction;
+            transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+        }
+        else
+        {
+            myAnimator.SetBool("isRun",false);
+        }
+
+        if (!_isAttack)
+        {
+            Vector3 movement = new Vector3(inputDir.x, 0, inputDir.y).normalized * moveSpeed;
+            // 移动玩家
+            _rigidbody.velocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z);
+        }
+        else
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
     }
 
     /// <summary>
@@ -222,7 +247,16 @@ public class PlayerPolice : MonoBehaviour
             return;
         }
         Debug.Log("玩家发动了攻击");
+        myAnimator.SetTrigger("Attack");
+        _isAttack = true;
+        StartCoroutine(WaitToEndAttack(0.7f));
         policeAttackArea.AttackPlayer();
+    }
+
+    IEnumerator WaitToEndAttack(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _isAttack = false;
     }
 
     /// <summary>
