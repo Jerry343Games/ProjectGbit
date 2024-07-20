@@ -9,7 +9,8 @@ public class UICountdownBubble : MonoBehaviour
     public Image inner;
     public Image outer;
 
-    private float duration;
+    [HideInInspector]
+    public float duration;
     public GameObject myBot;
     private RectTransform _rectTransform;
     
@@ -40,6 +41,7 @@ public class UICountdownBubble : MonoBehaviour
             yield return null;
         }
         outer.fillAmount = 1f;
+        CompleteCountdown();
         // 确保最终填满
     }
 
@@ -48,5 +50,13 @@ public class UICountdownBubble : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(bot.transform.position);
         _rectTransform.position = screenPos;
     }
-    
+
+    /// <summary>
+    /// 完成计时
+    /// </summary>
+    private void CompleteCountdown()
+    {
+        myBot.GetComponent<PlayerBot>().muBubble = null;
+        Destroy(gameObject);
+    }
 }

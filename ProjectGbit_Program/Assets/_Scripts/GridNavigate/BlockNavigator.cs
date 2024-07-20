@@ -16,10 +16,15 @@ public class BlockNavigator : MonoBehaviour
     private MultiplayerEventSystem _multiplayerEventSystem;
     private InputSetting _inputSetting;
     
+    [HideInInspector]
     public Vector2 inputDir;
+    [HideInInspector]
     public bool isUp;
+    [HideInInspector]
     public bool isDown;
+    [HideInInspector]
     public bool isLeft;
+    [HideInInspector]
     public bool isRight;
 
     private float _navigateInputTimer;
@@ -82,6 +87,9 @@ public class BlockNavigator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 切换传送带方向
+    /// </summary>
     private void SwitchDirection()
     {
         _pressSwitchTimer += Time.deltaTime; // 更新计时器
@@ -89,12 +97,16 @@ public class BlockNavigator : MonoBehaviour
         {
             if (_inputSetting.isPressSwitch)
             {
+                //这里写点击后的操作
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.cyan;
             }
             _pressSwitchTimer = 0f; // 重置计时器
         }
     }
     
+    /// <summary>
+    /// 开关传送带
+    /// </summary>
     private void ConfirmOnOff()
     {
         _pressConfirmTimer += Time.deltaTime; // 更新计时器
@@ -102,12 +114,16 @@ public class BlockNavigator : MonoBehaviour
         {
             if (_inputSetting.isPressConfirm)
             {
+                //这里写点击后执行的操作
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.blue;
             }
             _pressConfirmTimer = 0f; // 重置计时器
         }
     }
 
+    /// <summary>
+    /// 根据导航索引移动聚焦
+    /// </summary>
     private void Navigate()
     {
         if (isUp)
@@ -116,6 +132,7 @@ public class BlockNavigator : MonoBehaviour
             {
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
                 currentBlock.up.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
+                
                 currentBlock = currentBlock.up;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
             }
@@ -126,6 +143,7 @@ public class BlockNavigator : MonoBehaviour
             {
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
                 currentBlock.down.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
+                
                 currentBlock = currentBlock.down;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
             }
@@ -136,6 +154,7 @@ public class BlockNavigator : MonoBehaviour
             {
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
                 currentBlock.left.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
+                
                 currentBlock = currentBlock.left;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
             }
@@ -146,6 +165,7 @@ public class BlockNavigator : MonoBehaviour
             {
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
                 currentBlock.right.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
+                
                 currentBlock = currentBlock.right;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
             }
