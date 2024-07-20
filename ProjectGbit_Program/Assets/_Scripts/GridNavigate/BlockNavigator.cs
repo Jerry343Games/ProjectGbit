@@ -46,6 +46,7 @@ public class BlockNavigator : MonoBehaviour
     {
         _multiplayerEventSystem= navigateHost.GetComponent<MultiplayerEventSystem>();
         _inputSetting = navigateHost.GetComponent<InputSetting>();
+        currentBlock.gameObject.GetComponent<BeltSurfaceSet>().BeSelected();
     }
 
     void Update()
@@ -118,8 +119,6 @@ public class BlockNavigator : MonoBehaviour
                     return;
                 }
                 task.currentAmount -= SwitchDirectionNeedPart;
-
-                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.cyan;
                 ConveyorBelt conveyorBelt = currentBlock.GetComponent<ConveyorBelt>();
                 conveyorBelt.ChangeReverse();
                 _pressSwitchTimer = 0.5f; // 重置计时器
@@ -147,8 +146,7 @@ public class BlockNavigator : MonoBehaviour
                     return;
                 }
                 task.currentAmount -= ConfirmOnOffNeedPart;
-
-                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.blue;
+                
                 ConveyorBelt conveyorBelt = currentBlock.GetComponent<ConveyorBelt>();
                 conveyorBelt.ChangeOnOff();
                 _pressConfirmTimer = 0.5f; // 重置计时器
@@ -166,8 +164,8 @@ public class BlockNavigator : MonoBehaviour
         {
             if (currentBlock.up != null)
             {
-                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
-                currentBlock.up.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
+                currentBlock.gameObject.GetComponent<BeltSurfaceSet>().ExitSelected();
+                currentBlock.up.gameObject.GetComponent<BeltSurfaceSet>().BeSelected();
                 
                 currentBlock = currentBlock.up;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
@@ -177,9 +175,8 @@ public class BlockNavigator : MonoBehaviour
         {
             if (currentBlock.down != null)
             {
-                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
-                currentBlock.down.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
-                
+                currentBlock.gameObject.GetComponent<BeltSurfaceSet>().ExitSelected();
+                currentBlock.down.gameObject.GetComponent<BeltSurfaceSet>().BeSelected();
                 currentBlock = currentBlock.down;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
             }
@@ -188,8 +185,8 @@ public class BlockNavigator : MonoBehaviour
         {
             if (currentBlock.left != null)
             {
-                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
-                currentBlock.left.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
+                currentBlock.gameObject.GetComponent<BeltSurfaceSet>().ExitSelected();
+                currentBlock.left.gameObject.GetComponent<BeltSurfaceSet>().BeSelected();
                 
                 currentBlock = currentBlock.left;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);
@@ -199,8 +196,8 @@ public class BlockNavigator : MonoBehaviour
         {
             if (currentBlock.right != null)
             {
-                currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.white;
-                currentBlock.right.gameObject.GetComponent<MeshRenderer>().material.color=Color.red;
+                currentBlock.gameObject.GetComponent<BeltSurfaceSet>().ExitSelected();
+                currentBlock.right.gameObject.GetComponent<BeltSurfaceSet>().BeSelected();
                 
                 currentBlock = currentBlock.right;
                 _multiplayerEventSystem.SetSelectedGameObject(currentBlock.gameObject);

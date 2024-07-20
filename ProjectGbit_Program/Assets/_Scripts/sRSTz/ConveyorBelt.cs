@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour
 {
-    public float beltSpeed = 2.0f; // ´«ËÍ´øµÄËÙ¶È
-    //public float playerResistanceFactor = 0.5f; // Íæ¼ÒÒÆ¶¯Ê±µÄ×èÁ¦Òò×Ó
+    public float beltSpeed = 2.0f; // ä¼ é€å¸¦çš„é€Ÿåº¦
+    //public float playerResistanceFactor = 0.5f; // çŽ©å®¶ç§»åŠ¨æ—¶çš„é˜»åŠ›å› å­
     public bool isAwake = true;
     public bool isReverse = false;
     private int reverseNum = 1;
@@ -68,7 +68,7 @@ public class ConveyorBelt : MonoBehaviour
     public void ChangeReverse()
     {
         isReverse = !isReverse;
-        //°´ÖÐÐÄµã×óÓÒ·­×ª´«ËÍ´ø
+        //æŒ‰ä¸­å¿ƒç‚¹å·¦å³ç¿»è½¬ä¼ é€å¸¦
         
     }
     

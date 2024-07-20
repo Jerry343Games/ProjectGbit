@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ee7694d5bdfcc18478491f162ff824e5
+guid: a8c316fd818387c47a2d396fe691e79d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -29,10 +29,10 @@ ScriptedImporter:
     importPoints: 0
     importCurves: 1
     createCurveRenderers: 0
-  abcStartTime: 0.041666666666666664
-  abcEndTime: 2.0416666666666665
-  startTime: 0.041666666666666664
-  endTime: 2.0416666666666665
+  abcStartTime: 0
+  abcEndTime: 2
+  startTime: 0
+  endTime: 2
   importWarning: 
   firstImport: 0
   isHDF5: 0
