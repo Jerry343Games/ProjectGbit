@@ -237,10 +237,10 @@ public class AIBot : MonoBehaviour
         {
             yield return null;
         }
-
         yield return new WaitForSeconds(StopAtSubmissionDuration);
 
         CurrentPart = null;
+
 
         SwitchState();
     }
@@ -279,11 +279,16 @@ public class AIBot : MonoBehaviour
             QTETimer += Time.deltaTime;
             yield return null;
         }
+        Debug.Log("QTEOver");
 
         // QTE事件完成
         IsBeingQTE = false;
+
         _agent.isStopped = false;
         // 结束QTE就开始动
+
+        _currentCoroutine = null;
+
         AIBotAction();
     }
 

@@ -192,7 +192,7 @@ MonoBehaviour:
   CurrentState: 0
   MoveSpeed: 1.5
   SingleMoveDuration: 5
-  SingleStopDuration: 2
+  SingleStopDuration: 1
   WaitPoints: []
   CurrentPart: {fileID: 0}
   TargetPoint: {fileID: 0}
