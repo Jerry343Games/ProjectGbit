@@ -118,6 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6216d36aa2df9d740911bc2efdfab431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beltSpeed: 15
+  beltSpeed: 40
   isAwake: 1
   isReverse: 0

@@ -11,7 +11,12 @@ public class PlayerBot : MonoBehaviour
     public InputSetting inputSetting;
 
     public Player player;
-    // Start is called before the first frame update
+
+    public bool isOnConveyBelt = false;
+
+    public Vector3 conveyorVelocity;
+
+    public Part currentPart = null;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -22,7 +27,9 @@ public class PlayerBot : MonoBehaviour
     {
         if (player._isPlayerSetup)
         {
+            
             Movement(inputSetting.inputDir);
+            
         }
         
     }
@@ -35,7 +42,17 @@ public class PlayerBot : MonoBehaviour
     {
         Vector3 movement = new Vector3(inputDir.x, 0, inputDir.y).normalized * moveSpeed ;
         // 移动玩家
-        _rigidbody.velocity += new Vector3(movement.x, _rigidbody.velocity.y, movement.z)*Time.deltaTime*30;
+        if (!isOnConveyBelt)
+        {
+            _rigidbody.velocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z);
+        }
+        else
+        {
+            // 应用玩家输入方向和传送带速度
+            Vector3 totalVelocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z) + conveyorVelocity;
+            _rigidbody.velocity = totalVelocity;
+        }
+        
     }
     
     /// <summary>
@@ -59,5 +76,12 @@ public class PlayerBot : MonoBehaviour
         }
         //未完成输入，暴露
     }
-
+    /// <summary>
+    /// 获得零件之后的响应
+    /// </summary>
+    public void GetPart(Part part)
+    {
+        currentPart = part;
+        Debug.Log(part);
+    }
 }

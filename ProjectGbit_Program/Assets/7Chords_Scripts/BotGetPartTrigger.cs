@@ -18,10 +18,12 @@ public class BotGetPartTrigger : MonoBehaviour
         }
         if(other.gameObject.tag=="Part")
         {
+            
+            //Bot执行获得零件方法 结束等待
+            _aiBot.GetPart(other.gameObject.transform.parent.GetComponent<Part>());
             //销毁零件
             Destroy(other.gameObject);
-            //Bot执行获得零件方法 结束等待
-            _aiBot.GetPart(other.gameObject.GetComponent<Part>());
+            
 
         }
     }
