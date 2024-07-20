@@ -37,6 +37,10 @@ public class SubmissionPoint : MonoBehaviour
             {
                 if (bot.GetComponent<PlayerBot>().currentPart == PartType.Empty) return;
             }
+            else
+            {
+                if (bot.GetComponent<AIBot>().CurrentPart == PartType.Empty) return;
+            }
             GameObject bubble=Instantiate(Resources.Load<GameObject>("Prefab/UI/UICountdownBubble"),mainCanvas.transform);
             
             bubble.GetComponent<RectTransform>().localScale=Vector3.zero;

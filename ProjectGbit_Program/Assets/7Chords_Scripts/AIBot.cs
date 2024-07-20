@@ -285,7 +285,7 @@ public class AIBot : MonoBehaviour
 
         _agent.isStopped = false;
 
-        Vector3 endCenterPoint = FindObjectOfType<SubmissionPoint>().transform.position;
+        Vector3 endCenterPoint = FindClosestTarget("SubmissionPoint").transform.position;//FindObjectOfType<SubmissionPoint>().transform.position;
 
         Vector3 targetPosition = new Vector3(endCenterPoint.x + Random.Range(-2, 2), transform.position.y, endCenterPoint.z + Random.Range(-2, 2));
 
@@ -294,7 +294,25 @@ public class AIBot : MonoBehaviour
         StartCoroutine(test());
 
     }
+    private GameObject FindClosestTarget(string targetType)
+    {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag(targetType);
+        GameObject closestTarget = null;
+        float closestDistance = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
 
+        foreach (GameObject target in targets)
+        {
+            float distanceToTarget = Vector3.Distance(target.transform.position, currentPosition);
+            if (distanceToTarget < closestDistance)
+            {
+                closestTarget = target;
+                closestDistance = distanceToTarget;
+            }
+        }
+
+        return closestTarget;
+    }
     IEnumerator test()
     {
         while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
