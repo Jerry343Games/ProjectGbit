@@ -62,10 +62,10 @@ public class AIBot : MonoBehaviour
 
         StateList.Clear();
 
-        for(int i =0;i<5;i++)
+        for (int i = 0; i < 5; i++)
         {
             int r = Random.Range(0, 2);
-            if(r== 0)
+            if (r == 0)
             {
                 StateList.Add(BotState.Move);
             }
@@ -296,4 +296,20 @@ public class AIBot : MonoBehaviour
     {
         SceneManager.Instance.RemoveAIBot(this);
     }
+
+
+    private Vector3 GetRandomIntermediatePoint(Vector3 targetPosition)
+    {
+        Vector3 midPoint = (transform.position + targetPosition) / 2;
+        float randomOffset = Random.Range(-5f, 5f);
+        Vector3 randomPoint = new Vector3(midPoint.x + randomOffset, midPoint.y, midPoint.z + randomOffset);
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        return targetPosition;
+    }
+
 }
