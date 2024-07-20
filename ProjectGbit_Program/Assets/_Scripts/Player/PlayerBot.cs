@@ -39,15 +39,15 @@ public class PlayerBot : MonoBehaviour
     private float _pressConfirmTimer = 0;
     private void ConfirmDirection()
     {
-        _pressConfirmTimer += Time.deltaTime; // 更新计时器
-        if (_pressConfirmTimer >= 0.1f) // 检查计时器是否超过间隔
+        _pressConfirmTimer -= Time.deltaTime; // 更新计时器
+        if (_pressConfirmTimer <= 0) // 检查计时器是否超过间隔
         {
             if (inputSetting.isPressSwitch)
             {
-                //亮灯
-                Debug.Log("亮灯");
+                _rigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
+                _pressConfirmTimer = 0.5f; // 重置计时器
             }
-            _pressConfirmTimer = 0f; // 重置计时器
+            
         }
     }
     /// <summary>
@@ -65,7 +65,7 @@ public class PlayerBot : MonoBehaviour
         else
         {
             // 应用玩家输入方向和传送带速度
-            Vector3 totalVelocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z) + conveyorVelocity;
+            Vector3 totalVelocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z) +conveyorVelocity*6;
             _rigidbody.velocity = totalVelocity;
         }
         

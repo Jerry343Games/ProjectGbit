@@ -20,6 +20,8 @@ public class AIBot : MonoBehaviour
     private NavMeshAgent _agent;
     private Coroutine _currentCoroutine; // 当前正在执行的协程
 
+    private Rigidbody _rb;
+
     [Header("行为参数")]
     public List<BotState> StateList;
     public int CurrentStateIndex;
@@ -50,6 +52,8 @@ public class AIBot : MonoBehaviour
     private void Awake()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
+
+        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -262,6 +266,7 @@ public class AIBot : MonoBehaviour
     {
         if (!IsBeingQTE) // 检查是否已经在进行QTE
         {
+            Debug.Log("进行qte");
             IsBeingQTE = true;
             _agent.isStopped = true;
 
@@ -286,7 +291,7 @@ public class AIBot : MonoBehaviour
             yield return null;
         }
         //执行QTE效果
-        Debug.Log("QTE");
+        _rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
         while (QTETimer < QTEMaxTime)
         {
             QTETimer += Time.deltaTime;
@@ -299,10 +304,10 @@ public class AIBot : MonoBehaviour
 
         _agent.isStopped = false;
         // 结束QTE就开始动
-
-        _currentCoroutine = null;
-
         AIBotAction();
+
+        //_currentCoroutine = null;
+
     }
 
     public void Dead()

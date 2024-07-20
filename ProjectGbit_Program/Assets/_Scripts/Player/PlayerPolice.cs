@@ -57,18 +57,10 @@ public class PlayerPolice : MonoBehaviour
         }
 
         
-        if (inputSetting.isPressConfirm && !hasPressed)
-        {
-            CallQTE();
-            hasPressed = true;
-            pressTimer = Time.time; // 记录按键按下的时间
-        }
+        
 
         // 检查是否需要重置hasPressed变量
-        if (hasPressed && (Time.time - pressTimer) >= pressResetTime)
-        {
-            hasPressed = false; // 超过0.5秒后重置按键状态
-        }
+        ConfirmDirection();
         if (inputSetting.isPressScan)
         {
             StartScanPlayerBot();
@@ -148,15 +140,16 @@ public class PlayerPolice : MonoBehaviour
     private float _pressConfirmTimer = 0;
     private void ConfirmDirection()
     {
-        _pressConfirmTimer += Time.deltaTime; // 更新计时器
-        if (_pressConfirmTimer >= 0.1f) // 检查计时器是否超过间隔
+        _pressConfirmTimer -= Time.deltaTime; // 更新计时器
+        if (_pressConfirmTimer <= 0f) // 检查计时器是否超过间隔
         {
             if (inputSetting.isPressSwitch)
             {
 
                 CallQTE();
+                _pressConfirmTimer = 0.5f; // 重置计时器
             }
-            _pressConfirmTimer = 0f; // 重置计时器
+            
         }
     }
 
