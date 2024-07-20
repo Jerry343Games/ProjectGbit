@@ -9,35 +9,38 @@ public class ConveyorBelt : MonoBehaviour
     public bool isAwake = true;
     public bool isReverse = false;
     private int reverseNum = 1;
-    private void OnCollisionStay(Collision collision)
-    {
-        if (!isAwake) return;
 
-        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+
+        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
             if (isReverse) reverseNum = -1; else reverseNum = 1;
             Vector3 conveyorMovement = transform.forward * beltSpeed * Time.deltaTime * reverseNum;
 
-            PlayerBot playerBot = collision.gameObject.GetComponent<PlayerBot>();
-            if (playerBot == null)
+            PlayerBot playerBot = other.gameObject.GetComponent<PlayerBot>();
+            if (isAwake)
             {
-                rb.velocity += conveyorMovement;
+                if (playerBot == null)
+                {
+                    rb.velocity += conveyorMovement;
+                }
+                else
+                {
+                    playerBot.isOnConveyBelt = true;
+                    playerBot.conveyorVelocity = conveyorMovement;
+                }
             }
-            else
-            {
-                playerBot.isOnConveyBelt = true;
-                playerBot.conveyorVelocity = conveyorMovement;
-            }
-            
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        PlayerBot playerBot = collision.gameObject.GetComponent<PlayerBot>();
-        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+        PlayerBot playerBot = other.gameObject.GetComponent<PlayerBot>();
+        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
         if (playerBot == null && rb != null)
         {
             rb.velocity = Vector3.zero;
@@ -48,22 +51,26 @@ public class ConveyorBelt : MonoBehaviour
             playerBot.isOnConveyBelt = false;
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2*reverseNum);
     }
 
-    public void ChangeOnOff(bool isAwake)
+    public void ChangeOnOff()
     {
-        this.isAwake = isAwake;
+        isAwake = !isAwake;
+        
+
     }
     
-    public void ChangeReverse(bool isReverse)
+    public void ChangeReverse()
     {
-        this.isReverse = isReverse;
+        isReverse = !isReverse;
         //按中心点左右翻转传送带
+        
     }
-
+    
 }
 

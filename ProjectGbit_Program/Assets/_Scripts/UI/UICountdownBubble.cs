@@ -57,6 +57,7 @@ public class UICountdownBubble : MonoBehaviour
     private void CompleteCountdown()
     {
         myBot.GetComponent<PlayerBot>().muBubble = null;
+        myBot.GetComponent<PlayerBot>().SubmitPart();
         Destroy(gameObject);
     }
 }

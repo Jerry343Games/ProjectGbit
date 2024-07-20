@@ -28,8 +28,8 @@ public class BlockNavigator : MonoBehaviour
     public bool isRight;
 
     private float _navigateInputTimer;
-    private float _pressSwitchTimer;
-    private float _pressConfirmTimer;
+    private float _pressSwitchTimer = 0;
+    private float _pressConfirmTimer = 0;
     
     private void Awake()
     {
@@ -92,15 +92,19 @@ public class BlockNavigator : MonoBehaviour
     /// </summary>
     private void SwitchDirection()
     {
-        _pressSwitchTimer += Time.deltaTime; // 更新计时器
-        if (_pressSwitchTimer >= 0.1f) // 检查计时器是否超过间隔
+        
+        _pressSwitchTimer -= Time.deltaTime; // 更新计时器
+        if (_pressSwitchTimer <= 0) // 检查计时器是否超过间隔
         {
             if (_inputSetting.isPressSwitch)
             {
                 //这里写点击后的操作
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.cyan;
+                ConveyorBelt conveyorBelt = currentBlock.GetComponent<ConveyorBelt>();
+                conveyorBelt.ChangeReverse();
+                _pressSwitchTimer = 0.5f; // 重置计时器
             }
-            _pressSwitchTimer = 0f; // 重置计时器
+            
         }
     }
     
@@ -109,15 +113,18 @@ public class BlockNavigator : MonoBehaviour
     /// </summary>
     private void ConfirmOnOff()
     {
-        _pressConfirmTimer += Time.deltaTime; // 更新计时器
-        if (_pressConfirmTimer >= 0.1f) // 检查计时器是否超过间隔
+        _pressConfirmTimer -= Time.deltaTime; // 更新计时器
+        if (_pressConfirmTimer <= 0f) // 检查计时器是否超过间隔
         {
             if (_inputSetting.isPressConfirm)
             {
                 //这里写点击后执行的操作
                 currentBlock.gameObject.GetComponent<MeshRenderer>().material.color=Color.blue;
+                ConveyorBelt conveyorBelt = currentBlock.GetComponent<ConveyorBelt>();
+                conveyorBelt.ChangeOnOff();
+                _pressConfirmTimer = 0.5f; // 重置计时器
             }
-            _pressConfirmTimer = 0f; // 重置计时器
+            
         }
     }
 

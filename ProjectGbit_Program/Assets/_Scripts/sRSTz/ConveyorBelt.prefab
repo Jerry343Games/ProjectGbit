@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7784396736217827403}
   - component: {fileID: 7207166953595185930}
   - component: {fileID: 7526478874005134077}
+  - component: {fileID: 7689846440625910328}
+  - component: {fileID: 8257383123310586}
   m_Layer: 0
   m_Name: ConveyorBelt
   m_TagString: Untagged
@@ -121,3 +123,40 @@ MonoBehaviour:
   beltSpeed: 40
   isAwake: 1
   isReverse: 0
+--- !u!114 &7689846440625910328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6307641686786056290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eeb60b0d7be6af4fbb09440d850b368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 0}
+  down: {fileID: 0}
+  left: {fileID: 0}
+  right: {fileID: 0}
+--- !u!65 &8257383123310586
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6307641686786056290}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
