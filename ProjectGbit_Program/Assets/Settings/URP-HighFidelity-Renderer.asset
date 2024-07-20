@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66b92d6a08fd79428b644d1fa8d9096, type: 3}
   m_Name: PixelArtEdgeHighlightsFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     convexHighlight: 1
     outlineShadow: 1
@@ -208,8 +208,7 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
   - {fileID: 3467290896522575024}
-  - {fileID: -1184756643341915528}
-  m_RendererFeatureMap: adc0de57c6d2eee5b07c2c2cb34a1e30782a52281ce68eef
+  m_RendererFeatureMap: adc0de57c6d2eee5b07c2c2cb34a1e30
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
