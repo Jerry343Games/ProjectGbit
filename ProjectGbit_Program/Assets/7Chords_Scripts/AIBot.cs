@@ -52,7 +52,11 @@ public class AIBot : MonoBehaviour
 
     private void Start()
     {
+
+
         GameManager.Instance.GameStartedAction += AIBotAction;
+
+        SceneManager.Instance.RegisterAIBot(this);
 
         StateList.Clear();
 
@@ -239,15 +243,18 @@ public class AIBot : MonoBehaviour
 
     public void ExecuteQTE()
     {
-        IsBeingQTE = true;
-        _agent.isStopped = true;
-
-        if (_currentCoroutine != null)
+        if (!IsBeingQTE) // 检查是否已经在进行QTE
         {
-            StopCoroutine(_currentCoroutine);
-        }
+            IsBeingQTE = true;
+            _agent.isStopped = true;
 
-        _currentCoroutine = StartCoroutine(QTERoutine());
+            if (_currentCoroutine != null)
+            {
+                StopCoroutine(_currentCoroutine);
+            }
+
+            _currentCoroutine = StartCoroutine(QTERoutine());
+        }
     }
 
     private IEnumerator QTERoutine()
@@ -262,6 +269,7 @@ public class AIBot : MonoBehaviour
             yield return null;
         }
         //执行QTE效果
+        Debug.Log("QTE");
         while (QTETimer < QTEMaxTime)
         {
             QTETimer += Time.deltaTime;
@@ -273,5 +281,10 @@ public class AIBot : MonoBehaviour
         _agent.isStopped = false;
         // 结束QTE就开始动
         AIBotAction();
+    }
+
+    public void Dead()
+    {
+
     }
 }
