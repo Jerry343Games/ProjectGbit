@@ -13,7 +13,7 @@ public class BeltSurfaceSet : MonoBehaviour
     public Renderer beltRender;
     public Renderer shelftRender;
 
-
+    public GameObject beltMesh;
     public PlayableDirector playableDirector;
     void Start()
     {
@@ -44,12 +44,22 @@ public class BeltSurfaceSet : MonoBehaviour
         shelftRender.material = defaultMat;
     }
 
+    /// <summary>
+    /// 反转
+    /// </summary>
     public void SwitchDir()
     {
-        
+        Vector3 localScale = beltMesh.transform.localScale;
+        localScale.x = -localScale.x;
+        // 重新设置localScale
+        beltMesh.transform.localScale = localScale;
     }
 
-    public void OffMove()
+    
+    /// <summary>
+    /// 开关
+    /// </summary>
+    public void OnOffMove()
     {
         playableDirector.enabled = false;
     }
