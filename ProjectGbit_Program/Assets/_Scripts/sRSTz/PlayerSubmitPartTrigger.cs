@@ -11,7 +11,7 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
     private void Awake()
     {
         _playerBot = transform.parent.GetComponent<PlayerBot>();
-        
+        detectionTimeThreshold = _playerBot.GetComponent<BotProperty>().detectionTimeThreshold;
     }
     private void OnTriggerEnter(Collider other)
     {

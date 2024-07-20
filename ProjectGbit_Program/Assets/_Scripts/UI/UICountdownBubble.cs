@@ -56,8 +56,11 @@ public class UICountdownBubble : MonoBehaviour
     /// </summary>
     private void CompleteCountdown()
     {
-        myBot.GetComponent<PlayerBot>().muBubble = null;
+        myBot.GetComponent<BotProperty>().muBubble = null;
+        if(!myBot.GetComponent<BotProperty>().isAIBot)
         myBot.GetComponent<PlayerBot>().SubmitPart();
+        
+
         Destroy(gameObject);
     }
 }

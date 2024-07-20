@@ -59,6 +59,7 @@ public class AIBot : MonoBehaviour
 
     float waitTimer = 0;
 
+    public BotProperty botProperty;
     //float QTEtimer = 0;
 
     //bool hasQTEed = false;
@@ -68,11 +69,12 @@ public class AIBot : MonoBehaviour
         _agent = gameObject.GetComponent<NavMeshAgent>();
 
         _rb = gameObject.GetComponent<Rigidbody>();
+        botProperty = GetComponent<BotProperty>();
     }
 
     private void Start()
     {
-
+        
         SceneManager.Instance.RegisterAIBot(this);
 
         //生成随机行为序列
@@ -99,6 +101,7 @@ public class AIBot : MonoBehaviour
         WaitPoints = FindObjectsOfType<BotWaitPoint>();
 
         PrecomputeRandomDirection();
+        StopAtSubmissionDuration = botProperty.detectionTimeThreshold;
     }
 
 

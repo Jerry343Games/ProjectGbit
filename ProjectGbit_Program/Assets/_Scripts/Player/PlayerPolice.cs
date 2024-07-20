@@ -38,11 +38,11 @@ public class PlayerPolice : MonoBehaviour
     public float AttackCD;
 
     private float _attackTimer;
-
+    public PlayerPoliceAttack policeAttackArea;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-
+        policeAttackArea = GetComponentInChildren<PlayerPoliceAttack>();
         Invoke("CallQTE", 3f);
     }
 
@@ -58,19 +58,16 @@ public class PlayerPolice : MonoBehaviour
             Movement(inputSetting.inputDir);
         }
 
-        
-        
 
+
+        SwitchDirection();
         // 检查是否需要重置hasPressed变量
         ConfirmDirection();
         if (inputSetting.isPressScan)
         {
             StartScanPlayerBot();
         }
-        if(inputSetting.isPressSwitch)
-        {
-            Attack();
-        }
+        
         SkillCDUpdate();
         ScanPlayerBot();
     }
@@ -154,7 +151,21 @@ public class PlayerPolice : MonoBehaviour
             
         }
     }
+    private float _pressSwitchTimer = 0;
+    private void SwitchDirection()
+    {
+        _pressSwitchTimer -= Time.deltaTime; 
+        if (_pressSwitchTimer <= 0f) 
+        {
+            if (inputSetting.isPressSwitch)
+            {
 
+                Attack();
+                _pressSwitchTimer = AttackCD; 
+            }
+
+        }
+    }
     /// <summary>
     /// 开始扫描机器人
     /// </summary>
@@ -211,7 +222,7 @@ public class PlayerPolice : MonoBehaviour
             return;
         }
         Debug.Log("玩家发动了攻击");
-
+        policeAttackArea.AttackPlayer();
     }
 
     /// <summary>

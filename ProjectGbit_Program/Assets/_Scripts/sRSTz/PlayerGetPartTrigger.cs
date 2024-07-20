@@ -12,7 +12,7 @@ public class PlayerGetPartTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (_playerBot.currentPart)
+        if (_playerBot.currentPart!=PartType.Empty)
         {
             return;
         }

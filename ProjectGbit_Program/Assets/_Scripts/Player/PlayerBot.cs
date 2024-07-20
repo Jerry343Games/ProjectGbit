@@ -16,9 +16,9 @@ public class PlayerBot : MonoBehaviour
 
     public Vector3 conveyorVelocity;
 
-    public Part currentPart = null;
+    public PartType currentPart = PartType.Empty;
 
-    public GameObject muBubble;
+    
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -72,10 +72,10 @@ public class PlayerBot : MonoBehaviour
     }
     public void SubmitPart()
     {
-        if (currentPart == null) return;
+        if (currentPart==PartType.Empty) return;
         //在这里写检测根据part的不同种类提交
-        GameManager.Instance.AddPartToTask(currentPart.partType);
-        currentPart = null;
+        GameManager.Instance.AddPartToTask(currentPart);
+        currentPart = PartType.Empty;
     }
     /// <summary>
     /// 开始QTE
@@ -110,7 +110,7 @@ public class PlayerBot : MonoBehaviour
     /// </summary>
     public void GetPart(Part part)
     {
-        currentPart = part;
+        currentPart = part.partType;
         Debug.Log(part);
     }
 
