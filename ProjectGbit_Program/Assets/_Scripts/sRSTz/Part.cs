@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum PartType
 {
-    Normal,
+    Empty,
     type1,
     type2,
-    type3
+    type3,
 }
 public class Part : MonoBehaviour
 {

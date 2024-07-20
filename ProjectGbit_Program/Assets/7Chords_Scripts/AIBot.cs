@@ -36,7 +36,7 @@ public class AIBot : MonoBehaviour
     [Header("获取道具参数")]
     public BotWaitPoint[] WaitPoints;
 
-    public Part CurrentPart;
+    public PartType CurrentPart;
 
     public BotWaitPoint TargetPoint;
 
@@ -59,9 +59,9 @@ public class AIBot : MonoBehaviour
 
     float waitTimer = 0;
 
-    float QTEtimer = 0;
+    //float QTEtimer = 0;
 
-    bool hasQTEed = false;
+    //bool hasQTEed = false;
 
     private void Awake()
     {
@@ -251,9 +251,9 @@ public class AIBot : MonoBehaviour
 
         waitTimer = 0;
 
-        QTEtimer = 0;
+        //QTEtimer = 0;
 
-        hasQTEed = false;
+        //hasQTEed = false;
 
         PrecomputeRandomDirection();
     }
@@ -262,7 +262,7 @@ public class AIBot : MonoBehaviour
     /// <summary>
     /// 获得零件之后的响应
     /// </summary>
-    public void GetPart(Part part)
+    public void GetPart(PartType part)
     {
 
         CurrentPart = part;
@@ -283,12 +283,12 @@ public class AIBot : MonoBehaviour
 
     IEnumerator test()
     {
-        while(Vector3.Distance(_agent.pathEndPosition,transform.position) > 0.1f)
+        while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
         {
             yield return null;
         }
-
-        CurrentPart = null;
+        CurrentPart = PartType.Empty;
+        yield return new WaitForSeconds(StopAtSubmissionDuration);
 
         SwitchState();
 
@@ -310,6 +310,7 @@ public class AIBot : MonoBehaviour
     public void Dead()
     {
         SceneManager.Instance.RemoveAIBot(this);
+        Destroy(gameObject);
     }
 
 
