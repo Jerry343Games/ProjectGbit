@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.ShaderGraph.Internal;
 
 public class HookMachine : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class HookMachine : MonoBehaviour
 
     public float MaxX;
 
+    public float GetPartInterval;
+
+    private float _getPartTimer;
+
 
     private void Awake()
     {
@@ -24,14 +29,23 @@ public class HookMachine : MonoBehaviour
     }
     private void Start()
     {
-        Invoke("test", 2f);
+        _getPartTimer = GetPartInterval;
     }
-
-    private void test()
+    
+    private void Update()
     {
-        _anim.Play("Get");
-    }
+        if(_getPartTimer >0)
+        {
+            _getPartTimer -= Time.deltaTime;
+        }
+        else
+        {
+            _getPartTimer = GetPartInterval;
 
+            _anim.Play("Get");
+        }
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
