@@ -45,14 +45,21 @@ public class PlayerPolice : MonoBehaviour
     }
 
     // Update is called once per frame
+    // 新增一个布尔变量，初始值为false
+    private bool hasPressed = false;
     void Update()
     {
         if (player._isPlayerSetup)
         {
             Movement(inputSetting.inputDir);
         }
-        ConfirmDirection();
-        if(inputSetting.isPressScan)
+
+        if (inputSetting.isPressConfirm && !hasPressed)
+        {
+            CallQTE();
+            hasPressed = true; // 将hasPressed设为true，确保只执行一次
+        }
+        if (inputSetting.isPressScan)
         {
             StartScanPlayerBot();
         }
@@ -137,7 +144,7 @@ public class PlayerPolice : MonoBehaviour
             if (inputSetting.isPressSwitch)
             {
 
-                Debug.Log("警察开始qte");
+                CallQTE();
             }
             _pressConfirmTimer = 0f; // 重置计时器
         }
