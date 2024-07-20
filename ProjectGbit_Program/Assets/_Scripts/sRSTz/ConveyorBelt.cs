@@ -9,7 +9,11 @@ public class ConveyorBelt : MonoBehaviour
     public bool isAwake = true;
     public bool isReverse = false;
     private int reverseNum = 1;
-
+    public BeltSurfaceSet bletSurfaceSet;
+    private void Awake()
+    {
+        bletSurfaceSet = GetComponent<BeltSurfaceSet>();
+    }
     private void OnTriggerStay(Collider other)
     {
         Debug.Log(other.gameObject.name);
@@ -19,7 +23,7 @@ public class ConveyorBelt : MonoBehaviour
         if (rb != null)
         {
             if (isReverse) reverseNum = -1; else reverseNum = 1;
-            Vector3 conveyorMovement = transform.forward * beltSpeed * Time.deltaTime * reverseNum;
+            Vector3 conveyorMovement = -transform.right * beltSpeed * Time.deltaTime * reverseNum;
 
             PlayerBot playerBot = other.gameObject.GetComponent<PlayerBot>();
             if (isAwake)
@@ -55,13 +59,13 @@ public class ConveyorBelt : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2*reverseNum);
+        Gizmos.DrawLine(transform.position, transform.position + -transform.right * 2*reverseNum);
     }
 
     public void ChangeOnOff()
     {
         isAwake = !isAwake;
-        
+        bletSurfaceSet.OnOffMove(isAwake);
 
     }
     
@@ -69,7 +73,7 @@ public class ConveyorBelt : MonoBehaviour
     {
         isReverse = !isReverse;
         //按中心点左右翻转传送带
-        
+        bletSurfaceSet.SwitchDir();
     }
     
 }

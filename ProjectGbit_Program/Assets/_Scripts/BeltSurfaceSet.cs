@@ -59,9 +59,9 @@ public class BeltSurfaceSet : MonoBehaviour
     /// <summary>
     /// 开关
     /// </summary>
-    public void OnOffMove()
+    public void OnOffMove(bool isAwake)
     {
-        playableDirector.enabled = false;
+        playableDirector.enabled = isAwake;
     }
     
     
