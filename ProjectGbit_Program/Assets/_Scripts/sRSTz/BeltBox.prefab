@@ -193,6 +193,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7760441674769668387}
     m_Modifications:
+    - target: {fileID: 812858691631015914, guid: cafa0ab9168ff8d48b1e02022ae79162,
+        type: 3}
+      propertyPath: beltMesh
+      value: 
+      objectReference: {fileID: 6448922888259031851}
     - target: {fileID: 4406460709126558944, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
       propertyPath: m_Name
@@ -236,17 +241,17 @@ PrefabInstance:
     - target: {fileID: 8558930063400475986, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8558930063400475986, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8558930063400475986, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8558930063400475986, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
@@ -283,10 +288,32 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3758352833169720296}
+    - targetCorrespondingSourceObject: {fileID: 4406460709126558944, guid: cafa0ab9168ff8d48b1e02022ae79162,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9110337875416718357}
   m_SourcePrefab: {fileID: 100100000, guid: cafa0ab9168ff8d48b1e02022ae79162, type: 3}
 --- !u!4 &4008130158529527955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8558930063400475986, guid: cafa0ab9168ff8d48b1e02022ae79162,
+    type: 3}
+  m_PrefabInstance: {fileID: 4708742860701916609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5340998692453890603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 812858691631015914, guid: cafa0ab9168ff8d48b1e02022ae79162,
+    type: 3}
+  m_PrefabInstance: {fileID: 4708742860701916609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970664700274477345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ec4fb1af26c4940a569daa181009f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6448922888259031851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1740638635987537642, guid: cafa0ab9168ff8d48b1e02022ae79162,
     type: 3}
   m_PrefabInstance: {fileID: 4708742860701916609}
   m_PrefabAsset: {fileID: 0}
@@ -338,6 +365,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.463179, y: 0.32, z: 0.9912214}
   m_Center: {x: 0.1776915, y: 0.09, z: -2.854924}
+--- !u!114 &9110337875416718357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970664700274477345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6216d36aa2df9d740911bc2efdfab431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beltSpeed: 15
+  isAwake: 1
+  isReverse: 0
+  bletSurfaceSet: {fileID: 5340998692453890603}
 --- !u!1001 &8728658465285962929
 PrefabInstance:
   m_ObjectHideFlags: 0
