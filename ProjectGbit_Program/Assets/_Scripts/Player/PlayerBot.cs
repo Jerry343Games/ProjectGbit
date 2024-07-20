@@ -113,4 +113,10 @@ public class PlayerBot : MonoBehaviour
         currentPart = part;
         Debug.Log(part);
     }
+
+    public void Dead()
+    {
+        Debug.Log(gameObject.name + "dead");
+        Destroy(this.gameObject);
+    }
 }

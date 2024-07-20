@@ -576,6 +576,7 @@ MonoBehaviour:
   CheckPlayerBotDistance: 0
   CheckPlayerBotAngle: 0
   AttackCD: 0
+  policeAttackArea: {fileID: 0}
 --- !u!54 &308512931
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -845,19 +846,13 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &342630323 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
-    type: 3}
-  m_PrefabInstance: {fileID: 359944782}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &342630327 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7428233439764705239, guid: 17bd483d14d3c91439c5ea7d8834d565,
     type: 3}
   m_PrefabInstance: {fileID: 359944782}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342630323}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38df3c196ef814a4692c3c865f8144a7, type: 3}
@@ -869,7 +864,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 359944782}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342630323}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a19337d525f422742a9184571e150a12, type: 3}
@@ -3328,7 +3323,8 @@ MonoBehaviour:
   ScanBotCD: 0
   CheckPlayerBotDistance: 0
   CheckPlayerBotAngle: 0
-  AttackCD: 0
+  AttackCD: 3
+  policeAttackArea: {fileID: 0}
 --- !u!54 &1175117416
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3354,7 +3350,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1268586801
 GameObject:
@@ -3946,8 +3942,6 @@ MonoBehaviour:
   players:
   - {fileID: 1677557517}
   - {fileID: 2032400288}
-  - {fileID: 1754537819}
-  - {fileID: 342630323}
 --- !u!1 &1461323783
 GameObject:
   m_ObjectHideFlags: 0
@@ -4080,6 +4074,7 @@ MonoBehaviour:
   CheckPlayerBotDistance: 0
   CheckPlayerBotAngle: 0
   AttackCD: 0
+  policeAttackArea: {fileID: 0}
 --- !u!54 &1474592257
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4456,6 +4451,7 @@ MonoBehaviour:
   CheckPlayerBotDistance: 0
   CheckPlayerBotAngle: 0
   AttackCD: 0
+  policeAttackArea: {fileID: 0}
 --- !u!54 &1706857360
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4481,21 +4477,15 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!1 &1754537819 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
-    type: 3}
-  m_PrefabInstance: {fileID: 882039234}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1754537823 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7428233439764705239, guid: 17bd483d14d3c91439c5ea7d8834d565,
     type: 3}
   m_PrefabInstance: {fileID: 882039234}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754537819}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38df3c196ef814a4692c3c865f8144a7, type: 3}
@@ -4507,7 +4497,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 882039234}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754537819}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a19337d525f422742a9184571e150a12, type: 3}

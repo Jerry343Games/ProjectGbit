@@ -42,6 +42,8 @@ public class PlayerPolice : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+
+        Invoke("CallQTE", 3f);
     }
 
     // Update is called once per frame

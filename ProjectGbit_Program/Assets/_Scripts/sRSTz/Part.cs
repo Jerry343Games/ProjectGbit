@@ -14,8 +14,20 @@ public class Part : MonoBehaviour
     public PartType partType;
     public bool isPicked;
     public GameObject model;
-    
-
+    public float destroyTime = 5f;
+    private float destroyTimer;
+    private void Awake()
+    {
+        destroyTimer = destroyTime;
+    }
+    private void Update()
+    {
+        destroyTimer -= Time.deltaTime;
+        if (destroyTimer <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
     public void Use()
     {
 
