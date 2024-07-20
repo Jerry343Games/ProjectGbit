@@ -11,6 +11,7 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
     private void Awake()
     {
         _playerBot = transform.parent.GetComponent<PlayerBot>();
+        
     }
     private void OnTriggerEnter(Collider other)
     {

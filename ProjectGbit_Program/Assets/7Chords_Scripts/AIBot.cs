@@ -59,6 +59,10 @@ public class AIBot : MonoBehaviour
 
     float waitTimer = 0;
 
+    float QTEtimer = 0;
+
+    bool hasQTEed = false;
+
     private void Awake()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
@@ -236,6 +240,9 @@ public class AIBot : MonoBehaviour
 
         CurrentState = StateList[CurrentStateIndex];
 
+
+        _agent.isStopped = true;
+
         hasMoveOver = false;
 
         hasSetDest = false;
@@ -246,6 +253,10 @@ public class AIBot : MonoBehaviour
 
         waitTimer = 0;
 
+        QTEtimer = 0;
+
+        hasQTEed = false;
+
         PrecomputeRandomDirection();
     }
 
@@ -255,38 +266,36 @@ public class AIBot : MonoBehaviour
     /// </summary>
     public void GetPart(Part part)
     {
+
         CurrentPart = part;
 
         TargetPoint.HasBotExit = false;
 
-        StartCoroutine(GetPartRoutine());
-    }
-
-    private IEnumerator GetPartRoutine()
-    {
         _agent.isStopped = false;
 
         Vector3 endCenterPoint = FindObjectOfType<SubmissionPoint>().transform.position;
 
         Vector3 targetPosition = new Vector3(endCenterPoint.x + Random.Range(-2, 2), transform.position.y, endCenterPoint.z + Random.Range(-2, 2));
 
-        _agent.angularSpeed = 60;
-
         _agent.SetDestination(targetPosition);
 
-        while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
+        StartCoroutine(test());
+
+    }
+
+    IEnumerator test()
+    {
+        while(Vector3.Distance(_agent.pathEndPosition,transform.position) >0.1f)
         {
             yield return null;
         }
-        _agent.angularSpeed = 0;
-
-        yield return new WaitForSeconds(StopAtSubmissionDuration);
 
         CurrentPart = null;
 
-
         SwitchState();
+
     }
+
 
     public void ExecuteQTE()
     {
@@ -299,17 +308,15 @@ public class AIBot : MonoBehaviour
         {
             return;
         }
-
-        float timer = 0;
+        _agent.isStopped = false;
         float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
         float QTETime = Random.Range(0, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
-        bool hasQTEed = false;
 
 
-        timer += Time.deltaTime;
+        QTEtimer += Time.deltaTime;
         if (!hasQTEed)
         {
-            if(timer> QTETime)
+            if(QTEtimer> QTETime)
             {
                 hasQTEed = true;
                 Debug.Log("AI成功QTE！");
@@ -317,7 +324,7 @@ public class AIBot : MonoBehaviour
         }
         else
         {
-            if(timer > QTEMaxTime)
+            if(QTEtimer > QTEMaxTime)
             {
                 Debug.Log("QTE结束");
                 IsBeingQTE = false;
