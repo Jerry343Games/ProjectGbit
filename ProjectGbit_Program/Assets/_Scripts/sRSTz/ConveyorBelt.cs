@@ -20,19 +20,32 @@ public class ConveyorBelt : MonoBehaviour
             if (isReverse) reverseNum = -1; else reverseNum = 1;
             Vector3 conveyorMovement = transform.forward * beltSpeed * Time.deltaTime * reverseNum;
 
-            BotProperty botProperty = collision.gameObject.GetComponent<BotProperty>();
-            rb.velocity += conveyorMovement;
+            PlayerBot playerBot = collision.gameObject.GetComponent<PlayerBot>();
+            if (playerBot == null)
+            {
+                rb.velocity += conveyorMovement;
+            }
+            else
+            {
+                playerBot.isOnConveyBelt = true;
+                playerBot.conveyorVelocity = conveyorMovement;
+            }
+            
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        BotProperty botProperty = collision.gameObject.GetComponent<BotProperty>();
+        PlayerBot playerBot = collision.gameObject.GetComponent<PlayerBot>();
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-        if (botProperty == null && rb != null)
+        if (playerBot == null && rb != null)
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+        }
+        else if (playerBot != null)
+        {
+            playerBot.isOnConveyBelt = false;
         }
     }
     private void OnDrawGizmos()
