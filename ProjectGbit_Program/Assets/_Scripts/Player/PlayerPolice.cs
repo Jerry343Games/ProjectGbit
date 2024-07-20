@@ -47,6 +47,8 @@ public class PlayerPolice : MonoBehaviour
     // Update is called once per frame
     // 新增一个布尔变量，初始值为false
     private bool hasPressed = false;
+    private float pressResetTime = 0.5f; // 0.5秒的重置时间
+    private float pressTimer = 0f;
     void Update()
     {
         if (player._isPlayerSetup)
@@ -54,10 +56,18 @@ public class PlayerPolice : MonoBehaviour
             Movement(inputSetting.inputDir);
         }
 
+        
         if (inputSetting.isPressConfirm && !hasPressed)
         {
             CallQTE();
-            hasPressed = true; // 将hasPressed设为true，确保只执行一次
+            hasPressed = true;
+            pressTimer = Time.time; // 记录按键按下的时间
+        }
+
+        // 检查是否需要重置hasPressed变量
+        if (hasPressed && (Time.time - pressTimer) >= pressResetTime)
+        {
+            hasPressed = false; // 超过0.5秒后重置按键状态
         }
         if (inputSetting.isPressScan)
         {
@@ -133,7 +143,7 @@ public class PlayerPolice : MonoBehaviour
         {
             aiBot.GetComponent<AIBot>().ExecuteQTE();
         }
-        
+        hasPressed = false;
     }
     private float _pressConfirmTimer = 0;
     private void ConfirmDirection()
