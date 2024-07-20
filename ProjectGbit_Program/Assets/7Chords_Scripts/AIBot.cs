@@ -294,6 +294,6 @@ public class AIBot : MonoBehaviour
 
     public void Dead()
     {
-
+        SceneManager.Instance.RemoveAIBot(this);
     }
 }
