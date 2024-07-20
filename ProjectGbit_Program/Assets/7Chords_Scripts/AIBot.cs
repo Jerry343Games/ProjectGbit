@@ -38,6 +38,8 @@ public class AIBot : MonoBehaviour
 
     public BotWaitPoint TargetPoint;
 
+    public float StopAtSubmissionDuration;
+
     [Header("QTE²ÎÊý")]
     public bool IsBeingQTE;
 
@@ -235,6 +237,8 @@ public class AIBot : MonoBehaviour
         {
             yield return null;
         }
+
+        yield return new WaitForSeconds(StopAtSubmissionDuration);
 
         CurrentPart = null;
 

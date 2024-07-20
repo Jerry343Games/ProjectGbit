@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 2067897799500049307}
   - component: {fileID: 6982541431354422424}
   - component: {fileID: 4924810694885758424}
-  - component: {fileID: 2434036040347072885}
   - component: {fileID: 8373563396028096448}
   - component: {fileID: 3917301309653557862}
-  - component: {fileID: 146621422021878070}
   - component: {fileID: 5653949071681013379}
+  - component: {fileID: 146621422021878070}
+  - component: {fileID: 2434036040347072885}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -89,29 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2434036040347072885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2552705893818925299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15181e0e480f69c4ba02a369ba104f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StateList: 000000000000000001000000
-  CurrentStateIndex: 0
-  CurrentState: 0
-  MoveSpeed: 1.5
-  SingleMoveDuration: 5
-  SingleStopDuration: 1
-  WaitPoints: []
-  CurrentPart: {fileID: 0}
-  IsBeingQTE: 0
-  MinBounds: {x: -12, y: 0, z: -12}
-  MaxBounds: {x: 12, y: 0, z: 12}
 --- !u!195 &8373563396028096448
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -161,20 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &146621422021878070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2552705893818925299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e0a879097a2284f99ae1911f206a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAIBot: 1
-  QTEMaxTime: 0.3
 --- !u!136 &5653949071681013379
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -198,6 +161,45 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &146621422021878070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552705893818925299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e0a879097a2284f99ae1911f206a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAIBot: 1
+  QTEMaxTime: 0.3
+--- !u!114 &2434036040347072885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552705893818925299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15181e0e480f69c4ba02a369ba104f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateList: 000000000000000001000000
+  CurrentStateIndex: 0
+  CurrentState: 0
+  MoveSpeed: 1.5
+  SingleMoveDuration: 5
+  SingleStopDuration: 2
+  WaitPoints: []
+  CurrentPart: {fileID: 0}
+  TargetPoint: {fileID: 0}
+  StopAtSubmissionDuration: 0
+  IsBeingQTE: 0
+  MinBounds: {x: -12, y: 0, z: -12}
+  MaxBounds: {x: 12, y: 0, z: 12}
 --- !u!1 &5639847290535657941
 GameObject:
   m_ObjectHideFlags: 0
