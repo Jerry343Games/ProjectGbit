@@ -284,48 +284,53 @@ public class AIBot : MonoBehaviour
 
         CurrentPart = null;
 
-
         SwitchState();
     }
 
     public void ExecuteQTE()
     {
-        IsBeingQTE = true;
-
-    }
-    private void QTE()
-    {
-        if(!IsBeingQTE)
-        {
-            return;
-        }
-
-        float timer = 0;
         float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
         float QTETime = Random.Range(0, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
-        bool hasQTEed = false;
-
-
-        timer += Time.deltaTime;
-        if (!hasQTEed)
-        {
-            if(timer> QTETime)
-            {
-                hasQTEed = true;
-                Debug.Log("AI成功QTE！");
-            }
-        }
-        else
-        {
-            if(timer > QTEMaxTime)
-            {
-                Debug.Log("QTE结束");
-                IsBeingQTE = false;
-                SwitchState();
-            }
-        }
-        
+        Invoke("QTE", QTETime);
     }
+
+    public void QTE()
+    {
+        Debug.Log("AIQTE!!");
+    }
+    //private void QTE()
+    //{
+    //    if(!IsBeingQTE)
+    //    {
+    //        return;
+    //    }
+
+    //    float timer = 0;
+    //    float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
+    //    float QTETime = Random.Range(0, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
+    //    bool hasQTEed = false;
+
+
+    //    timer += Time.deltaTime;
+    //    if (!hasQTEed)
+    //    {
+    //        if(timer> QTETime)
+    //        {
+    //            hasQTEed = true;
+    //            Debug.Log("AI成功QTE！");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if(timer > QTEMaxTime)
+    //        {
+    //            Debug.Log("QTE结束");
+    //            IsBeingQTE = false;
+    //            SwitchState();
+    //        }
+    //    }
+        
+    //}
 
     public void Dead()
     {
