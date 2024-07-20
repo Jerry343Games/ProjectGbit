@@ -209,6 +209,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1340c491-1a6f-465f-aba6-d103237adccc
     m_ActionName: Player/PressScan[/Keyboard/e,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 71e3104f-a590-4761-b123-f0323f8fa276
+    m_ActionName: Factory/Trap[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -379,6 +383,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBot2
       objectReference: {fileID: 0}
+    - target: {fileID: 3616207219897498001, guid: eea432da6cfd48740bc166f471ec85eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5268627035637766701, guid: eea432da6cfd48740bc166f471ec85eb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -429,6 +438,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8252648962230830455, guid: eea432da6cfd48740bc166f471ec85eb,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8495521092547894194}
+    - target: {fileID: 8252648962230830455, guid: eea432da6cfd48740bc166f471ec85eb,
+        type: 3}
+      propertyPath: inputSetting
+      value: 
+      objectReference: {fileID: 7428233439764705239}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -458,6 +477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerBot1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3616207219897498001, guid: eea432da6cfd48740bc166f471ec85eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5268627035637766701, guid: eea432da6cfd48740bc166f471ec85eb,
         type: 3}
