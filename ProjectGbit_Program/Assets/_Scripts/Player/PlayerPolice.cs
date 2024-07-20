@@ -26,7 +26,10 @@ public class PlayerPolice : MonoBehaviour
         {
             Movement(inputSetting.inputDir);
         }
-
+        if (inputSetting.isPressConfirm)
+        {
+            CallQTE();
+        }
     }
 
     /// <summary>
@@ -46,6 +49,8 @@ public class PlayerPolice : MonoBehaviour
     /// </summary>
     private void CallQTE()
     {
+        Debug.Log("¾¯²ì¿ªÊ¼qte");
+        //if (SceneManager.Instance.AIBotList.Count == 0) return;
         foreach(var aiBot in SceneManager.Instance.AIBotList)
         {
             aiBot.GetComponent<AIBot>().ExecuteQTE();

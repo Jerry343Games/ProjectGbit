@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7553759066758502274}
   - component: {fileID: 7465542357035054127}
   - component: {fileID: 1783202979025043116}
+  - component: {fileID: 4870269524872652673}
   m_Layer: 7
-  m_Name: PlayerGetPartTrigger
+  m_Name: Playerinteractionrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +65,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66b923ae98745b94a9783aae4051e0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4870269524872652673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420692978062581335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12089715bcf0e464ba4b7afcb8bc27f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3616207219897498001

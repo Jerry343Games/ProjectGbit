@@ -17,9 +17,12 @@ public class PlayerBot : MonoBehaviour
     public Vector3 conveyorVelocity;
 
     public Part currentPart = null;
+
+    
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        SceneManager.Instance.RegisterPlayerBot(this);
     }
 
     // Update is called once per frame
@@ -54,7 +57,13 @@ public class PlayerBot : MonoBehaviour
         }
         
     }
-    
+    public void SubmitPart()
+    {
+        if (currentPart == null) return;
+        //在这里写检测根据part的不同种类提交
+
+        currentPart = null;
+    }
     /// <summary>
     /// 开始QTE
     /// </summary>
@@ -71,10 +80,17 @@ public class PlayerBot : MonoBehaviour
         while (QTETimer < QTEMaxTime)
         {
             //输入按键后结束
+            if (inputSetting.isPressConfirm)
+            {
+                Debug.Log("qte成功");
+                yield break;
+            }
             QTETimer += Time.deltaTime;
             yield return null;
         }
         //未完成输入，暴露
+        Debug.Log("Qte失败");
+
     }
     /// <summary>
     /// 获得零件之后的响应
