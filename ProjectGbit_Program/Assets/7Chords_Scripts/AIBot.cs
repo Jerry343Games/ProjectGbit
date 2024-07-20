@@ -160,8 +160,6 @@ public class AIBot : MonoBehaviour
                     break;
             }
         }
-
-        QTE();
     }
 
 
@@ -285,7 +283,7 @@ public class AIBot : MonoBehaviour
 
     IEnumerator test()
     {
-        while(Vector3.Distance(_agent.pathEndPosition,transform.position) >0.1f)
+        while(Vector3.Distance(_agent.pathEndPosition,transform.position) > 0.1f)
         {
             yield return null;
         }
@@ -299,39 +297,14 @@ public class AIBot : MonoBehaviour
 
     public void ExecuteQTE()
     {
-        IsBeingQTE = true;
-
-    }
-    private void QTE()
-    {
-        if(!IsBeingQTE)
-        {
-            return;
-        }
-        _agent.isStopped = false;
         float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
         float QTETime = Random.Range(0, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
+        Invoke("QTE", QTETime);
+    }
 
-
-        QTEtimer += Time.deltaTime;
-        if (!hasQTEed)
-        {
-            if(QTEtimer> QTETime)
-            {
-                hasQTEed = true;
-                Debug.Log("AI成功QTE！");
-            }
-        }
-        else
-        {
-            if(QTEtimer > QTEMaxTime)
-            {
-                Debug.Log("QTE结束");
-                IsBeingQTE = false;
-                SwitchState();
-            }
-        }
-        
+    public void QTE()
+    {
+        Debug.Log("AIQTE!!");
     }
 
     public void Dead()
