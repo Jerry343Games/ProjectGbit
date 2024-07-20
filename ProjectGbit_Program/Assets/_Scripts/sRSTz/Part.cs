@@ -15,16 +15,22 @@ public class Part : MonoBehaviour
     public bool isPicked;
     public GameObject model;
     public float destroyTime = 5f;
-    private float destroyTimer;
+    public float destroyTimer;
     private void Awake()
     {
         destroyTimer = destroyTime;
+    }
+
+    private void Start()
+    {
+        SceneManager.Instance.RegisterPart(this);
     }
     private void Update()
     {
         destroyTimer -= Time.deltaTime;
         if (destroyTimer <= 0)
         {
+            SceneManager.Instance.RemovePart(this);
             Destroy(this.gameObject);
         }
     }

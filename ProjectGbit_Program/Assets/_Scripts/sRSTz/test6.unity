@@ -1977,6 +1977,11 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.83
       objectReference: {fileID: 0}
+    - target: {fileID: 8373563396028096448, guid: 6eafa5228bb97994c92c3421b8757c7e,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2265,6 +2270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373563396028096448, guid: 6eafa5228bb97994c92c3421b8757c7e,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2871,6 +2881,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8373563396028096448, guid: 6eafa5228bb97994c92c3421b8757c7e,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3028,6 +3043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AIBotList: []
   PlayerBotList: []
+  AllParts: []
 --- !u!1 &1151686567
 GameObject:
   m_ObjectHideFlags: 0
@@ -3442,6 +3458,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373563396028096448, guid: 6eafa5228bb97994c92c3421b8757c7e,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

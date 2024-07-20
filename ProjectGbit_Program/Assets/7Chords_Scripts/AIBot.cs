@@ -23,7 +23,7 @@ public class AIBot : MonoBehaviour
     private Rigidbody _rb;
 
     [Header("行为参数")]
-    public List<BotState> StateList;
+    public List<BotState> StateList = new List<BotState>();
     public int CurrentStateIndex;
     public BotState CurrentState;
 
@@ -74,7 +74,7 @@ public class AIBot : MonoBehaviour
 
     private void Start()
     {
-        
+
         SceneManager.Instance.RegisterAIBot(this);
 
         //生成随机行为序列
@@ -101,6 +101,7 @@ public class AIBot : MonoBehaviour
         WaitPoints = FindObjectsOfType<BotWaitPoint>();
 
         PrecomputeRandomDirection();
+
         StopAtSubmissionDuration = botProperty.detectionTimeThreshold;
     }
 
@@ -110,6 +111,7 @@ public class AIBot : MonoBehaviour
     /// </summary>
     private void PrecomputeRandomDirection()
     {
+
         Vector3 potentialDirection;
         Vector3 newPosition;
 
@@ -122,6 +124,7 @@ public class AIBot : MonoBehaviour
 
         _randomDir = potentialDirection;
     }
+
 
     /// <summary>
     /// 检查新位置是否在边界内
@@ -148,6 +151,7 @@ public class AIBot : MonoBehaviour
         {
             return;
         }
+
         if (!IsBeingQTE)
         {
             switch (CurrentState)
@@ -181,13 +185,13 @@ public class AIBot : MonoBehaviour
 
     private void Move()
     {
- 
 
-        if(!hasMoveOver)
+
+        if (!hasMoveOver)
         {
             if (moveTimer < SingleMoveDuration)
             {
-                if(!hasSetDest)
+                if (!hasSetDest)
                 {
                     hasSetDest = true;
                     Vector3 targetPosition = transform.position + _randomDir * MoveSpeed * SingleMoveDuration;
@@ -204,7 +208,7 @@ public class AIBot : MonoBehaviour
         }
         else
         {
-            if(waitTimer<SingleStopDuration)
+            if (waitTimer < SingleStopDuration)
             {
                 waitTimer += Time.deltaTime;
                 _agent.isStopped = true;
@@ -222,7 +226,7 @@ public class AIBot : MonoBehaviour
     private void TakePart()
     {
 
-        if(!hasSetPartDest)
+        if (!hasSetPartDest)
         {
             hasSetPartDest = true;
             do
@@ -239,6 +243,20 @@ public class AIBot : MonoBehaviour
 
             _agent.SetDestination(TargetPoint.transform.position);
         }
+
+    }
+
+
+    /// <summary>
+    /// 每次移动后都随机一下下一次移动和停止的持续时间 更加拟人
+    /// </summary>
+    private void RandomMoveAndStopDuration()
+    {
+        SingleMoveDuration += Random.Range(-2, 2);
+        SingleMoveDuration = Mathf.Clamp(SingleMoveDuration, 1, 7);
+
+        SingleStopDuration += Random.Range(-2, 2);
+        SingleStopDuration = Mathf.Clamp(SingleStopDuration, 1, 7);
 
     }
 
@@ -270,6 +288,8 @@ public class AIBot : MonoBehaviour
         //hasQTEed = false;
 
         PrecomputeRandomDirection();
+
+        RandomMoveAndStopDuration();
     }
 
 
@@ -319,7 +339,11 @@ public class AIBot : MonoBehaviour
         {
             yield return null;
         }
+
+        //yield return new WaitForSeconds(_agent.remainingDistance / _agent.speed) ;
+
         CurrentPart = PartType.Empty;
+
         yield return new WaitForSeconds(StopAtSubmissionDuration);
 
         SwitchState();
