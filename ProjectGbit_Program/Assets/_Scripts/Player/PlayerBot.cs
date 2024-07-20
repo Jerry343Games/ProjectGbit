@@ -18,7 +18,7 @@ public class PlayerBot : MonoBehaviour
 
     public Part currentPart = null;
 
-    
+    public GameObject muBubble;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -34,9 +34,22 @@ public class PlayerBot : MonoBehaviour
             Movement(inputSetting.inputDir);
             
         }
-        
+        ConfirmDirection();
     }
-    
+    private float _pressConfirmTimer = 0;
+    private void ConfirmDirection()
+    {
+        _pressConfirmTimer += Time.deltaTime; // 更新计时器
+        if (_pressConfirmTimer >= 0.1f) // 检查计时器是否超过间隔
+        {
+            if (inputSetting.isPressSwitch)
+            {
+                //亮灯
+                Debug.Log("亮灯");
+            }
+            _pressConfirmTimer = 0f; // 重置计时器
+        }
+    }
     /// <summary>
     /// 玩家移动方法
     /// </summary>
@@ -67,7 +80,7 @@ public class PlayerBot : MonoBehaviour
     /// <summary>
     /// 开始QTE
     /// </summary>
-    public void BeginQTE()
+    /*public void BeginQTE()
     {
         StartCoroutine(QTERoutine());
     }
@@ -91,7 +104,7 @@ public class PlayerBot : MonoBehaviour
         //未完成输入，暴露
         Debug.Log("Qte失败");
 
-    }
+    }*/
     /// <summary>
     /// 获得零件之后的响应
     /// </summary>

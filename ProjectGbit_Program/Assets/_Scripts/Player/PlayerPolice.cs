@@ -51,10 +51,7 @@ public class PlayerPolice : MonoBehaviour
         {
             Movement(inputSetting.inputDir);
         }
-        if (inputSetting.isPressConfirm)
-        {
-            CallQTE();
-        }
+        ConfirmDirection();
         if(inputSetting.isPressScan)
         {
             StartScanPlayerBot();
@@ -129,12 +126,22 @@ public class PlayerPolice : MonoBehaviour
         {
             aiBot.GetComponent<AIBot>().ExecuteQTE();
         }
-        foreach (var playerBot in SceneManager.Instance.PlayerBotList)
+        
+    }
+    private float _pressConfirmTimer = 0;
+    private void ConfirmDirection()
+    {
+        _pressConfirmTimer += Time.deltaTime; // 更新计时器
+        if (_pressConfirmTimer >= 0.1f) // 检查计时器是否超过间隔
         {
-            playerBot.GetComponent<PlayerBot>().BeginQTE();
+            if (inputSetting.isPressSwitch)
+            {
+
+                Debug.Log("警察开始qte");
+            }
+            _pressConfirmTimer = 0f; // 重置计时器
         }
     }
-
 
     /// <summary>
     /// 开始扫描机器人
