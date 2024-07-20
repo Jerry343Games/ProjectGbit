@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2067897799500049307}
   - component: {fileID: 6982541431354422424}
   - component: {fileID: 4924810694885758424}
-  - component: {fileID: 8373563396028096448}
   - component: {fileID: 3917301309653557862}
   - component: {fileID: 5653949071681013379}
   - component: {fileID: 146621422021878070}
@@ -19,7 +18,7 @@ GameObject:
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -89,28 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!195 &8373563396028096448
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2552705893818925299}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 60
-  m_StoppingDistance: 0.2
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!54 &3917301309653557862
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -120,8 +97,8 @@ Rigidbody:
   m_GameObject: {fileID: 2552705893818925299}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -157,7 +134,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.83
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -174,7 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAIBot: 1
-  QTEMaxTime: 0.3
+  QTEMaxTime: 1
+  muBubble: {fileID: 0}
+  detectionTimeThreshold: 3
 --- !u!114 &2434036040347072885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,12 +173,13 @@ MonoBehaviour:
   SingleMoveDuration: 5
   SingleStopDuration: 1
   WaitPoints: []
-  CurrentPart: {fileID: 0}
+  CurrentPart: 0
   TargetPoint: {fileID: 0}
-  StopAtSubmissionDuration: 0
+  StopAtSubmissionDuration: 1
   IsBeingQTE: 0
   MinBounds: {x: -12, y: 0, z: -12}
   MaxBounds: {x: 12, y: 0, z: 12}
+  botProperty: {fileID: 0}
 --- !u!1 &5639847290535657941
 GameObject:
   m_ObjectHideFlags: 0

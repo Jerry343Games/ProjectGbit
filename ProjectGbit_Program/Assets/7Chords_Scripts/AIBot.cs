@@ -42,8 +42,8 @@ public class AIBot : MonoBehaviour
 
     public float StopAtSubmissionDuration;
 
-    [Header("QTE参数")]
-    public bool IsBeingQTE;
+    //[Header("QTE参数")]
+    //public bool IsBeingQTE;
 
     [Header("地图边界")]
     public Vector3 MinBounds; // 地图最小边界
@@ -152,20 +152,16 @@ public class AIBot : MonoBehaviour
             return;
         }
 
-        if (!IsBeingQTE)
+        switch (CurrentState)
         {
-            switch (CurrentState)
-            {
-                case BotState.Move:
-                    Move();
-                    break;
-                case BotState.TakeParts:
-                    TakePart();
-                    //_currentCoroutine = StartCoroutine(TakePartRoutine());
-                    break;
-                default:
-                    break;
-            }
+            case BotState.Move:
+                Move();
+                break;
+            case BotState.TakeParts:
+                TakePart();
+                break;
+            default:
+                break;
         }
 
         if (_agent.velocity != Vector3.zero)
@@ -283,10 +279,6 @@ public class AIBot : MonoBehaviour
 
         waitTimer = 0;
 
-        //QTEtimer = 0;
-
-        //hasQTEed = false;
-
         PrecomputeRandomDirection();
 
         RandomMoveAndStopDuration();
@@ -311,7 +303,7 @@ public class AIBot : MonoBehaviour
 
         _agent.SetDestination(targetPosition);
 
-        StartCoroutine(test());
+        StartCoroutine(GotoCommit());
 
     }
     private GameObject FindClosestTarget(string targetType)
@@ -333,7 +325,7 @@ public class AIBot : MonoBehaviour
 
         return closestTarget;
     }
-    IEnumerator test()
+    IEnumerator GotoCommit()
     {
         while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
         {
