@@ -107,7 +107,7 @@ public class PlayerPolice : MonoBehaviour
             _canStartScan = true;
         }
         //¹¥»÷CD¼ÆÊ±
-        if(_attackTimer>0)
+        if(_attackTimer > 0)
         {
             _attackTimer -= Time.deltaTime;
         }
