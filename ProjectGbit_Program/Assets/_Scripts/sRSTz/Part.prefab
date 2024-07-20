@@ -178,6 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20fd65dca0b5ce4297f93c67e62eb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: 0
+  partType: 1
   isPicked: 0
   model: {fileID: 3931638208162119725}

@@ -74,7 +74,7 @@ public class PlayerBot : MonoBehaviour
     {
         if (currentPart == null) return;
         //在这里写检测根据part的不同种类提交
-
+        GameManager.Instance.AddPartToTask(currentPart.partType);
         currentPart = null;
     }
     /// <summary>
