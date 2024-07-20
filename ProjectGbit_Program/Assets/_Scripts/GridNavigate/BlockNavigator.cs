@@ -5,6 +5,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 
+/// <summary>
+/// 工厂的传送带导航和选取确定功能
+/// </summary>
 public class BlockNavigator : MonoBehaviour
 {
     public Block currentBlock;
@@ -82,7 +85,7 @@ public class BlockNavigator : MonoBehaviour
     private void SwitchDirection()
     {
         _pressSwitchTimer += Time.deltaTime; // 更新计时器
-        if (_pressSwitchTimer >= 0.15f) // 检查计时器是否超过间隔
+        if (_pressSwitchTimer >= 0.1f) // 检查计时器是否超过间隔
         {
             if (_inputSetting.isPressSwitch)
             {
@@ -95,7 +98,7 @@ public class BlockNavigator : MonoBehaviour
     private void ConfirmOnOff()
     {
         _pressConfirmTimer += Time.deltaTime; // 更新计时器
-        if (_pressConfirmTimer >= 0.15f) // 检查计时器是否超过间隔
+        if (_pressConfirmTimer >= 0.1f) // 检查计时器是否超过间隔
         {
             if (_inputSetting.isPressConfirm)
             {

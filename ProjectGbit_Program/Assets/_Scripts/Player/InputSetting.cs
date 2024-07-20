@@ -51,4 +51,20 @@ public class InputSetting : MonoBehaviour
             isPressSwitch = false;
         }
     }
+    
+    [HideInInspector]
+    public bool isPressScan;
+    public void OnPressScan(InputAction.CallbackContext context)
+    {
+        // 检测按键被按下
+        if (context.started)
+        {
+            isPressScan = true;
+        }
+        // 检测按键被抬起
+        else if (context.canceled)
+        {
+            isPressScan = false;
+        }
+    }
 }
