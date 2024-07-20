@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
 
         GameFinished = false;
 
-        StartGame();
+        Invoke("StartGame", 2f);
     }
     public void StartGame()
     {
