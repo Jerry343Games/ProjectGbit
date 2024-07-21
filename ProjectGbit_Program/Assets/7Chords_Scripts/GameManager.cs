@@ -66,6 +66,7 @@ public class GameManager : Singleton<GameManager>
 
 
         GameStartedAction?.Invoke();
+
     }
 
     private void Update()
