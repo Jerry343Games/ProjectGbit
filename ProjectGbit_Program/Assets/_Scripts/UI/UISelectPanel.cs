@@ -16,6 +16,8 @@ public class UISelectPanel : MonoBehaviour
     /// </summary>
     private int _currentPlayerNum;
 
+    public Image selectMask;
+    
     public GameObject warningPanel;
     
     private void Awake()
@@ -62,6 +64,8 @@ public class UISelectPanel : MonoBehaviour
                 //消失菜单
                 gameObject.GetComponent<RectTransform>().DOScale(0, 0.5f);
                 gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.2f);
+                selectMask.DOFade(0, 0.2f);
+                
             });
         }
     }
