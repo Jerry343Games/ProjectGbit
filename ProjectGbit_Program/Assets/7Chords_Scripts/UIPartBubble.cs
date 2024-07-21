@@ -19,6 +19,7 @@ public class UIPartBubble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(myBot)
         MoveBubble(myBot);
     }
 

@@ -36,33 +36,38 @@ public class CG : MonoBehaviour
     public void PlayWinCG()
     {
         Sequence s = DOTween.Sequence();
+        s.Append(GetComponent<Image>().DOFade(1, 0.5f));
 
         s.Append(cgImg.DOFade(1, 0.5f).OnStart(() =>
         {
             cgImg.sprite = WinCGs[0];
         }));
-        s.Append(cgImg.DOFade(0, 0.3f).OnComplete(() =>
+        s.Append(cgImg.DOFade(0, 1f).OnComplete(() =>
         {
             cgImg.sprite = WinCGs[1];
         }));
+        s.AppendInterval(1f);
+        s.Append(cgImg.DOFade(1, 1f).OnStart(() =>
+        {
+            cgImg.sprite = WinCGs[1];
+        }));
+        s.AppendInterval(1f);
 
-        s.Append(cgImg.DOFade(1, 0.5f).OnStart(() =>
-        {
-            cgImg.sprite = WinCGs[1];
-        }));
-        s.Append(cgImg.DOFade(0, 0.3f).OnComplete(() =>
+        s.Append(cgImg.DOFade(0, 1f).OnComplete(() =>
         {
             cgImg.sprite = WinCGs[2];
         }));
-        s.Append(cgImg.DOFade(1, 0.5f).OnStart(() =>
+        s.Append(cgImg.DOFade(1, 1f).OnStart(() =>
         {
             cgImg.sprite = WinCGs[2];
         }));
-        s.Append(cgImg.DOFade(0, 0.3f).OnComplete(() =>
+        s.AppendInterval(1f);
+
+        s.Append(cgImg.DOFade(0, 1f).OnComplete(() =>
         {
             cgImg.sprite = WinCGs[3];
         }));
-        s.Append(cgImg.DOFade(0, 0.3f));
+        s.Append(cgImg.DOFade(0, 1f));
 
     }
 
@@ -70,20 +75,25 @@ public class CG : MonoBehaviour
     {
         Sequence s = DOTween.Sequence();
 
-        s.Append(cgImg.DOFade(1, 0.5f).OnStart(() =>
+        s.Append(GetComponent<Image>().DOFade(1, 0.5f));
+
+        s.Append(cgImg.DOFade(1, 1f).OnStart(() =>
         {
             cgImg.sprite = LoseCGs[0];
         }));
-        s.Append(cgImg.DOFade(0, 0.3f).OnComplete(() =>
+        s.AppendInterval(1f);
+
+        s.Append(cgImg.DOFade(0, 1f).OnComplete(() =>
         {
             cgImg.sprite = LoseCGs[1];
         }));
 
-        s.Append(cgImg.DOFade(1, 0.5f).OnStart(() =>
+        s.Append(cgImg.DOFade(1, 1f).OnStart(() =>
         {
             cgImg.sprite = LoseCGs[1];
         }));
-        s.Append(cgImg.DOFade(0, 0.3f));
+
+        s.Append(cgImg.DOFade(0, 1f));
  
     }
 }
