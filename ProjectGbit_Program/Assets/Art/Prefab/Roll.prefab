@@ -134,7 +134,7 @@ MonoBehaviour:
   awakeReverse: 0
   awakeStart: 0
   exitSpeedNum: 0.5
-  changeTime: 12
+  changeTime: 24
 --- !u!1 &4607597796827966803
 GameObject:
   m_ObjectHideFlags: 0
