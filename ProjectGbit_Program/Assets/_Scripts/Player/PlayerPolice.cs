@@ -51,7 +51,7 @@ public class PlayerPolice : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         policeAttackArea = GetComponentInChildren<PlayerPoliceAttack>();
-        Invoke("CallQTE", 3f);
+        //Invoke("CallQTE", 3f);
     }
 
     // Update is called once per frame
@@ -163,6 +163,7 @@ public class PlayerPolice : MonoBehaviour
     /// </summary>
     private void CallQTE()
     {
+        Debug.Log("callQTE");
         if(_callQTECDTimer > 0)
         {
             return;
@@ -180,16 +181,20 @@ public class PlayerPolice : MonoBehaviour
             aiBot.GetComponent<AIBot>().ExecuteQTE();
         }
     }
-    private float _pressConfirmTimer = 3;
+    private float _pressConfirmTimer = 2;
     private void ConfirmDirection()
     {
+        
         if (!GameManager.Instance.GameStarted) return;
         _pressConfirmTimer -= Time.deltaTime; // 更新计时器
         if (_pressConfirmTimer <= 0f) // 检查计时器是否超过间隔
         {
+
             if (inputSetting.isPressConfirm)
             {
+                
                 _pressConfirmTimer = CallQTECD; // 重置计时器
+                Debug.Log("confirm");
                 CallQTE();
                 
             }

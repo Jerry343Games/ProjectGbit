@@ -20,10 +20,7 @@ public class UIOrderPanel : MonoBehaviour
 
     
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     /// <summary>
     /// 显示对话框
