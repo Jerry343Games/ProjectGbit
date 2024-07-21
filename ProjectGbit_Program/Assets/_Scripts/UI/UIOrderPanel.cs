@@ -14,8 +14,8 @@ public class UIOrderPanel : MonoBehaviour
 
     public int countDownVale=3;
 
-    private float _startFontSize;
-    private float _numberFountSize;
+    private float _startFontSize=30;
+    private float _numberFountSize=55;
     // Start is called before the first frame update
     void Start()
     {
