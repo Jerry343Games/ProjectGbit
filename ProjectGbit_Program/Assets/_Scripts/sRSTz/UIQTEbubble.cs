@@ -22,6 +22,7 @@ public class UIQTEbubble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!myBot) return;
         MoveBubble(myBot);
     }
     /*
