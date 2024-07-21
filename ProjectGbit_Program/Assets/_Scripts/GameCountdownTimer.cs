@@ -40,7 +40,7 @@ public class GameCountdownTimer : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
 
-                GameManager.Instance.GameOver(true);
+                GameManager.Instance.GameOver(false);
             }
 
             yield return null;
