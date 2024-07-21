@@ -67,6 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b923ae98745b94a9783aae4051e0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCanvas: {fileID: 0}
+  getPartBubble: {fileID: 0}
 --- !u!114 &4870269524872652673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +119,7 @@ Transform:
   m_Children:
   - {fileID: 7148100663850485026}
   - {fileID: 7553759066758502274}
+  - {fileID: 6042512618550069956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &60053297141298363
@@ -188,6 +191,7 @@ MonoBehaviour:
   conveyorVelocity: {x: 0, y: 0, z: 0}
   currentPart: 0
   myAnimator: {fileID: 1652133073333612399}
+  qteUI: {fileID: 0}
 --- !u!54 &5018766790619436685
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -231,6 +235,7 @@ MonoBehaviour:
   QTEMaxTime: 1
   muBubble: {fileID: 0}
   detectionTimeThreshold: 3
+  qteBubble: {fileID: 0}
 --- !u!136 &4329482508790013494
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -254,6 +259,57 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6023557659157204233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6042512618550069956}
+  - component: {fileID: 3407978779361647617}
+  m_Layer: 5
+  m_Name: QTEUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6042512618550069956
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023557659157204233}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5268627035637766701}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3407978779361647617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023557659157204233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34de2e31d4797a6408bfd56fb856cb4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCanvas: {fileID: 0}
+  qteTime: 1
+  isCreating: 0
 --- !u!1001 &7258006903714194121
 PrefabInstance:
   m_ObjectHideFlags: 0

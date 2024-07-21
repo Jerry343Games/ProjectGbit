@@ -53,7 +53,7 @@ public class AIBot : MonoBehaviour
 
         _anim = transform.GetChild(0).GetComponent<Animator>();
 
-        qTEUI = FindFirstObjectByType<QTEUI>();
+        qTEUI = GetComponentInChildren<QTEUI>();
     }
 
     private void Start()
@@ -177,6 +177,7 @@ public class AIBot : MonoBehaviour
 
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/BotDeadEffect"),transform.position,Quaternion.identity);
         GetComponentInChildren<BotGetPartTrigger>().SetEmpty();
+        Destroy(botProperty.qteBubble);
         Destroy(gameObject);
     }
 

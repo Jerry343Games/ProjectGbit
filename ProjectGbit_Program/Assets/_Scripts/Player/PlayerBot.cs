@@ -25,7 +25,7 @@ public class PlayerBot : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         SceneManager.Instance.RegisterPlayerBot(this);
-        qteUI = FindFirstObjectByType<QTEUI>();
+        qteUI = GetComponentInChildren<QTEUI>();
     }
 
     // Update is called once per frame
@@ -40,19 +40,25 @@ public class PlayerBot : MonoBehaviour
         ConfirmDirection();
     }
     private float _pressConfirmTimer = 0;
+    private bool previousConfirmState = false; // 记录上一次的布尔值状态
     private void ConfirmDirection()
     {
-        _pressConfirmTimer -= Time.deltaTime; // 更新计时器
-        if (_pressConfirmTimer <= 0) // 检查计时器是否超过间隔
+        //_pressConfirmTimer -= Time.deltaTime; // 更新计时器
+        if (!previousConfirmState && inputSetting.isPressConfirm)
         {
-            if (inputSetting.isPressSwitch)
-            {
-                //_rigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
-                qteUI.CreatBubble(gameObject);
-                _pressConfirmTimer = 0.5f; // 重置计时器
-            }
             
+            //if (_pressConfirmTimer <= 0) // 检查计时器是否超过间隔
+           //{
+               // if (inputSetting.isPressSwitch)
+                {
+                    //_rigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
+                    qteUI.CreatBubble(gameObject);
+                   // _pressConfirmTimer = 0.5f; // 重置计时器
+                }
+
+            //}
         }
+        previousConfirmState = inputSetting.isPressConfirm;
     }
    
     /// <summary>
@@ -116,6 +122,7 @@ public class PlayerBot : MonoBehaviour
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/PlayerDeadEffect"), transform.position, Quaternion.identity);
         GetComponentInChildren<PlayerGetPartTrigger>().SetEmpty();
         Debug.Log(gameObject.name + "dead");
+        Destroy(GetComponent<BotProperty>().qteBubble);
         Destroy(this.gameObject);
     }
 }
