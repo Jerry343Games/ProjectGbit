@@ -338,6 +338,11 @@ PrefabInstance:
       propertyPath: myPlayer
       value: 
       objectReference: {fileID: 3860741151660753668}
+    - target: {fileID: 1940554578179813198, guid: f6e0f6abb0d6b0c4ba43d6f9178cd192,
+        type: 3}
+      propertyPath: mainLights.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4089501036522716570, guid: f6e0f6abb0d6b0c4ba43d6f9178cd192,
         type: 3}
       propertyPath: m_Name
