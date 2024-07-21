@@ -5,15 +5,23 @@ using UnityEngine.UI;
 
 public class UITaskPanel : MonoBehaviour
 {
-    private Text _amountText;
 
     private int _targetNum;
 
     private int _currentNum;
 
+    public List<Sprite> NumSpriteList;
+
+    private Image _firstNumImage;
+
+    private Image _secondNumImage;
+
+
     private void Awake()
     {
-        _amountText = transform.GetChild(1).GetComponent<Text>();
+        _firstNumImage = transform.GetChild(0).GetComponent<Image>();
+
+        _secondNumImage = transform.GetChild(2).GetComponent<Image>();
     }
 
     public void Init(int targetNum)
@@ -22,9 +30,9 @@ public class UITaskPanel : MonoBehaviour
 
         _targetNum = targetNum;
 
-        _amountText.text = _currentNum+  "/" + _targetNum;
+        _firstNumImage.sprite = NumSpriteList[_currentNum];
 
-
+        _secondNumImage.sprite = NumSpriteList[_targetNum];
 
     }
 
@@ -32,12 +40,9 @@ public class UITaskPanel : MonoBehaviour
     {
         _currentNum++;
 
-        _amountText.text = _currentNum + "/" + _targetNum;
+        _firstNumImage.sprite = NumSpriteList[_currentNum];
 
-        if (_currentNum >= _targetNum)
-        {
-            //¼¤»î´ò¹´·ûºÅ
-        }
+        _secondNumImage.sprite = NumSpriteList[_targetNum];
     }
 
 
