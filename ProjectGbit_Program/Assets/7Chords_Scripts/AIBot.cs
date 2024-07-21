@@ -176,7 +176,7 @@ public class AIBot : MonoBehaviour
         SceneManager.Instance.RemoveAIBot(this);
 
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/BotDeadEffect"),transform.position,Quaternion.identity);
-
+        GetComponentInChildren<BotGetPartTrigger>().SetEmpty();
         Destroy(gameObject);
     }
 

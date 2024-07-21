@@ -67,8 +67,7 @@ public class SubmissionPoint : MonoBehaviour
         
         BotProperty botProperty = bot.GetComponent<BotProperty>();
         if (botProperty == null) return;
-        if (botProperty.isAIBot)
-        {
+        
             if (botProperty != null && botProperty.muBubble != null)
             {
 
@@ -81,7 +80,7 @@ public class SubmissionPoint : MonoBehaviour
                     botProperty.muBubble = null;
                 });
             }
-        }
+        
         
     }
 }

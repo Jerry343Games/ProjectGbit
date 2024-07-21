@@ -114,7 +114,7 @@ public class PlayerBot : MonoBehaviour
     {
         SceneManager.Instance.RemovePlayerBot(this);
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/PlayerDeadEffect"), transform.position, Quaternion.identity);
-
+        GetComponentInChildren<PlayerGetPartTrigger>().SetEmpty();
         Debug.Log(gameObject.name + "dead");
         Destroy(this.gameObject);
     }

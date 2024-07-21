@@ -45,8 +45,9 @@ public class BotGetPartTrigger : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-    private void SetEmpty()
+    public void SetEmpty()
     {
+        if (getPartBubble == null) return;
         _aiBot.CurrentPart = PartType.Empty;
         getPartBubble.DestoryBubble();
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
