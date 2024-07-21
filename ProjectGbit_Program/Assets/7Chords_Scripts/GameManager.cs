@@ -84,6 +84,11 @@ public class GameManager : Singleton<GameManager>
         GameFinished = true;
 
         GameFinishedAction?.Invoke(isBotWin);
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Publish_Scene1")
+        {
+            SceneLoader.Instance.LoadScene("AlarmclockScene 1");
+        }
     }
 
     public void RandomTask()

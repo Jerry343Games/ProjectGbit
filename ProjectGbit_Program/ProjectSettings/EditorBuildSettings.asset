@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/7Chords_Scripts/Publish_Scene1 1.unity
-    guid: 71da42e00156ebf47a7be422901872f9
+    path: Assets/Scenes/Publish/Publish_Scene1.unity
+    guid: 9f760e4271b890549b3cc13c6edbd7fd
+  - enabled: 1
+    path: Assets/Scenes/Publish/AlarmclockScene 1.unity
+    guid: 74e1112c3fc7f864b88468c8d7256314
   m_configObjects: {}
