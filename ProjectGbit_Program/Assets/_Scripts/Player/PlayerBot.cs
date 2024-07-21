@@ -21,11 +21,13 @@ public class PlayerBot : MonoBehaviour
     public Animator myAnimator;
 
     public QTEUI qteUI;
+    public BotProperty botProperty;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         SceneManager.Instance.RegisterPlayerBot(this);
         qteUI = GetComponentInChildren<QTEUI>();
+        botProperty = GetComponent<BotProperty>();
     }
 
     // Update is called once per frame
@@ -120,9 +122,13 @@ public class PlayerBot : MonoBehaviour
     {
         SceneManager.Instance.RemovePlayerBot(this);
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/PlayerDeadEffect"), transform.position, Quaternion.identity);
-        GetComponentInChildren<PlayerGetPartTrigger>().SetEmpty();
+        GetComponentInChildren<PlayerGetPartTrigger>().SetEmpty();//
         Debug.Log(gameObject.name + "dead");
-        Destroy(GetComponent<BotProperty>().qteBubble);
-        Destroy(this.gameObject);
+        if(botProperty.muBubble!=null)
+        botProperty.muBubble.GetComponent<UICountdownBubble>().StopAndDeleteBubble();//删掉交付气泡
+
+        //Destroy(GetComponent<UICountdownBubble>())
+        //Destroy(botProperty.);
+        Destroy(gameObject);
     }
 }

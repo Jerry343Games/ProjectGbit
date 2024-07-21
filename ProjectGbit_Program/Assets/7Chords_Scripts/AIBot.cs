@@ -177,7 +177,10 @@ public class AIBot : MonoBehaviour
 
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/BotDeadEffect"),transform.position,Quaternion.identity);
         GetComponentInChildren<BotGetPartTrigger>().SetEmpty();
+        if (botProperty.muBubble != null)
+            botProperty.muBubble.GetComponent<UICountdownBubble>().StopAndDeleteBubble();
         Destroy(botProperty.qteBubble);
+
         Destroy(gameObject);
     }
 

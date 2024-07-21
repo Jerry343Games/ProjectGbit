@@ -41,6 +41,7 @@ public class UICountdownBubble : MonoBehaviour
             yield return null;
         }
         outer.fillAmount = 1f;
+        
         CompleteCountdown();
         // 确保最终填满
     }
@@ -56,11 +57,17 @@ public class UICountdownBubble : MonoBehaviour
     /// </summary>
     private void CompleteCountdown()
     {
+        if (myBot.GetComponent<BotProperty>().muBubble == null) return;
         myBot.GetComponent<BotProperty>().muBubble = null;
         if(!myBot.GetComponent<BotProperty>().isAIBot)
         myBot.GetComponent<PlayerBot>().SubmitPart();
         
 
+        Destroy(gameObject);
+    }
+    public void StopAndDeleteBubble()
+    {
+        myBot.GetComponent<BotProperty>().muBubble = null;
         Destroy(gameObject);
     }
 }

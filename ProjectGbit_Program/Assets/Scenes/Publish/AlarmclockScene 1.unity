@@ -6690,6 +6690,11 @@ PrefabInstance:
       objectReference: {fileID: 1198799584}
     - target: {fileID: 3599719562715923395, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
+      propertyPath: CanAttackCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3599719562715923395, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
       propertyPath: ScanRangeMaterial
       value: 
       objectReference: {fileID: 2100000, guid: e8c9b11f27bbf1742810c269df041e38, type: 2}
@@ -7469,6 +7474,11 @@ PrefabInstance:
       propertyPath: uiOrderPanel
       value: 
       objectReference: {fileID: 1198799584}
+    - target: {fileID: 3599719562715923395, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: CanAttackCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: m_Name
@@ -8360,12 +8370,12 @@ PrefabInstance:
     - target: {fileID: 3459424414410527473, guid: 9dbe6797b4740dc4bb707b8166f29f7e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 754.84125
+      value: -134
       objectReference: {fileID: 0}
     - target: {fileID: 3459424414410527473, guid: 9dbe6797b4740dc4bb707b8166f29f7e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 518.3475
+      value: -77
       objectReference: {fileID: 0}
     - target: {fileID: 3459424414410527473, guid: 9dbe6797b4740dc4bb707b8166f29f7e,
         type: 3}
@@ -9137,6 +9147,11 @@ PrefabInstance:
       propertyPath: uiOrderPanel
       value: 
       objectReference: {fileID: 1198799584}
+    - target: {fileID: 3599719562715923395, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: CanAttackCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3599719562715923395, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: ScanRangeMaterial
@@ -12637,6 +12652,11 @@ PrefabInstance:
       propertyPath: uiOrderPanel
       value: 
       objectReference: {fileID: 1198799584}
+    - target: {fileID: 3599719562715923395, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: CanAttackCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: m_Name

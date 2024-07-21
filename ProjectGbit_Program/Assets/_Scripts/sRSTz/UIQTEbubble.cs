@@ -55,13 +55,5 @@ public class UIQTEbubble : MonoBehaviour
     /// <summary>
     /// 完成计时
     /// </summary>
-    private void CompleteCountdown()
-    {
-        myBot.GetComponent<BotProperty>().qteBubble = null;
-        if (!myBot.GetComponent<BotProperty>().isAIBot)
-            myBot.GetComponent<PlayerBot>().SubmitPart();
 
-
-        Destroy(gameObject);
-    }
 }
