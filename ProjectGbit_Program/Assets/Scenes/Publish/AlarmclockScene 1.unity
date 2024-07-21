@@ -6872,6 +6872,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
+      propertyPath: mainLights.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
       propertyPath: mainLights.Array.data[0]
       value: 
       objectReference: {fileID: 479792864}
@@ -7686,6 +7691,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 73955717}
     m_Modifications:
+    - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: mainLights.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: mainLights.Array.data[0]
@@ -9346,6 +9356,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 73955717}
     m_Modifications:
+    - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: mainLights.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: mainLights.Array.data[0]
@@ -12830,6 +12845,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 73955717}
     m_Modifications:
+    - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: mainLights.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 36496589602899786, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: mainLights.Array.data[0]
