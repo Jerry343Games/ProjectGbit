@@ -36,17 +36,18 @@ public class CG : MonoBehaviour
     public void PlayWinCG()
     {
         Sequence s = DOTween.Sequence();
+
         s.Append(GetComponent<Image>().DOFade(1, 0.5f));
 
         s.Append(cgImg.DOFade(1, 0.5f).OnStart(() =>
         {
             cgImg.sprite = WinCGs[0];
         }));
-        s.Append(cgImg.DOFade(0, 1f).OnComplete(() =>
+        s.AppendInterval(1f);
+        s.Append(cgImg.DOFade(0, 0.5f).OnComplete(() =>
         {
             cgImg.sprite = WinCGs[1];
         }));
-        s.AppendInterval(1f);
         s.Append(cgImg.DOFade(1, 1f).OnStart(() =>
         {
             cgImg.sprite = WinCGs[1];
@@ -59,7 +60,7 @@ public class CG : MonoBehaviour
         }));
         s.Append(cgImg.DOFade(1, 1f).OnStart(() =>
         {
-            cgImg.sprite = WinCGs[2];
+            cgImg.sprite = WinCGs[3];
         }));
         s.AppendInterval(1f);
 
