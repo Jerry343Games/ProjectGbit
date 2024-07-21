@@ -14,11 +14,15 @@ public class PlayerFactory : MonoBehaviour
     public Light[] mainLights;
     private Color _originalAmbientLight;
     private Color _currentAmbirntLight;
+
+    private GameObject _canvas;
+    
     private void Awake()
     {
         _inputSetting = myPlayer.GetComponent<InputSetting>();
         _originalAmbientLight = RenderSettings.ambientLight;
         _currentAmbirntLight = _originalAmbientLight;
+        _canvas = GameObject.FindGameObjectWithTag("MainCanvas");
     }
 
     private void Update()
@@ -39,6 +43,15 @@ public class PlayerFactory : MonoBehaviour
         {
             // 执行技能
             Blackout(0.2f,2f);
+            
+            //唤出冷却
+            GameObject timer = Instantiate(Resources.Load<GameObject>("Prefab/UI/UIBlackoutColdTimer"), _canvas.transform);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            timer.GetComponent<RectTransform>().position = screenPos;
+            UIBlackoutColdTimer uiBlackoutColdTimer= timer.GetComponent<UIBlackoutColdTimer>();
+            uiBlackoutColdTimer.coldTime = cooldownTime;
+            uiBlackoutColdTimer.ExcuteColdDown();
+            
             // 设置下次可以使用技能的时间
             _nextUseTime = Time.time + cooldownTime;
         }
