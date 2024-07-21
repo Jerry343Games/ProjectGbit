@@ -39,6 +39,8 @@ public class GameCountdownTimer : MonoBehaviour
                 // 时间结束
                 timeRemaining = 0;
                 timerIsRunning = false;
+
+                GameManager.Instance.GameOver(true);
             }
 
             yield return null;

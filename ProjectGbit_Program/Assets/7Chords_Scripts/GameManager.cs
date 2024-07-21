@@ -21,9 +21,8 @@ public class GameManager : Singleton<GameManager>
 
     public bool GameFinished;//游戏是否结束
 
-    public float GameDuration;//游戏持续时间
+    public int GameDuration;//游戏持续时间
 
-    private float _gameTimer;
 
     public event Action GameStartedAction;
 
@@ -59,20 +58,18 @@ public class GameManager : Singleton<GameManager>
 
         MusicManager.Instance.PlayBackMusic("bot_crazy");
 
+
+        FindObjectOfType<GameCountdownTimer>().startMinutes = GameDuration;
+
+        FindObjectOfType<GameCountdownTimer>().ExcuteCountdown();
+
+
+
         GameStartedAction?.Invoke();
     }
 
     private void Update()
     {
-        if( GameStarted && !GameFinished)
-        {
-            _gameTimer += Time.deltaTime;
-
-            if(_gameTimer>GameDuration)
-            {
-                GameOver(false);
-            }
-        }
 
 
     }
