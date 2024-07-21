@@ -47,6 +47,11 @@ public class PlayerPolice : MonoBehaviour
     public Vector3 conveyorVelocity;
     //用于攻击动画罚站
     private bool _isAttack;
+
+
+    [Header("传送带参数")]
+
+    public Material ScanRangeMaterial;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -240,11 +245,13 @@ public class PlayerPolice : MonoBehaviour
     {
         if(!_isBeingScan)
         {
+            ScanRangeMaterial.SetFloat("_Alpha", 0);
             return;
         }
-
-
+        ScanRangeMaterial.SetFloat("_Alpha", 0.05f);
         Collider[] colliders = Physics.OverlapSphere(transform.position, CheckPlayerBotDistance);
+        ScanRangeMaterial.SetColor("_Color", Color.white);
+
         foreach (Collider collider in colliders)
         {
 
@@ -255,7 +262,8 @@ public class PlayerPolice : MonoBehaviour
 
                 if (angle < CheckPlayerBotAngle / 2f)
                 {
-                    Debug.Log("扫描出玩家了");
+                    ScanRangeMaterial.SetColor("_Color", Color.red);
+
                 }
             }
 
