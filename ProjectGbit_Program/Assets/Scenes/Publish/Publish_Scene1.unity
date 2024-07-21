@@ -5353,7 +5353,7 @@ PrefabInstance:
         type: 3}
       propertyPath: PatolPoints.Array.data[3]
       value: 
-      objectReference: {fileID: 628700883}
+      objectReference: {fileID: 235743457}
     - target: {fileID: 7905111856356071554, guid: f1bf729357f39f5478f691d26c11e66f,
         type: 3}
       propertyPath: m_LocalPosition.x
