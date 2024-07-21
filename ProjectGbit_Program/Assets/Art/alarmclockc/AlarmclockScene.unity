@@ -2328,6 +2328,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: guanqia1
       objectReference: {fileID: 0}
+    - target: {fileID: 6500318634513695978, guid: 51058b41ecba52145bceff46a54406af,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
