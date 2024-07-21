@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4843128630747495738}
+  - component: {fileID: 5328878438033889832}
+  - component: {fileID: 5264609149517894717}
   m_Layer: 0
   m_Name: MailBox
   m_TagString: Untagged
@@ -24,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7529115170912232269}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.2649854, z: -0, w: 0.9642525}
+  m_LocalRotation: {x: 0, y: 0.26498395, z: 0, w: 0.9642528}
   m_LocalPosition: {x: -0.102733605, y: 0, z: 0.030710861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,6 +34,40 @@ Transform:
   - {fileID: 6099903699905617975}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 30.732, z: 0}
+--- !u!114 &5328878438033889832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529115170912232269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb08db0ce4a56d46bf6206578493db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCanvas: {fileID: 0}
+--- !u!135 &5264609149517894717
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529115170912232269}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.43
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5993604346582550492
 PrefabInstance:
   m_ObjectHideFlags: 0
