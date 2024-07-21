@@ -12,7 +12,11 @@ public class BotGetPartTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(_aiBot.CurrentPart != PartType.Empty)
+        if (other.gameObject.tag == "SubmissionPoint")
+        {
+            _aiBot.CurrentPart = PartType.Empty;
+        }
+        if (_aiBot.CurrentPart != PartType.Empty)
         {
             return;
         }
@@ -23,14 +27,6 @@ public class BotGetPartTrigger : MonoBehaviour
             _aiBot.GetPart(other.gameObject.transform.parent.GetComponent<Part>().partType);
             //销毁零件
             Destroy(other.gameObject);
-        }
-        if (other.gameObject.tag == "SubmissionPoint")
-        {
-            Debug.Log(11);
-            //Bot执行获得零件方法 结束等待
-            _aiBot.CurrentPart = PartType.Empty;
-
-
         }
     }
 

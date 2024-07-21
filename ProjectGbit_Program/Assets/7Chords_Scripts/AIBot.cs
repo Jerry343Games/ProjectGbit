@@ -22,32 +22,26 @@ public class AIBot : MonoBehaviour
 
     [Header("普通移动参数")]
     public float MoveSpeed; // 移动速度
-    public float SingleMoveDuration; // 单次移动时间
-    public float SingleStopDuration; // 单次移动后停止时间
-    private Vector3 _randomDir; // 缓存的随机方向
 
     [Header("获取道具参数")]
-    public BotWaitPoint[] WaitPoints;
 
     public PartType CurrentPart;
-
-    public BotWaitPoint TargetPoint;
-
-    public float StopAtSubmissionDuration;
 
 
 
     [Header("巡逻相关")]
     public Transform[] PatolPoints;
+
     private Vector3 _guardPos;//初始站岗点
+
     public int _wayPointIndex = 0;//巡逻点标记，用以循环
-    public Transform[] submitPoint;
+
     public float _patrolStayTimer;
 
     public float PatrolStayDuration;
 
-
     public BotProperty botProperty;
+
     public Transform targetPoint;
 
 
@@ -67,9 +61,6 @@ public class AIBot : MonoBehaviour
 
         _patrolStayTimer = PatrolStayDuration;
 
-        //PrecomputeRandomDirection();
-
-        StopAtSubmissionDuration = botProperty.detectionTimeThreshold;
 
         targetPoint = PatolPoints[0];
     }
@@ -136,40 +127,6 @@ public class AIBot : MonoBehaviour
     }
 
 
-
-
-
-
-
-    ///// <summary>
-    ///// 获取一个随机移动方向，并确保不会超出边界和定位在障碍物里面
-    ///// </summary>
-    //private void PrecomputeRandomDirection()
-    //{
-
-    //    Vector3 potentialDirection;
-    //    Vector3 newPosition;
-
-    //    do
-    //    {
-    //        potentialDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-    //        newPosition = transform.position + potentialDirection * MoveSpeed * SingleMoveDuration;
-    //    }
-    //    while (!IsWithinBounds(newPosition) && !HasObstacleBetweenTwoPos(potentialDirection, Vector3.Distance(newPosition, transform.position)));
-
-    //    _randomDir = potentialDirection;
-    //}
-
-    ///// <summary>
-    ///// 检查新位置和当前位置之间是否有障碍物
-    ///// </summary>
-    //private bool HasObstacleBetweenTwoPos(Vector3 dir, float distance)
-    //{
-    //    return Physics.Raycast(transform.position, dir, distance, LayerMask.GetMask("Obstacle"));
-    //}
-
-
-
     private void Update()
     {
         if (!GameManager.Instance.GameStarted || GameManager.Instance.GameFinished)
@@ -189,23 +146,6 @@ public class AIBot : MonoBehaviour
             // 应用突变的旋转
             transform.rotation = newRotation;
         }
-
-    }
-
-
-
-
-
-    /// <summary>
-    /// 每次移动后都随机一下下一次移动和停止的持续时间 更加拟人
-    /// </summary>
-    private void RandomMoveAndStopDuration()
-    {
-        SingleMoveDuration += Random.Range(-2, 2);
-        SingleMoveDuration = Mathf.Clamp(SingleMoveDuration, 1, 7);
-
-        SingleStopDuration += Random.Range(-2, 2);
-        SingleStopDuration = Mathf.Clamp(SingleStopDuration, 1, 7);
 
     }
 
