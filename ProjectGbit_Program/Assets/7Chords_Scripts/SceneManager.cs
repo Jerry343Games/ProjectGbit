@@ -40,6 +40,10 @@ public class SceneManager : Singleton<SceneManager>
         {
             PlayerBotList.Remove(bot);
         }
+        if(PlayerBotList.Count==0)
+        {
+            GameManager.Instance.GameOver(false);
+        }
     }
 
     public void RegisterPart(Part part)
@@ -56,11 +60,6 @@ public class SceneManager : Singleton<SceneManager>
         {
             AllParts.Remove(part);
         }
-    }
-
-    public void CallHook()
-    {
-
     }
 
 }

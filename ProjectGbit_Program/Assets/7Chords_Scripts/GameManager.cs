@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
     {
         GameStarted = true;
 
-        GameStartedAction.Invoke();
+        GameStartedAction?.Invoke();
     }
 
     private void Update()
@@ -78,9 +78,13 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver(bool isBotWin)
     {
+        if (GameFinished) return;
+
+        Debug.Log("游戏结束了,结果是机器人" + isBotWin);
+
         GameFinished = true;
 
-        GameFinishedAction.Invoke(isBotWin);
+        GameFinishedAction?.Invoke(isBotWin);
     }
 
     public void RandomTask()
