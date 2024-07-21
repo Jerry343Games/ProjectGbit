@@ -55,6 +55,16 @@ public class HookMachine : MonoBehaviour
             PartObject = Instantiate(other.gameObject.GetComponent<PartBox>().GetRandomPart(),transform.position + new Vector3(0,-1.5f,0), Quaternion.identity);
 
             PartObject.transform.SetParent(GetPartParent.transform);
+
+            PartObject.transform.GetChild(0).GetComponent<Rigidbody>().useGravity = false;
+
+            PartObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+
+
+            PartObject.GetComponent<Part>().destroyTime = 10;
+
+            PartObject.GetComponent<Part>().destroyTimer = 10;
+
         }
     }
 
@@ -62,13 +72,15 @@ public class HookMachine : MonoBehaviour
     public void GetPartOver()
     {
         Sequence s = DOTween.Sequence();
-        s.Append(transform.DOLocalMoveX(Random.Range(MinX, MaxX), 1f));
-        s.Append(transform.DOLocalMoveX(-0.02f, 1f)).OnComplete(() =>
+        s.Append(transform.DOLocalMoveX(Random.Range(MinX, MaxX), 1f).OnComplete(() =>
         {
             PartObject.transform.SetParent(null);
 
-            PartObject.GetComponent<Rigidbody>().AddForce(Vector3.down * 20f, ForceMode.Impulse);
-        });
+            PartObject.transform.GetChild(0).GetComponent<Rigidbody>().useGravity = true;
+
+            PartObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
+        }));
+        s.Append(transform.DOLocalMoveX(-0.02f, 1f));
 
     }
 

@@ -6,18 +6,14 @@ public class PartBox : MonoBehaviour
 {
 
     public int PartTypeAmount;
+
+    public List<GameObject> PartPrefabs;
     public GameObject GetRandomPart()
     {
-        int randomNum = Random.Range(0, PartTypeAmount + 1);
+        int randomNum = Random.Range(0, 3);
 
-        GameObject test = Resources.Load<GameObject>("Prefab/Scene/Obstacle");
+        return PartPrefabs[randomNum];
 
-        return test;
-
-
-        //switch获得零件
-        //生成
-        //return null;
     }
 
 
