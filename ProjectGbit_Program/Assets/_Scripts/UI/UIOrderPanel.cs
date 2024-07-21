@@ -11,17 +11,14 @@ public class UIOrderPanel : MonoBehaviour
     public Image headImg;
     public Image dialoguePanel;
     public TMP_Text dialogueText;
-
-    public int countDownVale=3;
+    public int countDownMax = 3;
+    public int countDownVale;
 
     private float _startFontSize=30;
     private float _numberFountSize=55;
     // Start is called before the first frame update
-    void Start()
-    {
-        ShowPanel();
-    }
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +30,8 @@ public class UIOrderPanel : MonoBehaviour
     /// </summary>
     public void ShowPanel()
     {
+        countDownVale = countDownMax;
+        dialogueText.text = countDownMax.ToString();
         Sequence sequence = DOTween.Sequence();
         sequence.Append(headImg.rectTransform.DOScale(1, 0.2f));
         sequence.Append(dialoguePanel.rectTransform.DOScale(1, 0.3f));
@@ -47,10 +46,12 @@ public class UIOrderPanel : MonoBehaviour
     /// </summary>
     public void ClosePanel()
     {
+        countDownVale = countDownMax;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(dialoguePanel.rectTransform.DOScale(0, 0.3f));
         sequence.Append(headImg.rectTransform.DOScale(0, 0.2f));
         dialogueText.fontSize = _startFontSize;
+        
     }
 
     public void SayWords()
@@ -67,7 +68,7 @@ public class UIOrderPanel : MonoBehaviour
             yield return new WaitForSeconds(1); // 等待1秒
             countDownVale--;
         }
-
+        
         // 倒计时结束后，可以在这里执行其他逻辑
         ClosePanel();
     }

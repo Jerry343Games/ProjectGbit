@@ -34,6 +34,7 @@ public class PlayerPolice : MonoBehaviour
 
     private bool _canStartScan;
 
+    public UIOrderPanel uiOrderPanel;
     [Header("攻击参数")]
     public float AttackCD;
 
@@ -41,6 +42,9 @@ public class PlayerPolice : MonoBehaviour
     public PlayerPoliceAttack policeAttackArea;
 
     public Animator myAnimator;
+    [Header("传送带参数")]
+    public bool isOnConveyBelt = false;
+    public Vector3 conveyorVelocity;
     //用于攻击动画罚站
     private bool _isAttack;
     void Start()
@@ -100,7 +104,17 @@ public class PlayerPolice : MonoBehaviour
         {
             Vector3 movement = new Vector3(inputDir.x, 0, inputDir.y).normalized * moveSpeed;
             // 移动玩家
-            _rigidbody.velocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z);
+            // 移动玩家
+            if (!isOnConveyBelt)
+            {
+                _rigidbody.velocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z);
+            }
+            else
+            {
+                // 应用玩家输入方向和传送带速度
+                Vector3 totalVelocity = new Vector3(movement.x, _rigidbody.velocity.y, movement.z) + conveyorVelocity * 10;
+                _rigidbody.velocity = totalVelocity;
+            }
         }
         else
         {
@@ -153,13 +167,18 @@ public class PlayerPolice : MonoBehaviour
         {
             return;
         }
-        Debug.Log("警察开始qte");
-
-        foreach(var aiBot in SceneManager.Instance.AIBotList)
+        
+        uiOrderPanel.ShowPanel();
+        Invoke(nameof(CallAIQte), uiOrderPanel.countDownMax);
+        
+        hasPressed = false;
+    }
+    public void CallAIQte()
+    {
+        foreach (var aiBot in SceneManager.Instance.AIBotList)
         {
             aiBot.GetComponent<AIBot>().ExecuteQTE();
         }
-        hasPressed = false;
     }
     private float _pressConfirmTimer = 0;
     private void ConfirmDirection()
@@ -169,9 +188,9 @@ public class PlayerPolice : MonoBehaviour
         {
             if (inputSetting.isPressConfirm)
             {
-
+                _pressConfirmTimer = CallQTECD; // 重置计时器
                 CallQTE();
-                _pressConfirmTimer = 0.5f; // 重置计时器
+                
             }
             
         }

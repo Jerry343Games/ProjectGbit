@@ -65,6 +65,8 @@ public class UISelectPanel : MonoBehaviour
                 gameObject.GetComponent<RectTransform>().DOScale(0, 0.5f);
                 gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.2f);
                 selectMask.DOFade(0, 0.2f);
+
+                GameManager.Instance.StartGame();
                 
             });
         }

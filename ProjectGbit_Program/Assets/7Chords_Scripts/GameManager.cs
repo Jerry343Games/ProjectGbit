@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
 
         GameFinished = false;
 
-        Invoke("StartGame", 2f);
+       // Invoke("StartGame", 2f);
     }
     private void OnEnable()
     {

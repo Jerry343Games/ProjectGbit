@@ -533,6 +533,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7465542357035054127, guid: eea432da6cfd48740bc166f471ec85eb,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.12
+      objectReference: {fileID: 0}
     - target: {fileID: 8252648962230830455, guid: eea432da6cfd48740bc166f471ec85eb,
         type: 3}
       propertyPath: player
@@ -625,9 +630,34 @@ PrefabInstance:
       objectReference: {fileID: 8495521092547894194}
     - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
         type: 3}
+      propertyPath: CallQTECD
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
+        type: 3}
+      propertyPath: ScanBotCD
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
+        type: 3}
       propertyPath: inputSetting
       value: 
       objectReference: {fileID: 7428233439764705239}
+    - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
+        type: 3}
+      propertyPath: ScanBotDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
+        type: 3}
+      propertyPath: CheckPlayerBotAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
+        type: 3}
+      propertyPath: CheckPlayerBotDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7655458281269476894, guid: 9a8058c0da64de94eb2c51dc645534ed,
         type: 3}
       propertyPath: m_Name

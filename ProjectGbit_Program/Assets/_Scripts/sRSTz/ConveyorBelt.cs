@@ -37,16 +37,21 @@ public class ConveyorBelt : MonoBehaviour
             Vector3 conveyorMovement = -transform.right * beltSpeed * Time.deltaTime * reverseNum;
 
             PlayerBot playerBot = other.gameObject.GetComponent<PlayerBot>();
+            PlayerPolice playerPolice = other.gameObject.GetComponent<PlayerPolice>();
             if (isAwake)
             {
-                if (playerBot == null)
+                if (playerBot == null && playerPolice == null)
                 {
                     rb.velocity += conveyorMovement;
                 }
-                else
+                else if (playerBot != null)
                 {
                     playerBot.isOnConveyBelt = true;
                     playerBot.conveyorVelocity = conveyorMovement;
+                }else if(playerPolice != null)
+                {
+                    playerPolice.isOnConveyBelt = true;
+                    playerPolice.conveyorVelocity = conveyorMovement;
                 }
             }
         }
@@ -55,8 +60,9 @@ public class ConveyorBelt : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         PlayerBot playerBot = other.gameObject.GetComponent<PlayerBot>();
+        PlayerPolice playerPolice = other.gameObject.GetComponent<PlayerPolice>();
         Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-        if (playerBot == null && rb != null)
+        if (playerBot == null && rb != null&&playerPolice==null)
         {
             rb.velocity = rb.velocity * exitSpeedNum;
             rb.angularVelocity = Vector3.zero;
@@ -64,6 +70,9 @@ public class ConveyorBelt : MonoBehaviour
         else if (playerBot != null)
         {
             playerBot.isOnConveyBelt = false;
+        }else if (playerPolice != null)
+        {
+            playerPolice.isOnConveyBelt = false;
         }
     }
 

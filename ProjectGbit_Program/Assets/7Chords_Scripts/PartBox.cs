@@ -10,7 +10,7 @@ public class PartBox : MonoBehaviour
     public List<GameObject> PartPrefabs;
     public GameObject GetRandomPart()
     {
-        int randomNum = Random.Range(0, 3);
+        int randomNum = Random.Range(0, PartPrefabs.Count);
 
         return PartPrefabs[randomNum];
 
