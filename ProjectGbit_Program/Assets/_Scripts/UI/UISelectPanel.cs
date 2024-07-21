@@ -52,6 +52,8 @@ public class UISelectPanel : MonoBehaviour
     private void RegisterPlayer()
     {
         _currentPlayerNum++;
+
+        MusicManager.Instance.PlaySound("选择角色");
         
         //全部确认时
         if (_currentPlayerNum==PlayerManager.Instance.MaxPlayerNumber())
