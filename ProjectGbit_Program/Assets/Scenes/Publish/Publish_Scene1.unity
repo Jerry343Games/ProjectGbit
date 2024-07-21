@@ -652,7 +652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameStarted: 0
   GameFinished: 0
-  GameDuration: 1
+  GameDuration: 2
   Tasks:
   - type: 1
     totalAmount: 0
