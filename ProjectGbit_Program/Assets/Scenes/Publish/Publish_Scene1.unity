@@ -8475,6 +8475,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6066673617500989254, guid: f1bf729357f39f5478f691d26c11e66f,
         type: 3}
+      propertyPath: qTEUI
+      value: 
+      objectReference: {fileID: 1938062008}
+    - target: {fileID: 6066673617500989254, guid: f1bf729357f39f5478f691d26c11e66f,
+        type: 3}
       propertyPath: MoveSpeed
       value: 3
       objectReference: {fileID: 0}
