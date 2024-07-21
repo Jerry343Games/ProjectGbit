@@ -102,7 +102,7 @@ public class PlayerBot : MonoBehaviour
         //在这里写检测根据part的不同种类提交
         GameManager.Instance.AddPartToTask(currentPart);
         currentPart = PartType.Empty;
-        FindObjectOfType<PlayerFactory>().InitHealEffect();
+        FindObjectOfType<PlayerFactory>()?.InitHealEffect();
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
 
 

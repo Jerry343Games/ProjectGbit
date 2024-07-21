@@ -13,16 +13,17 @@ public class ConveyorBelt : MonoBehaviour
     public bool awakeReverse = false;
     public bool awakeStart = false;
     public float exitSpeedNum = 0.5f;
+    public float changeTime = 12f;
     private void Awake()
     {
         bletSurfaceSet = GetComponent<BeltSurfaceSet>();
         if (awakeReverse)
         {
-            ChangeReverse();
+            ChangeReverseOnce();
         }
         if (awakeStart)
         {
-            ChangeOnOff();
+            ChangeOnOffOnce();
         }
     }
     private void OnTriggerStay(Collider other)
@@ -84,17 +85,29 @@ public class ConveyorBelt : MonoBehaviour
 
     public void ChangeOnOff()
     {
+        CancelInvoke(nameof(ChangeOnOffOnce));
         isAwake = !isAwake;
         bletSurfaceSet.OnOffMove(isAwake);
-
+        Invoke(nameof(ChangeOnOffOnce), changeTime);
     }
-    
+    public void ChangeOnOffOnce()
+    {
+        isAwake = !isAwake;
+        bletSurfaceSet.OnOffMove(isAwake);
+    }
     public void ChangeReverse()
+    {
+        CancelInvoke(nameof(ChangeReverseOnce));
+        isReverse = !isReverse;
+        //按中心点左右翻转传送带
+        bletSurfaceSet.SwitchDir();
+        Invoke(nameof(ChangeReverseOnce), changeTime);
+    }
+    public void ChangeReverseOnce()
     {
         isReverse = !isReverse;
         //按中心点左右翻转传送带
         bletSurfaceSet.SwitchDir();
     }
-    
 }
 
