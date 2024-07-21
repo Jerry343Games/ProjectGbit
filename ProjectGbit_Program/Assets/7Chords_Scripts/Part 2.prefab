@@ -48,7 +48,7 @@ MonoBehaviour:
   partType: 3
   isPicked: 0
   model: {fileID: 6941499982428954109}
-  destroyTime: 4
+  destroyTime: 10
   destroyTimer: 0
 --- !u!1001 &7823949530885513388
 PrefabInstance:
