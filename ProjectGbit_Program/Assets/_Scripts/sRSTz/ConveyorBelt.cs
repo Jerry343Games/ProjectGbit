@@ -14,6 +14,7 @@ public class ConveyorBelt : MonoBehaviour
     public bool awakeStart = false;
     public float exitSpeedNum = 0.5f;
     public float changeTime = 12f;
+    
     private void Awake()
     {
         bletSurfaceSet = GetComponent<BeltSurfaceSet>();
