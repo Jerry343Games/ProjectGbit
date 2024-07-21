@@ -41,35 +41,14 @@ public class AIBot : MonoBehaviour
     public Transform[] PatolPoints;
     private Vector3 _guardPos;//初始站岗点
     public int _wayPointIndex = 0;//巡逻点标记，用以循环
-
+    public Transform[] submitPoint;
     public float _patrolStayTimer;
 
     public float PatrolStayDuration;
 
 
     public BotProperty botProperty;
-
-
-    private void Patrol()//巡逻方法
-    {
-        if (Vector3.Distance(transform.position, PatolPoints[_wayPointIndex].position) > 0.5f)
-        {
-            _agent.speed = MoveSpeed;
-            _agent.SetDestination(PatolPoints[_wayPointIndex].position);
-        }
-        else
-        {
-            _patrolStayTimer -= Time.deltaTime;
-            if (_patrolStayTimer < 0)
-            {
-                _wayPointIndex = (_wayPointIndex + 1) % PatolPoints.Length;
-                _patrolStayTimer = PatrolStayDuration;
-            }
-        }
-    }
-
-
-
+    public Transform targetPoint;
 
 
 
@@ -91,7 +70,75 @@ public class AIBot : MonoBehaviour
         //PrecomputeRandomDirection();
 
         StopAtSubmissionDuration = botProperty.detectionTimeThreshold;
+
+        targetPoint = PatolPoints[0];
     }
+
+    private void Patrol()//巡逻方法
+    {
+        if (Vector3.Distance(transform.position, targetPoint.position) > 1.3f)
+        {
+            _agent.speed = MoveSpeed;
+            _agent.SetDestination(targetPoint.position);
+        }
+        else
+        {
+            _patrolStayTimer -= Time.deltaTime;
+            if (_patrolStayTimer < 0)
+            {
+                if (CurrentPart != PartType.Empty)
+                {
+                    targetPoint = FindNearestSubmissonPoint();
+                }
+                else
+                {
+                    _wayPointIndex = (_wayPointIndex + 1) % PatolPoints.Length;
+                    targetPoint = PatolPoints[_wayPointIndex];
+                }
+
+                PatrolStayDuration += Random.Range(-1f, 1f);
+                PatrolStayDuration = Mathf.Clamp(PatrolStayDuration, 1, 5);
+                _patrolStayTimer = PatrolStayDuration;
+            }
+        }
+    }
+
+    public void GetPart(PartType type)
+    {
+        CurrentPart = type;
+    }
+    
+
+
+    private Transform FindNearestSubmissonPoint()
+    {
+        GameObject[] submissionPoints = GameObject.FindGameObjectsWithTag("SubmissionPoint");
+
+        if (submissionPoints.Length == 0) return null;
+
+        Transform nearestTran = submissionPoints[0].transform;
+
+        float nearestDis = Vector3.Distance(nearestTran.position, transform.position);
+
+
+
+        foreach (var point in submissionPoints)
+        {
+            float curDis = Vector3.Distance(point.transform.position, transform.position);
+            if (curDis < nearestDis)
+            {
+                nearestTran = point.transform;
+                nearestDis = curDis;
+            }
+        }
+
+        return nearestTran;
+    }
+
+
+
+
+
 
 
     ///// <summary>

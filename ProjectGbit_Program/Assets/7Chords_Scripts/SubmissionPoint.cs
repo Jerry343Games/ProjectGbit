@@ -16,6 +16,14 @@ public class SubmissionPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        BotProperty test = other.GetComponent<BotProperty>();
+        if (test)
+        {
+            if(test.isAIBot)
+            {
+                test.GetComponent<AIBot>().CurrentPart = PartType.Empty;
+            }
+        }
         CreatBubble(other.gameObject);
     }
 
@@ -23,6 +31,8 @@ public class SubmissionPoint : MonoBehaviour
     {
         DestoryBubble(other.gameObject);
     }
+
+    
 
     /// <summary>
     /// 创建并初始化倒计时气泡
