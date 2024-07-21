@@ -3252,6 +3252,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player3
       objectReference: {fileID: 0}
+    - target: {fileID: 3865897482920767788, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
+    - target: {fileID: 6087172848084137257, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
     - target: {fileID: 6828490346808110016, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: currentBlock
@@ -5064,6 +5074,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3865897482920767788, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
+    - target: {fileID: 6087172848084137257, guid: 17bd483d14d3c91439c5ea7d8834d565,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
     - target: {fileID: 6828490346808110016, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: currentBlock

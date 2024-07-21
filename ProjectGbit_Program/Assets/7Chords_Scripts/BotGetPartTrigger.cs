@@ -31,6 +31,7 @@ public class BotGetPartTrigger : MonoBehaviour
         }
         if(other.gameObject.tag=="Part")
         {
+            Instantiate(Resources.Load<GameObject>("Prefab/Effect/PickupTaskitem"), transform.position, Quaternion.identity);
 
             GameObject bubble = Instantiate(Resources.Load<GameObject>("Prefab/UI/UIPartBubble"), mainCanvas.transform);
             getPartBubble = bubble.GetComponent<UIPartBubble>();
