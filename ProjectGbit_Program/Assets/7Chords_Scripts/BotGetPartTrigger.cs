@@ -1,10 +1,18 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BotGetPartTrigger : MonoBehaviour
 {
     private AIBot _aiBot;
+
+    public GameObject mainCanvas;
+
+    public UIPartBubble getPartBubble;
+
 
     private void Awake()
     {
@@ -14,6 +22,7 @@ public class BotGetPartTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "SubmissionPoint")
         {
+            getPartBubble.DestoryBubble();
             Invoke("SetEmpty", 3f);
         }
         if (_aiBot.CurrentPart != PartType.Empty)
@@ -22,9 +31,16 @@ public class BotGetPartTrigger : MonoBehaviour
         }
         if(other.gameObject.tag=="Part")
         {
-            
+
+            GameObject bubble = Instantiate(Resources.Load<GameObject>("Prefab/UI/UIPartBubble"), mainCanvas.transform);
+            getPartBubble = bubble.GetComponent<UIPartBubble>();
+            bubble.GetComponent<RectTransform>().localScale = Vector3.zero;
+            bubble.GetComponent<RectTransform>().DOScale(1, 0.4f);
+            PartType type = other.gameObject.transform.parent.GetComponent<Part>().partType;
+            getPartBubble.SetInner(type);
+            getPartBubble.myBot = _aiBot.gameObject;
             //Bot执行获得零件方法 结束等待
-            _aiBot.GetPart(other.gameObject.transform.parent.GetComponent<Part>().partType);
+            _aiBot.GetPart(type);
             //销毁零件
             Destroy(other.gameObject);
         }
@@ -32,7 +48,6 @@ public class BotGetPartTrigger : MonoBehaviour
     private void SetEmpty()
     {
         _aiBot.CurrentPart = PartType.Empty;
-
     }
 
 }

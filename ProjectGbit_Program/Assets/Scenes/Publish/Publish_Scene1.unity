@@ -304,6 +304,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -6.89
       objectReference: {fileID: 0}
+    - target: {fileID: 8109842710999738652, guid: f1bf729357f39f5478f691d26c11e66f,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1893,6 +1898,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.65
       objectReference: {fileID: 0}
+    - target: {fileID: 8109842710999738652, guid: f1bf729357f39f5478f691d26c11e66f,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2800,6 +2810,54 @@ Transform:
   - {fileID: 1185948183}
   - {fileID: 1369733677}
   m_Father: {fileID: 428875727}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &693150524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 693150526}
+  - component: {fileID: 693150525}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &693150525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693150524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2cafc4f29235b84cabe42f1e23a3168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicAudio: {fileID: 0}
+  soundAudioList: []
+  MusicVolumn: 1
+  SoundVolumn: 1
+--- !u!4 &693150526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693150524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &716009916
 GameObject:
@@ -5554,6 +5612,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 8109842710999738652, guid: f1bf729357f39f5478f691d26c11e66f,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6414,6 +6477,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 10.32
       objectReference: {fileID: 0}
+    - target: {fileID: 8109842710999738652, guid: f1bf729357f39f5478f691d26c11e66f,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7403,6 +7471,11 @@ PrefabInstance:
       propertyPath: PatolPoints.Array.data[3]
       value: 
       objectReference: {fileID: 405675038}
+    - target: {fileID: 8109842710999738652, guid: f1bf729357f39f5478f691d26c11e66f,
+        type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 1894176428}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7694,3 +7767,4 @@ SceneRoots:
   - {fileID: 1550781641}
   - {fileID: 1445981163}
   - {fileID: 1819958289}
+  - {fileID: 693150526}

@@ -57,6 +57,8 @@ public class GameManager : Singleton<GameManager>
     {
         GameStarted = true;
 
+        MusicManager.Instance.PlayBackMusic("bot_crazy");
+
         GameStartedAction?.Invoke();
     }
 
