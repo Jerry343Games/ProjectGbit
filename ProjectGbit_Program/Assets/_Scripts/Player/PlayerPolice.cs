@@ -287,6 +287,7 @@ public class PlayerPolice : MonoBehaviour
             return;
         }
         CurrentAttackCount--;
+        FindObjectOfType<GuardAttackCountPanel>().SetAttackImgs(CurrentAttackCount);
         Debug.Log("玩家发动了攻击");
         myAnimator.SetTrigger("Attack");
         _isAttack = true;
