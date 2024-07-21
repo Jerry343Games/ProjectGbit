@@ -15,6 +15,7 @@ public class BeltSurfaceSet : MonoBehaviour
 
     public GameObject beltMesh;
     public PlayableDirector playableDirector;
+    public GameObject arrowObj;
     void Start()
     {
         
@@ -62,6 +63,7 @@ public class BeltSurfaceSet : MonoBehaviour
     public void OnOffMove(bool isAwake)
     {
         playableDirector.enabled = isAwake;
+        arrowObj.SetActive(isAwake);
     }
     
     
