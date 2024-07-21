@@ -16,15 +16,11 @@ public class BotGetPartTrigger : MonoBehaviour
         {
             return;
         }
-        if(_aiBot.CurrentState != BotState.TakeParts)
-        {
-            return;
-        }
         if(other.gameObject.tag=="Part")
         {
             
             //Bot执行获得零件方法 结束等待
-            _aiBot.GetPart(other.gameObject.transform.parent.GetComponent<Part>().partType);
+            //_aiBot.GetPart(other.gameObject.transform.parent.GetComponent<Part>().partType);
             //销毁零件
             Destroy(other.gameObject);
             

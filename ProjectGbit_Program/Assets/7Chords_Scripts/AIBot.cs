@@ -5,12 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-// AI机器人状态
-public enum BotState
-{
-    Move, // 普通移动
-    TakeParts, // 拿零件（移动到固定点面前，等待零件过来拿起来）
-}
 
 /// <summary>
 /// AI机器人脚本
@@ -18,14 +12,13 @@ public enum BotState
 public class AIBot : MonoBehaviour
 {
     private NavMeshAgent _agent;
-    //private Coroutine _currentCoroutine; // 当前正在执行的协程
 
     private Rigidbody _rb;
 
-    [Header("行为参数")]
-    public List<BotState> StateList = new List<BotState>();
-    public int CurrentStateIndex;
-    public BotState CurrentState;
+    //[Header("行为参数")]
+    //public List<BotState> StateList = new List<BotState>();
+    //public int CurrentStateIndex;
+    //public BotState CurrentState;
 
     [Header("普通移动参数")]
     public float MoveSpeed; // 移动速度
@@ -42,27 +35,43 @@ public class AIBot : MonoBehaviour
 
     public float StopAtSubmissionDuration;
 
-    //[Header("QTE参数")]
-    //public bool IsBeingQTE;
 
-    [Header("地图边界")]
-    public Vector3 MinBounds; // 地图最小边界
-    public Vector3 MaxBounds; // 地图最大边界
 
-    bool hasMoveOver = false;
+    [Header("巡逻相关")]
+    public Transform[] PatolPoints;
+    private Vector3 _guardPos;//初始站岗点
+    public int _wayPointIndex = 0;//巡逻点标记，用以循环
 
-    bool hasSetDest = false;
+    public float _patrolStayTimer;
 
-    bool hasSetPartDest = false;
+    public float PatrolStayDuration;
 
-    float moveTimer = 0;
-
-    float waitTimer = 0;
 
     public BotProperty botProperty;
-    //float QTEtimer = 0;
 
-    //bool hasQTEed = false;
+
+    private void Patrol()//巡逻方法
+    {
+        if (Vector3.Distance(transform.position, PatolPoints[_wayPointIndex].position) > 0.5f)
+        {
+            _agent.speed = MoveSpeed;
+            _agent.SetDestination(PatolPoints[_wayPointIndex].position);
+        }
+        else
+        {
+            _patrolStayTimer -= Time.deltaTime;
+            if (_patrolStayTimer < 0)
+            {
+                _wayPointIndex = (_wayPointIndex + 1) % PatolPoints.Length;
+                _patrolStayTimer = PatrolStayDuration;
+            }
+        }
+    }
+
+
+
+
+
 
     private void Awake()
     {
@@ -77,71 +86,40 @@ public class AIBot : MonoBehaviour
 
         SceneManager.Instance.RegisterAIBot(this);
 
-        //生成随机行为序列
-        StateList.Clear();
+        _patrolStayTimer = PatrolStayDuration;
 
-        for (int i = 0; i < 5; i++)
-        {
-            int r = Random.Range(0, 2);
-            if (r == 0)
-            {
-                StateList.Add(BotState.Move);
-            }
-            else
-            {
-                StateList.Add(BotState.TakeParts);
-            }
-        }
-
-        //设置当前行为
-        CurrentStateIndex = 0;
-        CurrentState = StateList[CurrentStateIndex];
-
-        //获取场上所有的零件等待点
-        WaitPoints = FindObjectsOfType<BotWaitPoint>();
-
-        PrecomputeRandomDirection();
+        //PrecomputeRandomDirection();
 
         StopAtSubmissionDuration = botProperty.detectionTimeThreshold;
     }
 
 
-    /// <summary>
-    /// 获取一个随机移动方向，并确保不会超出边界和定位在障碍物里面
-    /// </summary>
-    private void PrecomputeRandomDirection()
-    {
+    ///// <summary>
+    ///// 获取一个随机移动方向，并确保不会超出边界和定位在障碍物里面
+    ///// </summary>
+    //private void PrecomputeRandomDirection()
+    //{
 
-        Vector3 potentialDirection;
-        Vector3 newPosition;
+    //    Vector3 potentialDirection;
+    //    Vector3 newPosition;
 
-        do
-        {
-            potentialDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-            newPosition = transform.position + potentialDirection * MoveSpeed * SingleMoveDuration;
-        }
-        while (!IsWithinBounds(newPosition) && !HasObstacleBetweenTwoPos(potentialDirection, Vector3.Distance(newPosition, transform.position)));
+    //    do
+    //    {
+    //        potentialDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+    //        newPosition = transform.position + potentialDirection * MoveSpeed * SingleMoveDuration;
+    //    }
+    //    while (!IsWithinBounds(newPosition) && !HasObstacleBetweenTwoPos(potentialDirection, Vector3.Distance(newPosition, transform.position)));
 
-        _randomDir = potentialDirection;
-    }
+    //    _randomDir = potentialDirection;
+    //}
 
-
-    /// <summary>
-    /// 检查新位置是否在边界内
-    /// </summary>
-    private bool IsWithinBounds(Vector3 position)
-    {
-        return position.x > MinBounds.x && position.x < MaxBounds.x &&
-               position.z > MinBounds.z && position.z < MaxBounds.z;
-    }
-
-    /// <summary>
-    /// 检查新位置和当前位置之间是否有障碍物
-    /// </summary>
-    private bool HasObstacleBetweenTwoPos(Vector3 dir, float distance)
-    {
-        return Physics.Raycast(transform.position, dir, distance, LayerMask.GetMask("Obstacle"));
-    }
+    ///// <summary>
+    ///// 检查新位置和当前位置之间是否有障碍物
+    ///// </summary>
+    //private bool HasObstacleBetweenTwoPos(Vector3 dir, float distance)
+    //{
+    //    return Physics.Raycast(transform.position, dir, distance, LayerMask.GetMask("Obstacle"));
+    //}
 
 
 
@@ -151,18 +129,7 @@ public class AIBot : MonoBehaviour
         {
             return;
         }
-
-        switch (CurrentState)
-        {
-            case BotState.Move:
-                Move();
-                break;
-            case BotState.TakeParts:
-                TakePart();
-                break;
-            default:
-                break;
-        }
+        Patrol();
 
         if (_agent.velocity != Vector3.zero)
         {
@@ -179,68 +146,7 @@ public class AIBot : MonoBehaviour
     }
 
 
-    private void Move()
-    {
 
-
-        if (!hasMoveOver)
-        {
-            if (moveTimer < SingleMoveDuration)
-            {
-                if (!hasSetDest)
-                {
-                    hasSetDest = true;
-                    Vector3 targetPosition = transform.position + _randomDir * MoveSpeed * SingleMoveDuration;
-                    _agent.isStopped = false;
-                    _agent.SetDestination(targetPosition);
-                }
-                moveTimer += Time.deltaTime;
-
-            }
-            else
-            {
-                hasMoveOver = true;
-            }
-        }
-        else
-        {
-            if (waitTimer < SingleStopDuration)
-            {
-                waitTimer += Time.deltaTime;
-                _agent.isStopped = true;
-            }
-            else
-            {
-                SwitchState();
-            }
-        }
-
-
-    }
-
-
-    private void TakePart()
-    {
-
-        if (!hasSetPartDest)
-        {
-            hasSetPartDest = true;
-            do
-            {
-                int randomPartIndex = Random.Range(0, WaitPoints.Length);
-
-                TargetPoint = WaitPoints[randomPartIndex];
-
-            } while (TargetPoint.HasBotExit);
-
-            TargetPoint.HasBotExit = true;
-
-            _agent.isStopped = false;
-
-            _agent.SetDestination(TargetPoint.transform.position);
-        }
-
-    }
 
 
     /// <summary>
@@ -253,92 +159,6 @@ public class AIBot : MonoBehaviour
 
         SingleStopDuration += Random.Range(-2, 2);
         SingleStopDuration = Mathf.Clamp(SingleStopDuration, 1, 7);
-
-    }
-
-    /// <summary>
-    /// AIBot的状态切换
-    /// </summary>
-
-    private void SwitchState()
-    {
-        CurrentStateIndex = (CurrentStateIndex + 1) % StateList.Count;
-
-        CurrentState = StateList[CurrentStateIndex];
-
-
-        _agent.isStopped = true;
-
-        hasMoveOver = false;
-
-        hasSetDest = false;
-
-        hasSetPartDest = false;
-
-        moveTimer = 0;
-
-        waitTimer = 0;
-
-        PrecomputeRandomDirection();
-
-        RandomMoveAndStopDuration();
-    }
-
-
-    /// <summary>
-    /// 获得零件之后的响应
-    /// </summary>
-    public void GetPart(PartType part)
-    {
-
-        CurrentPart = part;
-
-        TargetPoint.HasBotExit = false;
-
-        _agent.isStopped = false;
-
-        Vector3 endCenterPoint = FindClosestTarget("SubmissionPoint").transform.position;//FindObjectOfType<SubmissionPoint>().transform.position;
-
-        Vector3 targetPosition = new Vector3(endCenterPoint.x + Random.Range(-2, 2), transform.position.y, endCenterPoint.z + Random.Range(-2, 2));
-
-        _agent.SetDestination(targetPosition);
-
-        StartCoroutine(GotoCommit());
-
-    }
-    private GameObject FindClosestTarget(string targetType)
-    {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag(targetType);
-        GameObject closestTarget = null;
-        float closestDistance = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-
-        foreach (GameObject target in targets)
-        {
-            float distanceToTarget = Vector3.Distance(target.transform.position, currentPosition);
-            if (distanceToTarget < closestDistance)
-            {
-                closestTarget = target;
-                closestDistance = distanceToTarget;
-            }
-        }
-
-        return closestTarget;
-    }
-    IEnumerator GotoCommit()
-    {
-        while (_agent.pathPending || _agent.remainingDistance > _agent.stoppingDistance)
-        {
-            yield return null;
-        }
-
-        //yield return new WaitForSeconds(_agent.remainingDistance / _agent.speed) ;
-
-        CurrentPart = PartType.Empty;
-
-        yield return new WaitForSeconds(StopAtSubmissionDuration);
-
-        SwitchState();
 
     }
 

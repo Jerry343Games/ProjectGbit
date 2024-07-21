@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5653949071681013379}
   - component: {fileID: 146621422021878070}
   - component: {fileID: 2434036040347072885}
+  - component: {fileID: 5106255246343079941}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -176,10 +177,31 @@ MonoBehaviour:
   CurrentPart: 0
   TargetPoint: {fileID: 0}
   StopAtSubmissionDuration: 1
-  IsBeingQTE: 0
   MinBounds: {x: -12, y: 0, z: -12}
   MaxBounds: {x: 12, y: 0, z: 12}
   botProperty: {fileID: 0}
+--- !u!195 &5106255246343079941
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552705893818925299}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 2
 --- !u!1 &5639847290535657941
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +254,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.16
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7936312887941235752
 MonoBehaviour:
