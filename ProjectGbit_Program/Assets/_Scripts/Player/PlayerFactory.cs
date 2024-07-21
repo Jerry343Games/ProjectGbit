@@ -45,7 +45,7 @@ public class PlayerFactory : MonoBehaviour
             Blackout(0.2f,2f);
             
             //唤出冷却
-            GameObject timer = Instantiate(Resources.Load<GameObject>("Prefab/UI/UIBlackoutColdTimer"), _canvas.transform);
+            GameObject timer= Instantiate(Resources.Load<GameObject>("Prefab/UIBlackoutColdTimer"), _canvas.transform);
             Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
             timer.GetComponent<RectTransform>().position = screenPos;
             UIBlackoutColdTimer uiBlackoutColdTimer= timer.GetComponent<UIBlackoutColdTimer>();

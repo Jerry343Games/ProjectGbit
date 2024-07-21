@@ -173,7 +173,7 @@ public class PlayerPolice : MonoBehaviour
         {
             return;
         }
-        
+        Camera.main.GetComponent<CameraShake>().ShakeCamera(0.3f,1f);
         uiOrderPanel.ShowPanel();
         Invoke(nameof(CallAIQte), uiOrderPanel.countDownMax);
         
