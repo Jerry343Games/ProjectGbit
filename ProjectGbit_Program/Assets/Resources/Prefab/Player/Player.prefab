@@ -431,7 +431,7 @@ PrefabInstance:
     - target: {fileID: 1940554578179813198, guid: f6e0f6abb0d6b0c4ba43d6f9178cd192,
         type: 3}
       propertyPath: mainLights.Array.size
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4089501036522716570, guid: f6e0f6abb0d6b0c4ba43d6f9178cd192,
         type: 3}
@@ -643,7 +643,8 @@ PrefabInstance:
       propertyPath: inputSetting
       value: 
       objectReference: {fileID: 7428233439764705239}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4870269524872652673, guid: eea432da6cfd48740bc166f471ec85eb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -738,6 +739,11 @@ PrefabInstance:
       propertyPath: inputSetting
       value: 
       objectReference: {fileID: 7428233439764705239}
+    - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
+        type: 3}
+      propertyPath: CanAttackCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
         type: 3}
       propertyPath: ScanBotDuration

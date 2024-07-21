@@ -34,7 +34,6 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
             detectionTime += Time.deltaTime;
             if (detectionTime >= detectionTimeThreshold)
             {
-                Submit();
                 isDetecting = false;
                 detectionTime = 0f;
             }
@@ -51,12 +50,5 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
     {
         isDetecting = false;
         detectionTime = 0f;
-    }
-
-    private void Submit()
-    {
-        if(transform.GetComponent<PlayerGetPartTrigger>().getPartBubble)
-        Destroy(transform.GetComponent<PlayerGetPartTrigger>().getPartBubble.gameObject);
-        //_playerBot.SubmitPart();
     }
 }

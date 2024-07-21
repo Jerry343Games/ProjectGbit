@@ -80,7 +80,6 @@ public class BotGetPartTrigger : MonoBehaviour
         _aiBot.CurrentPart = PartType.Empty;
         submitTimer = 0;
         getPartBubble.DestoryBubble();
-        Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
     }
 
     private void OnTriggerStay(Collider other)
@@ -92,6 +91,7 @@ public class BotGetPartTrigger : MonoBehaviour
             if(submitTimer>submitDuration)
             {
                 SetEmpty();
+                Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
             }
 
         }
