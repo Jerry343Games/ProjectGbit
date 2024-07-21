@@ -1322,21 +1322,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7914280635414887250, guid: cafa0ab9168ff8d48b1e02022ae79162,
-        type: 3}
-      propertyPath: beltSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914280635414887250, guid: cafa0ab9168ff8d48b1e02022ae79162,
-        type: 3}
-      propertyPath: awakeReverse
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914280635414887250, guid: cafa0ab9168ff8d48b1e02022ae79162,
-        type: 3}
-      propertyPath: exitSpeedNum
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 8558930063400475986, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
       propertyPath: m_LocalPosition.x
