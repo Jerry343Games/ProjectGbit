@@ -52,7 +52,7 @@ public class HookMachine : MonoBehaviour
         {
             Debug.Log("PartBox");
 
-            PartObject = Instantiate(other.gameObject.GetComponent<PartBox>().GetRandomPart(),transform.position + new Vector3(0,-1.5f,0), Quaternion.identity);
+            PartObject = Instantiate(other.gameObject.GetComponent<PartBox>().GetRandomPart(),transform.position + new Vector3(0,-3.2f,0), Quaternion.identity);
 
             PartObject.transform.SetParent(GetPartParent.transform);
 
