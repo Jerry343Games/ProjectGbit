@@ -27,7 +27,7 @@ public class ConveyorBelt : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+       
 
         Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
 
