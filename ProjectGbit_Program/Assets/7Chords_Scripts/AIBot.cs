@@ -174,6 +174,9 @@ public class AIBot : MonoBehaviour
     public void Dead()
     {
         SceneManager.Instance.RemoveAIBot(this);
+
+        Instantiate(Resources.Load<GameObject>("Prefab/Effect/BotDeadEffect"),transform.position,Quaternion.identity);
+
         Destroy(gameObject);
     }
 
