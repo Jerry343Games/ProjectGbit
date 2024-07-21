@@ -42,9 +42,10 @@ public class SubmissionPoint : MonoBehaviour
             else
             {
                 if (bot.GetComponent<AIBot>().CurrentPart == PartType.Empty) return;
+                Debug.Log("1121");
             }
             GameObject bubble=Instantiate(Resources.Load<GameObject>("Prefab/UI/UICountdownBubble"),mainCanvas.transform);
-            
+            Debug.Log(bubble);
             bubble.GetComponent<RectTransform>().localScale=Vector3.zero;
             bubble.GetComponent<RectTransform>().DOScale(1, 0.4f);
             
@@ -63,16 +64,23 @@ public class SubmissionPoint : MonoBehaviour
     /// <param name="bot"></param>
     private void DestoryBubble(GameObject bot)
     {
-        if (bot.CompareTag("Player")&&bot.GetComponent<BotProperty>().muBubble)
+        
+        BotProperty botProperty = bot.GetComponent<BotProperty>();
+        if (botProperty.isAIBot)
         {
-            Debug.Log("destory");
-            BotProperty playerBot = bot.GetComponent<BotProperty>();
-            //销毁并清空索引
-            playerBot.muBubble.GetComponent<RectTransform>().DOScale(0, 0.4f).OnComplete(() =>
+            if (botProperty != null && botProperty.muBubble != null)
             {
-                Destroy(playerBot.muBubble.gameObject);
-                playerBot.muBubble = null;
-            });
+
+                //BotProperty playerBot = bot.GetComponent<BotProperty>();
+                //销毁并清空索引
+                botProperty.muBubble.GetComponent<RectTransform>().DOScale(0, 0.4f).OnComplete(() =>
+                {
+                    
+                    Destroy(botProperty.muBubble.gameObject);
+                    botProperty.muBubble = null;
+                });
+            }
         }
+        
     }
 }

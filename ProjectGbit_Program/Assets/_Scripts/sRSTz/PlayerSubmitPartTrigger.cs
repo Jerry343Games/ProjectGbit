@@ -54,6 +54,6 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
 
     private void Submit()
     {
-        _playerBot.SubmitPart();
+        //_playerBot.SubmitPart();
     }
 }
