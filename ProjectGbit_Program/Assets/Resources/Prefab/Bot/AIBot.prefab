@@ -97,7 +97,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3616207219897498001}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   QTEMaxTime: 1
   muBubble: {fileID: 0}
   detectionTimeThreshold: 3
+  qteBubble: {fileID: 0}
 --- !u!136 &4329482508790013494
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -175,6 +176,7 @@ MonoBehaviour:
   PatrolStayDuration: 0
   botProperty: {fileID: 0}
   targetPoint: {fileID: 0}
+  qTEUI: {fileID: 0}
 --- !u!1 &6241155616783017010
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7223872d9e3a2c74ba91d0bae837a8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCanvas: {fileID: 0}
+  getPartBubble: {fileID: 0}
 --- !u!1001 &7258006903714194121
 PrefabInstance:
   m_ObjectHideFlags: 0

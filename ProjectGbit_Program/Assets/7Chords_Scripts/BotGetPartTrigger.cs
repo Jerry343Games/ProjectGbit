@@ -91,8 +91,9 @@ public class BotGetPartTrigger : MonoBehaviour
             if(submitTimer>submitDuration)
             {
                 SetEmpty();
-                DestoryBubble(transform.parent.gameObject);
                 Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
+                DestoryBubble(transform.parent.gameObject);
+                
             }
 
         }
@@ -100,14 +101,13 @@ public class BotGetPartTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "SubmissionPoint" && _aiBot.CurrentPart != PartType.Empty)
+        if (other.gameObject.tag == "SubmissionPoint")
         {
             submitTimer = 0;
-
-        }else if(other.gameObject.tag == "SubmissionPoint" && _aiBot.CurrentPart == PartType.Empty)
-        {
             DestoryBubble(transform.parent.gameObject);
+
         }
+ 
     }
 
     /// <summary>

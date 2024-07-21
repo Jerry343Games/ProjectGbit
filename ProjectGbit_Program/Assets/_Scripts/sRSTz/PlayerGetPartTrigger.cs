@@ -88,6 +88,10 @@ public class PlayerGetPartTrigger : MonoBehaviour
 
     public void CreateBubble(PartType type)
     {
+        if (getPartBubble != null)
+        {
+            getPartBubble.DestoryBubble();
+        }
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/PickupTaskitem"), transform.position, Quaternion.identity);
         GameObject bubble = Instantiate(Resources.Load<GameObject>("Prefab/UI/UIPartBubble"), mainCanvas.transform);
         getPartBubble = bubble.GetComponent<UIPartBubble>();
