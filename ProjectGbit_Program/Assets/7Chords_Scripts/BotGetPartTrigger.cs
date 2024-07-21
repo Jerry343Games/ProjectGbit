@@ -14,7 +14,7 @@ public class BotGetPartTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "SubmissionPoint")
         {
-            _aiBot.CurrentPart = PartType.Empty;
+            Invoke("SetEmpty", 3f);
         }
         if (_aiBot.CurrentPart != PartType.Empty)
         {
@@ -28,6 +28,11 @@ public class BotGetPartTrigger : MonoBehaviour
             //Ïú»ÙÁã¼þ
             Destroy(other.gameObject);
         }
+    }
+    private void SetEmpty()
+    {
+        _aiBot.CurrentPart = PartType.Empty;
+
     }
 
 }
