@@ -50,7 +50,6 @@ public class PlayerGetPartTrigger : MonoBehaviour
     {
         if (getPartBubble == null) return;
         _playerBot.currentPart = PartType.Empty;
-        getPartBubble.DestoryBubble();
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
     }
 }

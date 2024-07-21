@@ -44,6 +44,7 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
     public void StartDetection()
     {
         isDetecting = true;
+        detectionTime = 0;
     }
 
     public void StopDetection()
@@ -54,7 +55,6 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
 
     private void Submit()
     {
-
         Destroy(transform.GetComponent<PlayerGetPartTrigger>().getPartBubble.gameObject);
         //_playerBot.SubmitPart();
     }
