@@ -227,6 +227,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AIBot
       objectReference: {fileID: 0}
+    - target: {fileID: 3616207219897498001, guid: fa3121af96a10f248bfd9f32a30233c7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5268627035637766701, guid: fa3121af96a10f248bfd9f32a30233c7,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -36,6 +36,8 @@ public class PlayerPolice : MonoBehaviour
 
     public UIOrderPanel uiOrderPanel;
     [Header("攻击参数")]
+    public int CanAttackCount;
+    public int CurrentAttackCount;
     public float AttackCD;
 
     private float _attackTimer;
@@ -57,6 +59,7 @@ public class PlayerPolice : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         policeAttackArea = GetComponentInChildren<PlayerPoliceAttack>();
         //Invoke("CallQTE", 3f);
+        CurrentAttackCount = CanAttackCount;
     }
 
     // Update is called once per frame
@@ -275,10 +278,15 @@ public class PlayerPolice : MonoBehaviour
     /// </summary>
     private void Attack()
     {
+        if(CurrentAttackCount==0)
+        {
+            return;
+        }
         if(_attackTimer>0)
         {
             return;
         }
+        CurrentAttackCount--;
         Debug.Log("玩家发动了攻击");
         myAnimator.SetTrigger("Attack");
         _isAttack = true;
