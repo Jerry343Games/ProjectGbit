@@ -50,7 +50,7 @@ public class HookMachine : MonoBehaviour
     {
         if(other.gameObject.tag=="PartBox")
         {
-            Debug.Log("PartBox");
+            //Debug.Log("PartBox");
 
             PartObject = Instantiate(other.gameObject.GetComponent<PartBox>().GetRandomPart(),transform.position + new Vector3(0,-3.2f,0), Quaternion.identity);
 

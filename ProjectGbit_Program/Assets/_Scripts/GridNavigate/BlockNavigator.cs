@@ -120,7 +120,7 @@ public class BlockNavigator : MonoBehaviour
                 }
                 task.currentAmount -= SwitchDirectionNeedPart;
                 ConveyorBelt conveyorBelt = currentBlock.GetComponent<ConveyorBelt>();
-                Debug.Log("change");
+                //Debug.Log("change");
                 conveyorBelt.ChangeReverse();
                 _pressSwitchTimer = 0.5f; // 重置计时器
             }

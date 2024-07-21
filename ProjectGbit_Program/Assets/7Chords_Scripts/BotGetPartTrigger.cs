@@ -62,7 +62,7 @@ public class BotGetPartTrigger : MonoBehaviour
     {
         BotProperty botProperty = bot.GetComponent<BotProperty>();
         GameObject bubble = Instantiate(Resources.Load<GameObject>("Prefab/UI/UICountdownBubble"), mainCanvas.transform);
-        Debug.Log(bubble);
+        
         bubble.GetComponent<RectTransform>().localScale = Vector3.zero;
         bubble.GetComponent<RectTransform>().DOScale(1, 0.4f);
 
@@ -91,6 +91,7 @@ public class BotGetPartTrigger : MonoBehaviour
             if(submitTimer>submitDuration)
             {
                 SetEmpty();
+                DestoryBubble(transform.parent.gameObject);
                 Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
             }
 
@@ -115,13 +116,13 @@ public class BotGetPartTrigger : MonoBehaviour
     /// <param name="bot"></param>
     private void DestoryBubble(GameObject bot)
     {
-
+        Debug.Log("destroy1");
         BotProperty botProperty = bot.GetComponent<BotProperty>();
         if (botProperty == null) return;
 
         if (botProperty != null && botProperty.muBubble != null)
         {
-
+            Debug.Log("destroy2");
             //BotProperty playerBot = bot.GetComponent<BotProperty>();
             //销毁并清空索引
             botProperty.muBubble.GetComponent<RectTransform>().DOScale(0, 0.4f).OnComplete(() =>
