@@ -180,9 +180,10 @@ public class PlayerPolice : MonoBehaviour
             aiBot.GetComponent<AIBot>().ExecuteQTE();
         }
     }
-    private float _pressConfirmTimer = 0;
+    private float _pressConfirmTimer = 3;
     private void ConfirmDirection()
     {
+        if (!GameManager.Instance.GameStarted) return;
         _pressConfirmTimer -= Time.deltaTime; // 更新计时器
         if (_pressConfirmTimer <= 0f) // 检查计时器是否超过间隔
         {

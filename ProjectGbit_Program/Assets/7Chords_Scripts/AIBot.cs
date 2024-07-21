@@ -41,7 +41,7 @@ public class AIBot : MonoBehaviour
 
     public Transform targetPoint;
 
-
+    public QTEUI qTEUI;
 
     private void Awake()
     {
@@ -52,6 +52,8 @@ public class AIBot : MonoBehaviour
         botProperty = GetComponent<BotProperty>();
 
         _anim = transform.GetChild(0).GetComponent<Animator>();
+
+        qTEUI = FindFirstObjectByType<QTEUI>();
     }
 
     private void Start()
@@ -160,13 +162,13 @@ public class AIBot : MonoBehaviour
     public void ExecuteQTE()
     {
         float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
-        float QTETime = Random.Range(0, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
+        float QTETime = Random.Range(QTEMaxTime/2, QTEMaxTime); // 随机选取一个0到最大响应时间的时间点 响应QTE
         Invoke("QTE", QTETime);
     }
 
     public void QTE()
     {
-        Debug.Log("AIQTE!!");
+        qTEUI.CreatBubble(gameObject);
     }
 
     public void Dead()

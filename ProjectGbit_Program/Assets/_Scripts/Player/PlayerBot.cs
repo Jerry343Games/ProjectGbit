@@ -19,11 +19,13 @@ public class PlayerBot : MonoBehaviour
     public PartType currentPart = PartType.Empty;
 
     public Animator myAnimator;
-    
+
+    public QTEUI qteUI;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         SceneManager.Instance.RegisterPlayerBot(this);
+        qteUI = FindFirstObjectByType<QTEUI>();
     }
 
     // Update is called once per frame
@@ -45,12 +47,14 @@ public class PlayerBot : MonoBehaviour
         {
             if (inputSetting.isPressSwitch)
             {
-                _rigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
+                //_rigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
+                qteUI.CreatBubble(gameObject);
                 _pressConfirmTimer = 0.5f; // 重置计时器
             }
             
         }
     }
+   
     /// <summary>
     /// 玩家移动方法
     /// </summary>

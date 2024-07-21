@@ -10,4 +10,5 @@ public class BotProperty : MonoBehaviour
 
     public GameObject muBubble;
     public float detectionTimeThreshold = 3f;
+    public GameObject qteBubble;
 }
