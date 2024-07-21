@@ -732,7 +732,12 @@ PrefabInstance:
     - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
         type: 3}
       propertyPath: ScanBotCD
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
         type: 3}
@@ -747,7 +752,7 @@ PrefabInstance:
     - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
         type: 3}
       propertyPath: ScanBotDuration
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6857885129880897401, guid: 9a8058c0da64de94eb2c51dc645534ed,
         type: 3}
