@@ -35,7 +35,7 @@ public class PartGenerator : MonoBehaviour
     void GeneratePart()
     {
         GameObject partToSpawn = nextPart != null ? nextPart : parts[Random.Range(0, parts.Length)];
-        Instantiate(partToSpawn, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(partToSpawn, spawnPoint.position, Quaternion.identity);
         nextPart = null;
     }
 

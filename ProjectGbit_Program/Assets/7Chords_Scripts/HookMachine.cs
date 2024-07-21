@@ -52,13 +52,9 @@ public class HookMachine : MonoBehaviour
         {
             Debug.Log("PartBox");
 
-            PartObject = Instantiate(other.gameObject.GetComponent<PartBox>().GetRandomPart(),transform.position + new Vector3(0,-2.5f,0), Quaternion.identity);
+            PartObject = Instantiate(other.gameObject.GetComponent<PartBox>().GetRandomPart(),transform.position + new Vector3(0,-1.5f,0), Quaternion.identity);
 
             PartObject.transform.SetParent(GetPartParent.transform);
-
-            Sequence s = DOTween.Sequence();
-
-            s.Append(PartObject.transform.DOLocalMoveZ(-0.02f, 2.5f)).SetEase(Ease.InSine);
         }
     }
 
@@ -70,8 +66,8 @@ public class HookMachine : MonoBehaviour
         s.Append(transform.DOLocalMoveX(-0.02f, 1f)).OnComplete(() =>
         {
             PartObject.transform.SetParent(null);
-            //µôÂä£¿£¿
-            PartObject = null;
+
+            PartObject.GetComponent<Rigidbody>().AddForce(Vector3.down * 20f, ForceMode.Impulse);
         });
 
     }

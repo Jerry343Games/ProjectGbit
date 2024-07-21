@@ -15,10 +15,7 @@ public class AIBot : MonoBehaviour
 
     private Rigidbody _rb;
 
-    //[Header("行为参数")]
-    //public List<BotState> StateList = new List<BotState>();
-    //public int CurrentStateIndex;
-    //public BotState CurrentState;
+    private Animator _anim;
 
     [Header("普通移动参数")]
     public float MoveSpeed; // 移动速度
@@ -51,7 +48,10 @@ public class AIBot : MonoBehaviour
         _agent = gameObject.GetComponent<NavMeshAgent>();
 
         _rb = gameObject.GetComponent<Rigidbody>();
+
         botProperty = GetComponent<BotProperty>();
+
+        _anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Start()
@@ -71,10 +71,15 @@ public class AIBot : MonoBehaviour
         {
             _agent.speed = MoveSpeed;
             _agent.SetDestination(targetPoint.position);
+            //播放移动
+            _anim.SetBool("isRun", true);
         }
         else
         {
             _patrolStayTimer -= Time.deltaTime;
+            //播放待机
+            _anim.SetBool("isRun", false);
+
             if (_patrolStayTimer < 0)
             {
                 if (CurrentPart != PartType.Empty)
@@ -90,6 +95,8 @@ public class AIBot : MonoBehaviour
                 PatrolStayDuration += Random.Range(-1f, 1f);
                 PatrolStayDuration = Mathf.Clamp(PatrolStayDuration, 1, 5);
                 _patrolStayTimer = PatrolStayDuration;
+
+
             }
         }
     }
