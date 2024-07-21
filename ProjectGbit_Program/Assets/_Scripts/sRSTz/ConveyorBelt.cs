@@ -6,13 +6,24 @@ public class ConveyorBelt : MonoBehaviour
 {
     public float beltSpeed = 2.0f; // 传送带的速度
     //public float playerResistanceFactor = 0.5f; // 玩家移动时的阻力因子
-    public bool isAwake = true;
-    public bool isReverse = false;
+    private bool isAwake = true;
+    private bool isReverse = false;
     private int reverseNum = 1;
     public BeltSurfaceSet bletSurfaceSet;
+    public bool awakeReverse = false;
+    public bool awakeStart = false;
+    public float exitSpeedNum = 0.5f;
     private void Awake()
     {
         bletSurfaceSet = GetComponent<BeltSurfaceSet>();
+        if (awakeReverse)
+        {
+            ChangeReverse();
+        }
+        if (awakeStart)
+        {
+            ChangeOnOff();
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -47,7 +58,7 @@ public class ConveyorBelt : MonoBehaviour
         Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
         if (playerBot == null && rb != null)
         {
-            rb.velocity = Vector3.zero;
+            rb.velocity = rb.velocity * exitSpeedNum;
             rb.angularVelocity = Vector3.zero;
         }
         else if (playerBot != null)

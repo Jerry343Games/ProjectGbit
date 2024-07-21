@@ -93,8 +93,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4631786, y: 0.7819081, z: 0.9912214}
-  m_Center: {x: 0.17769146, y: -0.5150963, z: -2.8549237}
+  m_Size: {x: 2.744161, y: 0.78190804, z: 0.9912213}
+  m_Center: {x: 0.17373675, y: -0.5150963, z: -2.8550167}
 --- !u!65 &6570828828663356174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114,8 +114,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.463179, y: 0.32, z: 0.9912214}
-  m_Center: {x: 0.1776915, y: 0.09, z: -2.854924}
+  m_Size: {x: 2.7184715, y: 0.32, z: 0.9912213}
+  m_Center: {x: 0.18143135, y: 0.09, z: -2.8549902}
 --- !u!114 &7914280635414887250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,9 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beltSpeed: 15
-  isAwake: 1
-  isReverse: 0
   bletSurfaceSet: {fileID: 812858691631015914}
+  awakeReverse: 0
+  awakeStart: 0
 --- !u!1 &4607597796827966803
 GameObject:
   m_ObjectHideFlags: 0

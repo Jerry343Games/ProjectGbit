@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8720955545020709276}
   - component: {fileID: 241469320775867945}
   - component: {fileID: 2319509094915240696}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Model
   m_TagString: Part
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7763540123081860772}
   - component: {fileID: 3585037699886623227}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Part 1
   m_TagString: Part
   m_Icon: {fileID: 0}
@@ -181,3 +181,5 @@ MonoBehaviour:
   partType: 2
   isPicked: 0
   model: {fileID: 3931638208162119725}
+  destroyTime: 10
+  destroyTimer: 0
