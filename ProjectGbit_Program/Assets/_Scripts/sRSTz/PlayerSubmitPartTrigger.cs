@@ -54,6 +54,8 @@ public class PlayerSubmitPartTrigger : MonoBehaviour
 
     private void Submit()
     {
+
+        Destroy(transform.GetComponent<PlayerGetPartTrigger>().getPartBubble.gameObject);
         //_playerBot.SubmitPart();
     }
 }
