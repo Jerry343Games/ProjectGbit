@@ -56,11 +56,11 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.position + -transform.right * 2*reverseNum);
-    }
+    }*/
 
     public void ChangeOnOff()
     {

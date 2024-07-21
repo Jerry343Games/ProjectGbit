@@ -41,18 +41,19 @@ public class AIBot : MonoBehaviour
     public Transform[] PatolPoints;
     private Vector3 _guardPos;//初始站岗点
     public int _wayPointIndex = 0;//巡逻点标记，用以循环
-
+    public Transform[] submitPoint;
     public float _patrolStayTimer;
 
     public float PatrolStayDuration;
 
 
     public BotProperty botProperty;
-
+    public Transform targetPoint;
 
     private void Patrol()//巡逻方法
     {
-        if (Vector3.Distance(transform.position, PatolPoints[_wayPointIndex].position) > 0.5f)
+
+        if (Vector3.Distance(transform.position, targetPoint.position) > 0.5f)
         {
             _agent.speed = MoveSpeed;
             _agent.SetDestination(PatolPoints[_wayPointIndex].position);
@@ -62,22 +63,27 @@ public class AIBot : MonoBehaviour
             _patrolStayTimer -= Time.deltaTime;
             if (_patrolStayTimer < 0)
             {
-                _wayPointIndex = (_wayPointIndex + 1) % PatolPoints.Length;
-                _patrolStayTimer = PatrolStayDuration;
+                if (CurrentPart != PartType.Empty)
+                {
+                    //targetPoint = FindNearestSubmissonPoint();
+                }
+                else
+                {
+                    _wayPointIndex = (_wayPointIndex + 1) % PatolPoints.Length;
+                    _patrolStayTimer = PatrolStayDuration;
+                }
             }
         }
     }
 
-
-
-
-
+    
 
     private void Awake()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
 
         _rb = gameObject.GetComponent<Rigidbody>();
+
         botProperty = GetComponent<BotProperty>();
     }
 
@@ -91,6 +97,7 @@ public class AIBot : MonoBehaviour
         //PrecomputeRandomDirection();
 
         StopAtSubmissionDuration = botProperty.detectionTimeThreshold;
+
     }
 
 
