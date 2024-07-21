@@ -6625,12 +6625,12 @@ MonoBehaviour:
   - type: 1
     totalAmount: 0
     currentAmount: 0
-    taskUI: {fileID: 448384063}
+    taskUI: {fileID: 1058569872}
     hasFinshed: 0
   - type: 2
     totalAmount: 0
     currentAmount: 0
-    taskUI: {fileID: 1058569872}
+    taskUI: {fileID: 448384063}
     hasFinshed: 0
   - type: 3
     totalAmount: 0

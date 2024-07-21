@@ -70,7 +70,6 @@ public class PlayerGetPartTrigger : MonoBehaviour
             if (submitTimer > submitDuration)
             {
                 SetEmpty();
-                Debug.Log(2525);
                 Instantiate(Resources.Load<GameObject>("Prefab/Effect/GivePartGreen"), transform.position, Quaternion.identity);
             }
 
@@ -100,7 +99,6 @@ public class PlayerGetPartTrigger : MonoBehaviour
     public void SetEmpty()
     {
         if (getPartBubble == null) return;
-        _playerBot.currentPart = PartType.Empty;
         submitTimer = 0;
         getPartBubble.DestoryBubble();
     }
