@@ -3309,6 +3309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eeb60b0d7be6af4fbb09440d850b368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &382750470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
+    type: 3}
+  m_PrefabInstance: {fileID: 1033587985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &392566434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7898,7 +7904,7 @@ PrefabInstance:
     - target: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3865897482920767788, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
@@ -9582,7 +9588,7 @@ PrefabInstance:
     - target: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3865897482920767788, guid: 17bd483d14d3c91439c5ea7d8834d565,
         type: 3}
@@ -9927,6 +9933,8 @@ MonoBehaviour:
   players:
   - {fileID: 1834304224}
   - {fileID: 932815584}
+  - {fileID: 382750470}
+  - {fileID: 1964115950}
 --- !u!1 &1402007228
 GameObject:
   m_ObjectHideFlags: 0
@@ -10522,11 +10530,6 @@ PrefabInstance:
       objectReference: {fileID: 877819704}
     - target: {fileID: 2750733689637929356, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
-      propertyPath: left
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2750733689637929356, guid: cafa0ab9168ff8d48b1e02022ae79162,
-        type: 3}
       propertyPath: right
       value: 
       objectReference: {fileID: 116976916}
@@ -10539,11 +10542,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914280635414887250, guid: cafa0ab9168ff8d48b1e02022ae79162,
-        type: 3}
-      propertyPath: awakeReverse
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8558930063400475986, guid: cafa0ab9168ff8d48b1e02022ae79162,
         type: 3}
@@ -13506,6 +13504,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5492836072239654677, guid: e1c5c32520c1065468e990374c2a88e4,
     type: 3}
   m_PrefabInstance: {fileID: 1937944319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1964115950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3860741151660753668, guid: 17bd483d14d3c91439c5ea7d8834d565,
+    type: 3}
+  m_PrefabInstance: {fileID: 1332975626}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1994395370
 PrefabInstance:

@@ -63,7 +63,7 @@ public class BeltSurfaceSet : MonoBehaviour
     public void OnOffMove(bool isAwake)
     {
         playableDirector.enabled = isAwake;
-        arrowObj.SetActive(isAwake);
+        //arrowObj.SetActive(isAwake);
     }
     
     
