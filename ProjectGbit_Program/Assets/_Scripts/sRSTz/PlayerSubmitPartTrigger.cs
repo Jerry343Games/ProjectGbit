@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerSubmitPartTrigger : MonoBehaviour
 {
     private PlayerBot _playerBot;
-    public float detectionTimeThreshold = 3f; // ¼ì²âÊ±¼äãÐÖµ
+    public float detectionTimeThreshold = 3f; // æ£€æµ‹æ—¶é—´é˜ˆå€¼
     private float detectionTime = 0f;
     private bool isDetecting = false;
     private void Awake()

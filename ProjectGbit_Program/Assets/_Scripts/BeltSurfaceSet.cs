@@ -18,7 +18,7 @@ public class BeltSurfaceSet : MonoBehaviour
     public GameObject arrowObj;
     void Start()
     {
-        
+        arrowObj = transform.GetChild(1).GetChild(1).gameObject;
     }
 
     // Update is called once per frame
@@ -63,7 +63,7 @@ public class BeltSurfaceSet : MonoBehaviour
     public void OnOffMove(bool isAwake)
     {
         playableDirector.enabled = isAwake;
-        //arrowObj.SetActive(isAwake);
+        arrowObj.SetActive(isAwake);
     }
     
     

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.Composites;
 
 [Serializable]
-public class PartTask//Áã¼şÊÕ¼¯ÈÎÎñ
+public class PartTask//é›¶ä»¶æ”¶é›†ä»»åŠ¡
 {
     public PartType type;
     public int totalAmount;
@@ -16,19 +16,19 @@ public class PartTask//Áã¼şÊÕ¼¯ÈÎÎñ
 
 public class GameManager : Singleton<GameManager>
 {
-    [Header("ÓÎÏ·»ù±¾²ÎÊı")]
-    public bool GameStarted;//ÓÎÏ·ÊÇ·ñ¿ªÊ¼
+    [Header("æ¸¸æˆåŸºæœ¬å‚æ•°")]
+    public bool GameStarted;//æ¸¸æˆæ˜¯å¦å¼€å§‹
 
-    public bool GameFinished;//ÓÎÏ·ÊÇ·ñ½áÊø
+    public bool GameFinished;//æ¸¸æˆæ˜¯å¦ç»“æŸ
 
-    public int GameDuration;//ÓÎÏ·³ÖĞøÊ±¼ä
+    public int GameDuration;//æ¸¸æˆæŒç»­æ—¶é—´
 
 
     public event Action GameStartedAction;
 
     public event Action<bool> GameFinishedAction;
 
-    [Header("Áã¼şÊÕ¼¯Ïà¹Ø")]
+    [Header("é›¶ä»¶æ”¶é›†ç›¸å…³")]
     public List<PartTask> Tasks = new List<PartTask>();
 
     public int MaxNum;
@@ -80,7 +80,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (GameFinished) return;
 
-        Debug.Log("ÓÎÏ·½áÊøÁË,½á¹ûÊÇ»úÆ÷ÈË" + isBotWin);
+        Debug.Log("æ¸¸æˆç»“æŸäº†,ç»“æœæ˜¯æœºå™¨äºº" + isBotWin);
 
         GameFinished = true;
 

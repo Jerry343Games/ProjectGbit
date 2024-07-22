@@ -30,7 +30,7 @@ public class UIPartBubble : MonoBehaviour
     }
     private void MoveBubble(GameObject bot)
     {
-        //¸Ä
+        //æ”¹
         Vector3 screenPos = Camera.main.WorldToScreenPoint(bot.transform.position);
         _rectTransform.position = screenPos;
     }
