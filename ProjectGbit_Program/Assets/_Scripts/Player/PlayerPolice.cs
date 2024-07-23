@@ -293,6 +293,10 @@ public class PlayerPolice : MonoBehaviour
         _isAttack = true;
         StartCoroutine(WaitToEndAttack(0.7f));
         policeAttackArea.AttackPlayer();
+        if(CurrentAttackCount ==0 && SceneManager.Instance.PlayerBotList.Count!=0)
+        {
+            GameManager.Instance.GameOver(true);
+        }
     }
 
     IEnumerator WaitToEndAttack(float duration)
