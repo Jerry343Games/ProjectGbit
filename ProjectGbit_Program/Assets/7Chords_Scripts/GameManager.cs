@@ -24,6 +24,10 @@ public class GameManager : Singleton<GameManager>
     public int GameDuration;//游戏持续时间
 
 
+    
+    public GameObject botWinObj;
+
+    public GameObject botLoseObj;
     public event Action GameStartedAction;
 
     public event Action<bool> GameFinishedAction;
@@ -88,8 +92,25 @@ public class GameManager : Singleton<GameManager>
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Publish_Scene1")
         {
-            SceneLoader.Instance.LoadScene("AlarmclockScene 1");
+
+            StartCoroutine(Next(isBotWin));
         }
+    }
+
+    IEnumerator Next(bool isBotWin)
+    {
+        if (isBotWin)
+        {
+            botWinObj.SetActive(true);
+        }
+        else
+        {
+            botLoseObj.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(3f);
+        SceneLoader.Instance.LoadScene("AlarmclockScene 1");
+        
     }
 
     public void RandomTask()

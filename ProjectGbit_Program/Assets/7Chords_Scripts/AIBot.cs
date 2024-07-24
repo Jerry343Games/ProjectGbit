@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 
 /// <summary>
-/// AI»úÆ÷ÈË½Å±¾
+/// AIï¿½ï¿½ï¿½ï¿½ï¿½Ë½Å±ï¿½
 /// </summary>
 public class AIBot : MonoBehaviour
 {
@@ -17,21 +17,21 @@ public class AIBot : MonoBehaviour
 
     private Animator _anim;
 
-    [Header("ÆÕÍ¨ÒÆ¶¯²ÎÊý")]
-    public float MoveSpeed; // ÒÆ¶¯ËÙ¶È
+    [Header("ï¿½ï¿½Í¨ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public float MoveSpeed; // ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
 
-    [Header("»ñÈ¡µÀ¾ß²ÎÊý")]
+    [Header("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ß²ï¿½ï¿½ï¿½")]
 
     public PartType CurrentPart;
 
 
 
-    [Header("Ñ²ÂßÏà¹Ø")]
+    [Header("Ñ²ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Transform[] PatolPoints;
 
-    private Vector3 _guardPos;//³õÊ¼Õ¾¸Úµã
+    private Vector3 _guardPos;//ï¿½ï¿½Ê¼Õ¾ï¿½Úµï¿½
 
-    public int _wayPointIndex = 0;//Ñ²Âßµã±ê¼Ç£¬ÓÃÒÔÑ­»·
+    public int _wayPointIndex = 0;//Ñ²ï¿½ßµï¿½ï¿½Ç£ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 
     public float _patrolStayTimer;
 
@@ -67,19 +67,19 @@ public class AIBot : MonoBehaviour
         targetPoint = PatolPoints[0];
     }
 
-    private void Patrol()//Ñ²Âß·½·¨
+    private void Patrol()//Ñ²ï¿½ß·ï¿½ï¿½ï¿½
     {
-        if (Vector3.Distance(transform.position, targetPoint.position) > 1.3f)
+        if (Vector3.Distance(transform.position, targetPoint.position) > 1.5f)
         {
             _agent.speed = MoveSpeed;
             _agent.SetDestination(targetPoint.position);
-            //²¥·ÅÒÆ¶¯
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
             _anim.SetBool("isRun", true);
         }
         else
         {
             _patrolStayTimer -= Time.deltaTime;
-            //²¥·Å´ý»ú
+            //ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½
             _anim.SetBool("isRun", false);
 
             if (_patrolStayTimer < 0)
@@ -146,13 +146,13 @@ public class AIBot : MonoBehaviour
 
         if (_agent.velocity != Vector3.zero)
         {
-            // »ñÈ¡µ±Ç°ËÙ¶ÈµÄ·½Ïò
+            // ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Ù¶ÈµÄ·ï¿½ï¿½ï¿½
             Vector3 direction = _agent.velocity.normalized;
 
-            // ¼ÆËã³¯ÏòÔË¶¯·½ÏòµÄÐý×ª½Ç¶È
+            // ï¿½ï¿½ï¿½ã³¯ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ç¶ï¿½
             Quaternion newRotation = Quaternion.LookRotation(direction);
 
-            // Ó¦ÓÃÍ»±äµÄÐý×ª
+            // Ó¦ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½×ª
             transform.rotation = newRotation;
         }
 
@@ -162,7 +162,7 @@ public class AIBot : MonoBehaviour
     public void ExecuteQTE()
     {
         float QTEMaxTime = GetComponent<BotProperty>().QTEMaxTime;
-        float QTETime = Random.Range(QTEMaxTime/2, QTEMaxTime); // Ëæ»úÑ¡È¡Ò»¸ö0µ½×î´óÏìÓ¦Ê±¼äµÄÊ±¼äµã ÏìÓ¦QTE
+        float QTETime = Random.Range(QTEMaxTime/2, QTEMaxTime); // ï¿½ï¿½ï¿½Ñ¡È¡Ò»ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦Ê±ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ ï¿½ï¿½Ó¦QTE
         Invoke("QTE", QTETime);
     }
 

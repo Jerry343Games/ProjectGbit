@@ -6482,7 +6482,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.1
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: aaede8d1dae531f44bcf79473afdefbc, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0deca69da3c2e754198a0c66f1b731f8, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1604280765
 GameObject:
@@ -8110,6 +8110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1894176428}
   qteTime: 1
+  isCreating: 0
 --- !u!1 &1938457145
 GameObject:
   m_ObjectHideFlags: 0
