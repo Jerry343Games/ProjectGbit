@@ -8,6 +8,7 @@ TagManager:
   - Part
   - PartBox
   - MainCanvas
+  - Factory
   layers:
   - Default
   - TransparentFX

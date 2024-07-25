@@ -96,6 +96,5 @@ public class PlayerFactory : MonoBehaviour
     public void InitHealEffect()
     {
         Instantiate(Resources.Load<GameObject>("Prefab/Effect/Heal"), transform.position, Quaternion.identity);
-
     }
 }

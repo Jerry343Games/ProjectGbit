@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.Composites;
+using UnityEngine.UI;
+using Quaternion = System.Numerics.Quaternion;
 
 [Serializable]
 public class PartTask//零件收集任务
@@ -130,8 +134,13 @@ public class GameManager : Singleton<GameManager>
     {
         PartTask task = Tasks.Find(x => x.type == type);
         task.currentAmount++;
-
+        task.taskUI.GetComponent<RectTransform>().DOShakePosition(0.4f, 5f);
         task.taskUI.GetComponent<UITaskPanel>().AddOne();
+
+        GameObject repairBubble= Instantiate(Resources.Load<GameObject>("Prefab/UI/UIRepairPartIcon"),GameObject.FindWithTag("MainCanvas").transform);
+        repairBubble.GetComponent<RectTransform>().position = task.taskUI.GetComponent<RectTransform>().position;
+        repairBubble.GetComponent<UIRepairIcon>().Init(type);
+        
 
         if(task.currentAmount == task.totalAmount)
         {
@@ -140,7 +149,11 @@ public class GameManager : Singleton<GameManager>
 
         if (CheckIfBotWin())
         {
-            GameOver(true);
+            Sequence q = DOTween.Sequence();
+            q.AppendInterval(1f).OnComplete(()=>
+            {
+                GameOver(true);
+            });
         }
 
     }
